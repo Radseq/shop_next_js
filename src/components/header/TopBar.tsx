@@ -3,9 +3,11 @@ import React, { useState } from "react";
 import styles from "./TopBar.module.css";
 import { StyledInput } from "../StyledInput";
 import { Icon } from "../Icon";
+import { useCartSelector } from "@/lib/storeCart";
+import { CartOverlay } from "../cart/CartOverlay";
 
 export const TopBar = () => {
-	//const shoppingCart = useCartSelector((state) => state.shoppingCart);
+	const shoppingCart = useCartSelector((state) => state.shoppingCart);
 
 	const [searchIsFocused, setSearchIsFocused] = useState(false);
 	const [searchedText, setSearchedText] = useState("");
@@ -32,14 +34,14 @@ export const TopBar = () => {
 					placeholder="search"
 					onClick={() => setSearchIsFocused(true)}
 				></StyledInput>
-				{searchIsFocused && (
+				{/* {searchIsFocused && (
 					<div className={styles.searchOverlay}>
-						{/* <SearchedProducts
+						<SearchedProducts
 							search={searchedText}
 							callback={() => setSearchIsFocused(false)}
-						/> */}
+						/>
 					</div>
-				)}
+				)} */}
 			</div>
 
 			<a href="/help-center" className={styles.icon}>
@@ -47,19 +49,19 @@ export const TopBar = () => {
 				<span>Help</span>
 			</a>
 
-			<div className={styles.cardInfo}>
+			<div className={`${styles.icon} ${styles.cardInfo}`}>
 				<a href="/cart">
 					<Icon kind="cart" />
 				</a>
-				{/* <span>{shoppingCart.length}</span> */}
+				<span>{shoppingCart.length}</span>
 				<div className={styles.cartOverlay}>
-					{/* {shoppingCart.length !== 0 ? (
-						<Cart cartItems={shoppingCart} />
+					{shoppingCart.length !== 0 ? (
+						<CartOverlay cartItems={shoppingCart} />
 					) : (
 						<div className={styles.emptyCard}>
 							Shipping cart is empty
 						</div>
-					)} */}
+					)}
 				</div>
 			</div>
 

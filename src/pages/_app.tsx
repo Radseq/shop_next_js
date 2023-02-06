@@ -3,6 +3,7 @@ import React from "react";
 import type { AppProps } from "next/app";
 import { QueryClient, QueryClientProvider, Hydrate } from "react-query";
 import { ReactQueryDevtools } from "react-query/devtools";
+import { wrapper } from "@/lib/storeCart";
 
 function MyApp({ Component, pageProps }: AppProps) {
 	const [queryClient] = React.useState(() => new QueryClient());
@@ -16,4 +17,4 @@ function MyApp({ Component, pageProps }: AppProps) {
 	);
 }
 
-export default MyApp;
+export default wrapper.withRedux(MyApp);

@@ -76,13 +76,7 @@
 }
 
 .cardInfo {
-	padding: 5px 10px;
-	flex: 0 1 6%;
-	align-items: center;
-	display: flex;
-	flex-direction: column;
-	color: black;
-	white-space: nowrap;
+	position: relative;
 }
 
 .cardInfo:hover .cartOverlay {

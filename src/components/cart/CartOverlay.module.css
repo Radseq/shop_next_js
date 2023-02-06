@@ -1,0 +1,135 @@
+.cart {
+	width: 400px;
+	font-family: Lato, sans-serif;
+}
+
+.header {
+	display: flex;
+	justify-content: space-between;
+	margin: 10px 10px 0px 10px;
+}
+
+.header span {
+	color: #8a8a8a;
+}
+
+.header a {
+	order: 1;
+	color: royalblue;
+}
+
+.header div {
+	font-weight: bold;
+}
+
+.cartItem {
+	display: flex;
+	width: calc(100% - 20px);
+	margin: 10px 10px;
+}
+
+.itemAside {
+	margin: auto 0;
+	width: 65%;
+}
+
+.itemAside > span {
+	width: 100%;
+	margin: auto 0;
+	height: 100%;
+	overflow: hidden;
+
+	text-overflow: ellipsis;
+
+	display: -webkit-box;
+	-webkit-line-clamp: 2;
+	-webkit-box-orient: vertical;
+}
+
+.cartItemCount {
+	color: #a1a1a1;
+	font-size: 0.9em;
+}
+
+.prices span {
+	display: block;
+}
+
+.prices del {
+	color: rgb(116, 116, 116);
+	font-size: 0.9em;
+	margin-left: 5px;
+}
+
+.asideContairner {
+	display: flex;
+	margin-top: 5px;
+	justify-content: space-between;
+}
+
+.cartItemRemove {
+	width: 20px;
+	height: 20px;
+	margin: auto 3%;
+}
+
+.cartItemRemove img {
+	width: 20px;
+	height: 20px;
+}
+
+.cartSum {
+	display: flex;
+	flex-grow: 1;
+	justify-content: space-between;
+	font-weight: bold;
+	margin: 10px 0;
+	font-size: 1.1em;
+}
+
+.cartSumDiscount {
+	color: rgb(2, 177, 2);
+	font-weight: normal;
+	font-size: 1em;
+}
+
+.productImage {
+	width: 30%;
+	height: 100px;
+}
+
+.productImage img {
+	width: 100%;
+	height: 100%;
+}
+
+.footer {
+	padding: 10px 15px;
+	background-color: #e6e6e6;
+	border-radius: 10px;
+	border-top: 2px solid rgb(211, 211, 211);
+}
+
+.footer a {
+	padding: 5px 6px;
+	display: block;
+	width: 50%;
+	margin: auto;
+	text-align: center;
+
+	font-size: 1em;
+
+	border-radius: 5px;
+	background-color: transparent;
+
+	color: royalblue;
+	border: 2px solid royalblue;
+	text-decoration: none;
+	transition: all 0.2s ease-in-out;
+}
+
+.footer a:hover {
+	background-color: royalblue;
+	border-color: royalblue;
+	color: white;
+}
