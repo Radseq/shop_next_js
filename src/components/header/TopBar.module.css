@@ -1,0 +1,96 @@
+.topBar {
+	display: flex;
+	height: 60px;
+	padding: 0 5px;
+	align-items: center;
+	justify-content: center;
+}
+
+.topBar a {
+	text-decoration: none;
+}
+
+.search {
+	width: calc(100% - 14px);
+	padding-left: 10px;
+	margin-left: 10px;
+}
+
+.search input {
+	border-radius: 10px;
+	border: 2px solid rgb(205, 205, 203);
+	padding-left: 10px;
+	font-size: 1.2em;
+	width: calc(100% - 16px); /* padding-left + 2x border + 2x border of icon*/
+	transition: all 0.5s ease-in-out;
+	display: block;
+}
+
+.search input:focus {
+	border: 2px solid rgb(126, 126, 126);
+	outline: none;
+	box-shadow: rgba(126, 126, 126, 0.938) 0px 2px 8px;
+}
+
+.searchOverlay {
+	display: block;
+	position: absolute;
+	background-color: white;
+	width: calc(100% + 170px);
+
+	top: 26px;
+	z-index: 5;
+	/* pointer-events: none; */
+	border: 2px solid rgb(126, 126, 126);
+	box-shadow: rgba(126, 126, 126, 0.938) 0px 2px 8px;
+	border-radius: 10px;
+}
+
+.icon {
+	padding: 5px 10px;
+	flex: 0 1 6%;
+	align-items: center;
+	display: flex;
+	flex-direction: column;
+	color: black;
+	white-space: nowrap;
+}
+
+.icon:hover {
+	border-radius: 10px;
+	transition: all 0.5s ease-in-out;
+	box-shadow: rgba(0 0 0 / 20%) 0px 2px 8px 0px,
+		rgb(0 0 0 / 10%) 0px 0px 2px 1px;
+}
+
+.cartOverlay {
+	display: none;
+	position: absolute;
+	background-color: white;
+	min-width: 160px;
+	box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.329);
+	z-index: 1;
+	right: 0px;
+	top: 57px;
+	border-radius: 10px;
+}
+
+.cardInfo {
+	padding: 5px 10px;
+	flex: 0 1 6%;
+	align-items: center;
+	display: flex;
+	flex-direction: column;
+	color: black;
+	white-space: nowrap;
+}
+
+.cardInfo:hover .cartOverlay {
+	display: block;
+}
+
+@media (max-width: 550px) {
+	.cartOverlay {
+		right: -50px;
+	}
+}
