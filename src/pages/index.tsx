@@ -1,7 +1,5 @@
 import { TopBar } from "@/components/header/TopBar";
 import Head from "next/head";
-import Link from "next/link";
-import { FC } from "react";
 import styles from "../styles/MainPageBody.module.css";
 
 export default function Home() {
@@ -23,16 +21,11 @@ export default function Home() {
 				<div className={styles.webMain}>
 					<header>
 						<TopBar />
-
 					</header>
 					<main>
-						<div className={styles.mainPageBody}>
-
-						</div>
+						<div className={styles.mainPageBody}></div>
 					</main>
-					<footer>
-
-					</footer>
+					<footer></footer>
 				</div>
 			</main>
 		</>

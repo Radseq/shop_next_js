@@ -1,5 +1,5 @@
+import { ShippingCartProduct } from '@/components/cart/types';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { ShippingCartProduct } from '../components/header/navigationCart/types';
 
 const cartSlice = createSlice({
     name: 'shoppingCart',

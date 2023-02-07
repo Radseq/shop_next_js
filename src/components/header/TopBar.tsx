@@ -5,6 +5,7 @@ import { StyledInput } from "../StyledInput";
 import { Icon } from "../Icon";
 import { useCartSelector } from "@/lib/storeCart";
 import { CartOverlay } from "../cart/CartOverlay";
+import { SearchedProducts } from "./SearchedProducts";
 
 export const TopBar = () => {
 	const shoppingCart = useCartSelector((state) => state.shoppingCart);
@@ -34,14 +35,14 @@ export const TopBar = () => {
 					placeholder="search"
 					onClick={() => setSearchIsFocused(true)}
 				></StyledInput>
-				{/* {searchIsFocused && (
+				{searchIsFocused && searchedText && (
 					<div className={styles.searchOverlay}>
 						<SearchedProducts
 							search={searchedText}
 							callback={() => setSearchIsFocused(false)}
 						/>
 					</div>
-				)} */}
+				)}
 			</div>
 
 			<a href="/help-center" className={styles.icon}>
