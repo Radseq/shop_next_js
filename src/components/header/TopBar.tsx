@@ -6,6 +6,7 @@ import { Icon } from "../Icon";
 import { useCartSelector } from "@/lib/storeCart";
 import { CartOverlay } from "../cart/CartOverlay";
 import { SearchedProducts } from "./SearchedProducts";
+import classNames from "classnames";
 
 export const TopBar = () => {
 	const shoppingCart = useCartSelector((state) => state.shoppingCart);
@@ -50,7 +51,7 @@ export const TopBar = () => {
 				<span>Help</span>
 			</a>
 
-			<div className={`${styles.icon} ${styles.cardInfo}`}>
+			<div className={classNames(styles.icon, styles.cardInfo)}>
 				<a href="/cart">
 					<Icon kind="cart" />
 				</a>
