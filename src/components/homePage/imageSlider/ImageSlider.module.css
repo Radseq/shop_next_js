@@ -1,0 +1,114 @@
+.slides {
+	max-height: 350px;
+}
+
+.slider {
+	animation-name: fade;
+	animation-duration: 1.5s;
+	max-height: inherit;
+}
+
+.slider img {
+	width: 100%;
+	border-radius: 20px;
+	max-height: inherit;
+}
+
+.slidesBody {
+	position: relative;
+	max-height: 320px;
+}
+
+.prevSlider,
+.nextSlider {
+	cursor: pointer;
+	width: auto;
+	position: absolute;
+	padding: 16px;
+	color: rgb(255, 255, 255);
+	font-weight: bold;
+	font-size: 24px;
+	user-select: none;
+	margin-top: -22px;
+	top: 50%;
+	text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000,
+		1px 1px 0 #000;
+}
+
+.prevSlider {
+	border-radius: 15px 0 0 15px;
+}
+
+.nextSlider {
+	right: 0;
+	border-radius: 0 15px 15px 0;
+}
+
+.sliderText {
+	color: white;
+	font-size: 20px;
+	margin: 8px 12px;
+	position: absolute;
+	bottom: 8px;
+	width: 100%;
+	text-align: center;
+	text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000,
+		1px 1px 0 #000;
+}
+
+.numberOfSliderInfo {
+	color: white;
+	font-size: 20px;
+	padding: 8px 12px;
+	position: absolute;
+	top: 0;
+	text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000,
+		1px 1px 0 #000;
+}
+
+.active:hover {
+	background-color: #717171;
+}
+
+.sliderFooter {
+	display: flex;
+	justify-content: space-evenly;
+	max-height: 30px;
+}
+
+.sliderTab {
+	font-size: 13px;
+	padding: 8px 0px;
+	line-height: 16px;
+	cursor: pointer;
+}
+
+.sliderTab.selected {
+	border-right: solid transparent;
+	border-left: solid transparent;
+	border-top: 4px solid rgb(26, 26, 26);
+}
+
+.sliderTab.unSelected {
+	margin-top: 4px;
+	margin-left: 3px;
+	margin-right: 3px;
+}
+
+@keyframes fade {
+	from {
+		opacity: 0.4;
+	}
+
+	to {
+		opacity: 1;
+	}
+}
+
+@media only screen and (max-width: 700px) {
+	.prevSlider,
+	.nextSlider,
+	.sliderText {
+		font-size: 17px;
+	}
+}
