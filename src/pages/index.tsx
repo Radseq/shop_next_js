@@ -7,6 +7,7 @@ import Head from "next/head";
 import styles from "../styles/MainPageBody.module.css";
 import { RootNavigation } from "@/components/header/Types";
 import { ImageToSlide } from "@/components/homePage/Types";
+import { SeparateSection } from "@/components/homePage/SeparateSection";
 
 export default function Home(props: {
 	navigationData: RootNavigation[];
@@ -35,6 +36,7 @@ export default function Home(props: {
 					<main>
 						<div className={styles.mainPageBody}>
 							<News advertising={props.advertisementData} />
+							<SeparateSection sectionName="Recomended products" />
 						</div>
 					</main>
 					<footer>
