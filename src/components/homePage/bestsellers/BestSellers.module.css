@@ -1,0 +1,15 @@
+.bestsellersSection {
+	display: flex;
+	margin: 10px 0px;
+	width: 100%;
+	flex-flow: wrap;
+	align-content: baseline;
+	justify-content: space-between;
+}
+
+.bestsellerProduct {
+	max-width: 24%;
+	min-width: 220px;
+	text-decoration: none;
+	color: black;
+}
