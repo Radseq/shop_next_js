@@ -1,0 +1,152 @@
+.hotSell {
+	width: 35%;
+	border: 2px solid rgb(120, 120, 120);
+	border-radius: 12px;
+	height: 100%;
+	position: relative;
+	font-family: Lato, sans-serif;
+	margin-right: 10px;
+}
+
+.hotSell span {
+	display: block;
+}
+
+.hotSell a {
+	text-decoration: none;
+	color: #000;
+}
+
+.hotSell h1 {
+	padding-left: 20px;
+}
+
+.savesPanel {
+	position: absolute;
+	background-color: rgb(110, 110, 110);
+	color: white;
+	width: 100px;
+	top: 30px;
+	right: 10px;
+	border-radius: 10px;
+	text-align: center;
+}
+
+.savesPanel span {
+	padding: 5px 7px;
+	display: block;
+}
+
+.hotSell img {
+	display: block;
+	width: 200px;
+	height: 200px;
+	margin: auto;
+}
+
+.hotSell > span {
+	display: block;
+}
+
+.productTitle {
+	padding: 20px;
+	font-size: 20px;
+	text-align: center;
+}
+
+.productPrice {
+	font-size: 20px;
+	line-height: 24px;
+	color: rgb(110, 110, 110);
+	text-align: center;
+	display: block;
+}
+
+.productPriceAfterDiscount {
+	font-size: 31px;
+	color: rgb(75, 75, 75);
+	font-weight: bold;
+	text-align: center;
+	white-space: nowrap;
+}
+
+.hotSellMessage {
+	font-size: 31px;
+	color: rgb(75, 75, 75);
+	font-weight: bold;
+	white-space: nowrap;
+	text-align: center;
+	padding: 20px;
+}
+
+.hotSellTimer {
+	text-align: center;
+}
+
+.hotSellTimer > span {
+	color: rgb(50, 50, 50);
+}
+
+.clockBox {
+	display: flex;
+	font-size: 24px;
+	justify-content: center;
+}
+
+.clockBox > span {
+	padding: 7px;
+}
+
+.timeBoxNumeric {
+	padding: 10px;
+	border-radius: 10px;
+	background-color: rgb(215, 215, 215);
+}
+
+.timeBox span {
+	font-size: 16px;
+}
+
+.sellProgressBar {
+	padding: 0 10%;
+}
+
+.sellProgressDesc {
+	display: flex;
+	justify-content: space-between;
+}
+
+.ordered {
+	font-size: 14px;
+}
+
+.ordered > span {
+	font-size: 20px;
+	font-weight: bold;
+}
+
+.sold {
+	font-size: 14px;
+}
+
+.sold > span {
+	font-size: 22px;
+	font-weight: bold;
+	text-shadow: 1px 1px #ff0000;
+}
+
+@media (min-width: 600px) and (max-width: 910px) {
+	.hotSell {
+		border: 2px solid rgb(120, 120, 120);
+		border-radius: 12px;
+		width: 100%;
+	}
+}
+
+@media (max-width: 600px) {
+	.hotSell {
+		border: 2px solid rgb(120, 120, 120);
+		border-radius: 12px;
+		width: 100%;
+	}
+}
