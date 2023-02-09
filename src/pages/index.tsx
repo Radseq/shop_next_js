@@ -13,6 +13,8 @@ import { RecommendedProduct } from "@/components/homePage/recommendedProducts/Ty
 import { HotSellProduct } from "@/components/homePage/hotSellPanel/Types";
 import { Promotions } from "@/components/homePage/promotions/Promotions";
 import { Promotion } from "@/components/homePage/promotions/Types";
+import { HitsOfTheWeek } from "@/components/homePage/hitsOfTheWeekSlider/HitsOfTheWeek";
+import { HitOfWeekProduct } from "@/components/homePage/hitsOfTheWeekSlider/Types";
 
 export default function Home(props: {
 	navigationData: RootNavigation[];
@@ -20,6 +22,7 @@ export default function Home(props: {
 	recommendedProductsData: RecommendedProduct[];
 	hotSellProductData: HotSellProduct;
 	promotions: Promotion[];
+	hitsOfTheWeekProducts: HitOfWeekProduct[];
 }) {
 	return (
 		<div>
@@ -57,6 +60,13 @@ export default function Home(props: {
 							/>
 							<Promotions promotionsData={props.promotions} />
 							<hr />
+							<SeparateSection
+								sectionName="Hits of the week"
+								url="/hitsoftheweek"
+							/>
+							<HitsOfTheWeek
+								hitsOfTheWeek={props.hitsOfTheWeekProducts}
+							/>
 						</div>
 					</main>
 					<footer>
@@ -89,12 +99,19 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 	);
 	const promotions = await promotionsResult.json();
 
+	const hitsOfTheWeekResult = await fetch(
+		"http://localhost:3000/api/hitsOfTheWeek/hitsOfTheWeek/"
+	);
+
+	const hitsOfTheWeekProducts = await hitsOfTheWeekResult.json();
+
 	return {
 		props: {
 			navigationData: navigations,
 			advertisementData: advertisement,
 			recommendedProductsData: recommendedProducts,
 			promotions,
+			hitsOfTheWeekProducts,
 		},
 	};
 };
