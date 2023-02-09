@@ -11,12 +11,15 @@ import { SeparateSection } from "@/components/homePage/SeparateSection";
 import { RecommendedProducts } from "@/components/homePage/recommendedProducts/RecommendedProducts";
 import { RecommendedProduct } from "@/components/homePage/recommendedProducts/Types";
 import { HotSellProduct } from "@/components/homePage/hotSellPanel/Types";
+import { Promotions } from "@/components/homePage/promotions/Promotions";
+import { Promotion } from "@/components/homePage/promotions/Types";
 
 export default function Home(props: {
 	navigationData: RootNavigation[];
 	advertisementData: ImageToSlide[];
 	recommendedProductsData: RecommendedProduct[];
 	hotSellProductData: HotSellProduct;
+	promotions: Promotion[];
 }) {
 	return (
 		<div>
@@ -47,6 +50,13 @@ export default function Home(props: {
 									props.recommendedProductsData
 								}
 							/>
+							<hr />
+							<SeparateSection
+								sectionName="Promotions"
+								url="/promotions"
+							/>
+							<Promotions promotionsData={props.promotions} />
+							<hr />
 						</div>
 					</main>
 					<footer>
@@ -70,15 +80,21 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 	const advertisement = await advertisingResult.json();
 
 	const recommendedProductsResult = await fetch(
-		"http://localhost:3000/api/recommendedProducts/recommendedProducts/"
+		"http://localhost:3000/api/recommendedProduct/recommendedProduct/"
 	);
 	const recommendedProducts = await recommendedProductsResult.json();
+
+	const promotionsResult = await fetch(
+		"http://localhost:3000/api/promotion/promotion/"
+	);
+	const promotions = await promotionsResult.json();
 
 	return {
 		props: {
 			navigationData: navigations,
 			advertisementData: advertisement,
 			recommendedProductsData: recommendedProducts,
+			promotions,
 		},
 	};
 };

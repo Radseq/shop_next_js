@@ -1,0 +1,39 @@
+.productBasicSlider {
+	position: relative;
+	margin: auto;
+	display: flex;
+	max-height: 280px;
+}
+
+.productBasicSlider > a {
+	text-decoration: none;
+	color: black;
+}
+
+.prev,
+.next {
+	margin: auto;
+	transition: 0.6s ease;
+	border-radius: 0 3px 3px 0;
+	-webkit-user-select: none;
+	user-select: none;
+	cursor: pointer;
+	border: 1px solid rgb(110, 110, 110);
+	border-radius: 15px;
+	vertical-align: baseline;
+	padding: 5px;
+	height: 20px;
+	text-align: center;
+	min-width: 20px;
+}
+
+@media (max-width: 1210px) {
+	.prev,
+	.next {
+		display: none;
+	}
+
+	.productBasicSlider {
+		overflow: hidden;
+	}
+}
