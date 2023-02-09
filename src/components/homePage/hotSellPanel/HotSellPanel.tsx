@@ -1,6 +1,6 @@
 import React, { FC, useEffect, useState } from "react";
 import styles from "./HotSellPanel.module.css";
-import { Timer, useTimer } from "../../../hooks/useTimer";
+import { useTimer } from "../../../hooks/useTimer";
 import ProgressBar from "../../ProgressBar";
 import { HotSellProduct } from "./Types";
 

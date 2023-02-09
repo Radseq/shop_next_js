@@ -1,9 +1,6 @@
 import { ProductItem } from "@/components/productItem/ProductItem";
-import axios from "axios";
 import React, { FC, useEffect, useState } from "react";
-import { useQuery } from "react-query";
 import { HotSellPanel } from "../hotSellPanel/HotSellPanel";
-import { HotSellProduct } from "../hotSellPanel/Types";
 import styles from "./RecommendedProducts.module.css";
 import { RecommendedProduct } from "./Types";
 

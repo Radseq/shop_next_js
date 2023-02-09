@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-export type Timer = { type: 'Finished' }
+type Timer = { type: 'Finished' }
     | { type: 'Ongoing', hours: number, minutes: number, seconds: number }
 
 const FINISHED_TIMER: Timer = { type: 'Finished' }
