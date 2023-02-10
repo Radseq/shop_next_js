@@ -3,6 +3,8 @@ import styles from "./HotSellPanel.module.css";
 import { useTimer } from "../../../hooks/useTimer";
 import ProgressBar from "../../ProgressBar";
 import { HotSellProduct } from "./Types";
+import Image from "next/image";
+import Link from "next/link";
 
 type ProductStock = Pick<HotSellProduct, "maxQuantity" | "orderQuantity">;
 const isSoldOut = (product: ProductStock) =>
@@ -101,11 +103,16 @@ export const HotSellPanel = () => {
 
 	return (
 		<div className={styles.hotSell}>
-			<a href="/">
+			<Link href="/">
 				<div className={styles.title}>
 					<h1>Hot sell</h1>
 				</div>
-				<img src={hotSellProduct.imageSrc} alt="hot sell product" />
+				<Image
+					width="200"
+					height="200"
+					src={hotSellProduct.imageSrc}
+					alt={hotSellProduct.name}
+				/>
 				<div className={styles.savesPanel}>
 					<span>Save</span>
 					<b>
@@ -128,7 +135,7 @@ export const HotSellPanel = () => {
 					minutes={timer.minutes}
 					seconds={timer.seconds}
 				/>
-			</a>
+			</Link>
 		</div>
 	);
 };

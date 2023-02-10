@@ -11,8 +11,7 @@
 }
 
 .productBasicContainer > img {
-	max-width: inherit;
-	border-radius: 20px;
+	margin: auto;
 }
 
 .productBasicTitle {

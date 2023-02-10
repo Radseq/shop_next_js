@@ -3,12 +3,12 @@
 	border: 2px solid transparent;
 
 	font-size: 14px;
-	max-height: calc(100% - 10px);
-	max-width: calc(100% - 10px);
+	height: calc(100% - 10px);
+	width: calc(100% - 10px);
 	margin: 8px;
 	display: flex;
 	flex-direction: column;
-	min-height: 228px;
+	min-height: 250px;
 }
 
 .productItem:hover {
@@ -25,8 +25,7 @@
 }
 
 .header {
-	height: 25px;
-	max-height: 35px;
+	min-height: 40px;
 	margin: 0 auto;
 	display: flex;
 	justify-content: space-between;
@@ -59,17 +58,14 @@
 }
 
 .content {
-	max-height: 50%;
+	min-height: calc(40% - 16px);
 	margin: 8px;
 	overflow: hidden;
 	text-overflow: ellipsis;
 }
 
 .productItem img {
-	width: 60%;
 	margin: auto;
-	display: block;
-	max-height: 50%;
 }
 
 .title {

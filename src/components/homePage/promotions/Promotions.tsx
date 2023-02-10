@@ -3,6 +3,7 @@ import React, { FC } from "react";
 import { useMutipleItemsSlider } from "../../../hooks/useMutipleItemsSlider";
 import styles from "./Promotions.module.css";
 import { Promotion } from "./Types";
+import Link from "next/link";
 
 const PromotionSlider: FC<{
 	promotions: Promotion[];
@@ -21,17 +22,22 @@ const PromotionSlider: FC<{
 			>
 				❮
 			</div>
-			{promotionSlider.currentPromotions.map((promotion) => {
-				return (
-					<a href={`/Product/${promotion.id}`} key={promotion.id}>
-						<ProductImage
-							desc={promotion.desc}
-							imageSrc={promotion.imageSrc}
-							title={promotion.title}
-						/>
-					</a>
-				);
-			})}
+			<div className={styles.sliderImagesContainer}>
+				{promotionSlider.currentPromotions.map((promotion) => {
+					return (
+						<Link
+							href={`/products/${promotion.id}`}
+							key={promotion.id}
+						>
+							<ProductImage
+								desc={promotion.desc}
+								imageSrc={promotion.imageSrc}
+								title={promotion.title}
+							/>
+						</Link>
+					);
+				})}
+			</div>
 			<div className={styles.next} onClick={promotionSlider.nextSlide}>
 				❯
 			</div>

@@ -2,6 +2,7 @@ import React, { FC } from "react";
 import { ProductItem } from "../../productItem/ProductItem";
 import styles from "./BestSellers.module.css";
 import { BestsellerProduct } from "./Types";
+import Link from "next/link";
 
 export const BestSellers: FC<{ products: BestsellerProduct[] }> = ({
 	products,
@@ -10,8 +11,8 @@ export const BestSellers: FC<{ products: BestsellerProduct[] }> = ({
 		<section className={styles.bestsellersSection}>
 			{products.map((bestseller) => {
 				return (
-					<a
-						href={`/Product/${bestseller.id}`}
+					<Link
+						href={`/products/${bestseller.id}`}
 						className={styles.bestsellerProduct}
 						key={bestseller.id}
 					>
@@ -24,7 +25,7 @@ export const BestSellers: FC<{ products: BestsellerProduct[] }> = ({
 							price={bestseller.price}
 							promotionPrice={bestseller.promotionPrice}
 						/>
-					</a>
+					</Link>
 				);
 			})}
 		</section>

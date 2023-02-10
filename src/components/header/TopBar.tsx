@@ -7,6 +7,7 @@ import { useCartSelector } from "@/lib/storeCart";
 import { CartOverlay } from "../cart/CartOverlay";
 import { SearchedProducts } from "./SearchedProducts";
 import classNames from "classnames";
+import Link from "next/link";
 
 export const TopBar = () => {
 	const shoppingCart = useCartSelector((state) => state.shoppingCart);
@@ -21,9 +22,9 @@ export const TopBar = () => {
 
 	return (
 		<div className={styles.topBar}>
-			<a href="/">
+			<Link href="/">
 				<Icon kind="shop" />
-			</a>
+			</Link>
 
 			<div className={styles.search}>
 				<StyledInput

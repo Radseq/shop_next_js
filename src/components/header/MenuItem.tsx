@@ -6,6 +6,8 @@ import {
 	RootNavigationExt,
 	SubCategory,
 } from "./Types";
+import Image from "next/image";
+import Link from "next/link";
 
 const isProduct = (value: NavProduct | SubCategory[]): value is NavProduct =>
 	!Array.isArray(value);
@@ -19,7 +21,18 @@ const SubCategoryProduct: FC<{ value: NavProduct | SubCategory[] }> = (
 			<ul>
 				{subCategories.map((subCategory) => (
 					<li key={subCategory.id}>
-						<a href={subCategory.linkUrl}>{subCategory.name}</a>
+						<Link href={subCategory.linkUrl}>
+							{subCategory.name}
+						</Link>
+
+						<Image
+							width="32"
+							height="32"
+							src={subCategory.linkUrl}
+							alt="icon"
+						>
+							{subCategory.name}
+						</Image>
 					</li>
 				))}
 			</ul>
@@ -36,7 +49,12 @@ const SubCategoryProduct: FC<{ value: NavProduct | SubCategory[] }> = (
 					<div>{product.descSecond}</div>
 					<div>{product.descThird}</div>
 				</div>
-				<img src={product.imgUrl} alt={product.name} />
+				<Image
+					width="200"
+					height="200"
+					src={product.imgUrl}
+					alt={product.name}
+				/>
 			</div>
 			<div className={styles.recommendedProductPrice}>
 				<span>only</span>

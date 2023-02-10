@@ -3,6 +3,7 @@ import React, { FC, useEffect, useState } from "react";
 import { HotSellPanel } from "../hotSellPanel/HotSellPanel";
 import styles from "./RecommendedProducts.module.css";
 import { RecommendedProduct } from "./Types";
+import Link from "next/link";
 
 export const RecommendedProducts: FC<{
 	recommendedProduct: RecommendedProduct[];
@@ -13,8 +14,8 @@ export const RecommendedProducts: FC<{
 			<div className={styles.recommendedProducts}>
 				{recommendedProduct.map((loadedProduct) => {
 					return (
-						<a
-							href={`/Product/${loadedProduct.id}`}
+						<Link
+							href={`/products/${loadedProduct.id}`}
 							className={styles.recommendedProduct}
 							key={loadedProduct.id}
 						>
@@ -29,7 +30,7 @@ export const RecommendedProducts: FC<{
 								price={loadedProduct.price}
 								promotionPrice={loadedProduct.promotionPrice}
 							/>
-						</a>
+						</Link>
 					);
 				})}
 			</div>

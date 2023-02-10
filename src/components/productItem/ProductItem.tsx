@@ -1,5 +1,6 @@
 import React, { FC } from "react";
 import styles from "./ProductItem.module.css";
+import Image from "next/image";
 
 const calcPercentagePrice = (oldPrice: number, newPrice: number) => {
 	return (newPrice * 100) / oldPrice;
@@ -79,7 +80,12 @@ export const ProductItem: FC<ProductItemProps> = (props) => {
 				price={props.price}
 				promotionPrice={props.promotionPrice}
 			/>
-			<img src={props.imageSrc} alt={"product"} />
+			<Image
+					width="100"
+					height="100"
+					src={props.imageSrc}
+					alt={props.name}
+				/>
 			<div className={styles.content}>
 				<div className={styles.title}>{props.name}</div>
 				{props.children}
