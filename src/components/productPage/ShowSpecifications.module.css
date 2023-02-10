@@ -1,0 +1,50 @@
+.specificationsMain dl {
+	display: flex;
+}
+
+.specificationsMain dt {
+	width: 30%;
+	text-align: right;
+	color: rgb(116, 116, 116);
+}
+
+.specificationsMain dl > div {
+	width: calc(70% - 10px);
+	margin-left: 10px;
+}
+
+.specificationsMain dd {
+	margin-left: 0px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+.specificationsOther dl {
+	display: flex;
+	padding: 5px 0px;
+	border-radius: 10px;
+	margin-block-start: 5px;
+	margin-block-end: 5px;
+}
+
+.specificationsOther dt {
+	flex: 1 0;
+	text-align: right;
+}
+
+.specificationsOther dd {
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+.specificationsOther dl > div {
+	flex: 1 0;
+}
+
+.specificationsOther dl:nth-child(even) {
+	background: white;
+}
+
+.specificationsOther dl:nth-child(odd) {
+	background: #e4e4e4;
+}

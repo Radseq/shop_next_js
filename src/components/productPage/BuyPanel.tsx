@@ -1,0 +1,184 @@
+import { FC, useState } from "react";
+import styles from "./BuyPanel.module.css";
+import { ProductProps } from "./Types";
+import { StyledInput } from "../StyledInput";
+import { useCartDispatch } from "@/lib/storeCart";
+import { addToCart } from "@/lib/cartSlice";
+import { StyledButton } from "../StyledButton";
+import Image from "next/image";
+
+const AvailableProductItem: FC<{ quantity: number; productId: number }> = ({
+	quantity,
+	productId,
+}) => {
+	if (quantity)
+		return (
+			<div className={styles.item}>
+				<span className={styles.ok}>Avaiable</span>
+				<span>
+					<a href={"/available/" + productId}> Find out more</a>
+				</span>
+			</div>
+		);
+	else
+		return (
+			<div className={styles.item}>
+				<span className={styles.error}>Inaccessible</span>
+				<span>
+					<a href="/inaccessible/1"> Find out more</a>
+				</span>
+			</div>
+		);
+};
+
+const DeliveryItem: FC<{ hasFreeDelivery: boolean }> = ({
+	hasFreeDelivery,
+}) => {
+	if (hasFreeDelivery) {
+		return (
+			<div className={styles.item}>
+				<span className={styles.ok}>Free Delivery</span>
+				<span>
+					<a href={"/deliveryfree"}> Find out more</a>
+				</span>
+			</div>
+		);
+	} else {
+		return (
+			<div className={styles.item}>
+				<span>Free pickup in the shop</span>
+				<span>
+					<a href={"/delivery"}> Find out more</a>
+				</span>
+			</div>
+		);
+	}
+};
+
+const LoanInstallmentItemDetailRow: FC<{
+	installmentPrice: number;
+	productId: number;
+}> = ({ installmentPrice, productId }) => {
+	return (
+		<div className={styles.detailRow}>
+			<Image
+				width="32"
+				height="32"
+				src={"/images/payment-icon.png"}
+				alt="icon"
+			/>
+			<div className={styles.item}>
+				<span>Installment only {installmentPrice} PLN</span>
+				<span>
+					<a href={"/installment/" + productId}>
+						Calculate loan rate
+					</a>
+				</span>
+			</div>
+		</div>
+	);
+};
+
+export const BuyPanel: FC<{ purchasedProduct: ProductProps }> = ({
+	purchasedProduct,
+}) => {
+	const [quantity, setQuantity] = useState(1);
+	const dispatch = useCartDispatch();
+
+	const onAddToCartBtnClick = (product: ProductProps) => {
+		dispatch(
+			addToCart({
+				id: product.id,
+				imageSrc: product.imageSrc,
+				name: product.name,
+				price: product.price,
+				discountPrice: product.priceDiscount,
+				quantity: quantity,
+			})
+		);
+	};
+
+	const onQuntityChange: React.ChangeEventHandler<HTMLInputElement> = (e) => {
+		const inputValue = Number(e.target.value);
+		setQuantity(inputValue > 0 ? inputValue : 1);
+	};
+
+	return (
+		<div className={styles.buyPanel}>
+			<span>
+				Save {purchasedProduct.price - purchasedProduct.priceDiscount}{" "}
+				pln
+			</span>
+			<div className={styles.totalPrice}>
+				<del>{purchasedProduct.price} pln </del>
+				<h2>{purchasedProduct.priceDiscount} pln</h2>
+			</div>
+			<div className={styles.addToCart}>
+				<StyledButton
+					onClick={() => onAddToCartBtnClick(purchasedProduct)}
+					kind="primary"
+				>
+					Add to cart
+				</StyledButton>
+				<StyledInput
+					type="number"
+					value={quantity}
+					onChange={onQuntityChange}
+					kind="primary"
+				/>
+			</div>
+			<div className={styles.details}>
+				<hr />
+				<div className={styles.detailRow}>
+					<Image
+						width="32"
+						height="32"
+						src={"/images/check-mark.png"}
+						alt="icon"
+					/>
+					<AvailableProductItem
+						quantity={purchasedProduct.quantity}
+						productId={purchasedProduct.id}
+					/>
+				</div>
+				<hr />
+				<div className={styles.detailRow}>
+					<Image
+						width="32"
+						height="32"
+						src={"/images/clock-icon.png"}
+						alt="icon"
+					/>
+					<div className={styles.item}>
+						<span>Buy now, receive day after tomorrow</span>
+						<span>
+							<a href={"/receiveday/" + purchasedProduct.id}>
+								Find out more
+							</a>
+						</span>
+					</div>
+				</div>
+				<hr />
+				<div className={styles.detailRow}>
+					<Image
+						// className={}
+						width="32"
+						height="32"
+						src={"/images/delivery-icon.png"}
+						alt="icon"
+					/>
+					<DeliveryItem
+						hasFreeDelivery={purchasedProduct.freeDelivery}
+					/>
+				</div>
+				<hr />
+				{purchasedProduct.installmentPrice && (
+					<LoanInstallmentItemDetailRow
+						installmentPrice={purchasedProduct.installmentPrice}
+						productId={purchasedProduct.id}
+					/>
+				)}
+			</div>
+		</div>
+	);
+};
