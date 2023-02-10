@@ -6,6 +6,7 @@ import { StarScore } from "@/components/StarScore";
 import { ShowSpecifications } from "@/components/productPage/ShowSpecifications";
 import { BuyPanel } from "@/components/productPage/BuyPanel";
 import axios from "axios";
+import { ScorePanel } from "@/components/productPage/ScorePanel";
 
 const ProductDescriptions: FC<{ descriptions: Description[] }> = (props) => {
 	return (
@@ -58,7 +59,7 @@ export default function Product(props: {
 					</div>
 				</div>
 			</div>
-			{/* <ProductDescriptions descriptions={props.product.descriptions} />
+			<ProductDescriptions descriptions={props.product.descriptions} />
 			<h2>Specification</h2>
 			<div className={styles.specificationsOther}>
 				<ShowSpecifications
@@ -77,9 +78,9 @@ export default function Product(props: {
 					productName={props.product.name}
 				/>
 				<hr />
-				<CommentsPanel productId={Number(props.productId)} />
+				{/* <CommentsPanel productId={Number(props.productId)} /> */}
 			</div>
-			<hr /> */}
+			<hr />
 		</div>
 	);
 }
