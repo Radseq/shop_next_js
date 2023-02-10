@@ -7,6 +7,7 @@ import { ShowSpecifications } from "@/components/productPage/ShowSpecifications"
 import { BuyPanel } from "@/components/productPage/BuyPanel";
 import axios from "axios";
 import { ScorePanel } from "@/components/productPage/ScorePanel";
+import { CommentsPanel } from "@/components/productPage/Comments";
 
 const ProductDescriptions: FC<{ descriptions: Description[] }> = (props) => {
 	return (
@@ -78,7 +79,7 @@ export default function Product(props: {
 					productName={props.product.name}
 				/>
 				<hr />
-				{/* <CommentsPanel productId={Number(props.productId)} /> */}
+				<CommentsPanel productId={Number(props.productId)} />
 			</div>
 			<hr />
 		</div>
