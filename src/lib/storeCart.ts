@@ -1,7 +1,8 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
 import { cartReducer } from "./cartSlice";
-import storage from 'redux-persist/lib/storage' // localStorage
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
 
 import { combineReducers } from 'redux';
 import {
@@ -17,7 +18,7 @@ import { createWrapper } from "next-redux-wrapper";
 
 const persistConfig = {
     key: 'shoppingCart',
-    storage,
+    storage: AsyncStorage,
 }
 
 const reducers = combineReducers({ shoppingCart: cartReducer });
