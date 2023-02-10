@@ -11,19 +11,19 @@ export default function userHandler(
             "id": 1,
             "name": "Slider 1",
             "desc": "Slider 1 desc",
-            "imageSrc": "https://www.w3schools.com/howto/img_nature_wide.jpg"
+            "imageSrc": "/advertisement/adv1.jpg"
         },
         {
             "id": 2,
             "name": "Slider 2",
             "desc": "Slider 2 desc",
-            "imageSrc": "https://www.w3schools.com/howto/img_snow_wide.jpg"
+            "imageSrc": "/advertisement/adv2.jpg"
         },
         {
             "id": 3,
             "name": "Slider 3",
             "desc": "Slider 3 desc",
-            "imageSrc": "https://www.w3schools.com/howto/img_mountains_wide.jpg"
+            "imageSrc": "/advertisement/adv3.jpg"
         }
     ];
 
