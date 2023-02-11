@@ -56,6 +56,8 @@ export const SearchedProducts: FC<{ search: string; callback: () => void }> = ({
 	search,
 	callback,
 }) => {
+
+	// todo hook to do function every x instead every key press
 	const fetchData = () =>
 		axios
 			.get(`http://localhost:3000/api/product/search/${search}/`)

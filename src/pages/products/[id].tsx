@@ -95,16 +95,10 @@ export default function Product(props: {
 	);
 }
 
-export const getStaticPaths: GetStaticPaths = async () => {
-	return {
-		paths: [],
-		fallback: "blocking",
-	};
-};
-
-export const getStaticProps: GetStaticProps = async ({ params }) => {
+export const getServerSideProps: GetStaticProps = async ({ params }) => {
 	const id = params?.id as string;
 
+	// todo error handle
 	const urls = [
 		"http://localhost:3000/api/navigation/navigation/",
 		`http://localhost:3000/api/product/${id}/`,

@@ -23,7 +23,6 @@ export default function userHandler(
 
     switch (method) {
         case 'GET':
-
             res.status(200).json(dummyData)
             break
         default:

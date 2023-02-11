@@ -5,6 +5,7 @@ import ProgressBar from "../../ProgressBar";
 import { HotSellProduct } from "./Types";
 import Image from "next/image";
 import Link from "next/link";
+import axios from "axios";
 
 type ProductStock = Pick<HotSellProduct, "maxQuantity" | "orderQuantity">;
 const isSoldOut = (product: ProductStock) =>
@@ -71,13 +72,11 @@ const HotSellTimer: FC<HotSellTimerProps> = (props) => {
 export const HotSellPanel = () => {
 	const [hotSellProduct, setHotSellProduct] = useState<HotSellProduct>();
 
-	const getHotSellProduct = async () => {
-		const hotSellProductResult = await fetch(
+	// todo handle error
+	const fetchData = async () =>
+		axios.get(
 			"http://localhost:3000/api/recommendedProduct/hotSellProduct/"
 		);
-
-		return await hotSellProductResult.json();
-	};
 
 	const endDateTime = hotSellProduct?.endDateTime ?? 0;
 
@@ -87,8 +86,8 @@ export const HotSellPanel = () => {
 
 	useEffect(() => {
 		setInterval(() => {
-			getHotSellProduct().then((data) => {
-				setHotSellProduct(data);
+			fetchData().then((data) => {
+				setHotSellProduct(data.data);
 			});
 		}, getHotSellProductEveryMs);
 	}, [setHotSellProduct, getHotSellProductEveryMs]);

@@ -68,7 +68,8 @@ export default function Home(props: {
 	);
 }
 
-export const getStaticProps: GetStaticProps = async ({ params }) => {
+export const getServerSideProps: GetStaticProps = async ({ params }) => {
+	// todo error handle
 	const urls = [
 		"http://localhost:3000/api/navigation/navigation/",
 		"http://localhost:3000/api/advertising/advertisement/",
