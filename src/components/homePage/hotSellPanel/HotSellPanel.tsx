@@ -71,7 +71,7 @@ export const HotSellPanel = () => {
 
 	const getHotSellProduct = async () => {
 		const hotSellProductResult = await fetch(
-			"http://localhost:3000/api/recommendedProducts/hotSellProduct/"
+			"http://localhost:3000/api/recommendedProduct/hotSellProduct/"
 		);
 
 		return await hotSellProductResult.json();
