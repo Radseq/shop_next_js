@@ -1,5 +1,6 @@
+import { TopBar } from "@/components/header/TopBar";
 import Head from "next/head";
-import Link from "next/link";
+import styles from "../styles/MainPageBody.module.css";
 
 export default function Home() {
 	return (
@@ -17,9 +18,15 @@ export default function Home() {
 				<link rel="icon" href="/favicon.ico" />
 			</Head>
 			<main>
-				<h2>
-					<Link href="/posts/1">post</Link>
-				</h2>
+				<div className={styles.webMain}>
+					<header>
+						<TopBar />
+					</header>
+					<main>
+						<div className={styles.mainPageBody}></div>
+					</main>
+					<footer></footer>
+				</div>
 			</main>
 		</>
 	);
