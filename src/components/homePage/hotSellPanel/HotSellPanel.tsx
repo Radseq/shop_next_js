@@ -72,6 +72,7 @@ const HotSellTimer: FC<HotSellTimerProps> = (props) => {
 export const HotSellPanel = () => {
 	const [hotSellProduct, setHotSellProduct] = useState<HotSellProduct>();
 
+	// todo handle error
 	const fetchData = async () =>
 		axios.get(
 			"http://localhost:3000/api/recommendedProduct/hotSellProduct/"
