@@ -9,7 +9,7 @@ export const useAutoSlider = (sliderCount: number, interval: number) => {
         }
         const timeout = setTimeout(() => slider.nextSlide(), interval)
         return () => clearTimeout(timeout)
-    }, [slider.nextSlide, interval])
+    }, [slider, interval])
 
     return slider
 }

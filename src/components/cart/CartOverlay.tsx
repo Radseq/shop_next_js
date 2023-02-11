@@ -5,6 +5,7 @@ import styles from "./CartOverlay.module.css";
 import { ShippingCartProduct } from "./types";
 import Image from "next/image";
 import classNames from "classnames";
+import Link from "next/link";
 
 const CartItem: FC<{ product: ShippingCartProduct }> = ({ product }) => {
 	const dispatch = useCartDispatch();
@@ -68,7 +69,7 @@ export const CartOverlay: FC<{ cartItems: ShippingCartProduct[] }> = ({
 				<div>
 					Cart <span>({cartItems.length})</span>
 				</div>
-				<a href="/cart">Edit</a>
+				<Link href="/cart">Edit</Link>
 			</div>
 			{cartItems.map((item) => {
 				return <CartItem key={item.id} product={item} />;
@@ -88,7 +89,7 @@ export const CartOverlay: FC<{ cartItems: ShippingCartProduct[] }> = ({
 					To pay
 					<span>{sumItemsPriceDiscount} pln</span>
 				</div>
-				<a href="/">Show cart</a>
+				<Link href="/cart">Show cart</Link>
 			</div>
 		</div>
 	);
