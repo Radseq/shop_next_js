@@ -59,7 +59,7 @@ export const SearchedProducts: FC<{ search: string; callback: () => void }> = ({
 			.then(({ data }) => data);
 
 	const { isSuccess, data, isLoading, isError } = useQuery(
-		["gerSearchResult"],
+		["getSearchResult"],
 		() => fetchData(),
 		{
 			enabled: search.length > 0,

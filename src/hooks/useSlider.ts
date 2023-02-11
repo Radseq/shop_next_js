@@ -1,4 +1,4 @@
-import {useCallback, useState} from "react";
+import { useCallback, useState } from "react";
 
 const normalizeIndex = (newIndex: number, max: number) => (max + newIndex) % max;
 

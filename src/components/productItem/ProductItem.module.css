@@ -1,0 +1,87 @@
+.productItem {
+	border-radius: 10px;
+	border: 2px solid transparent;
+
+	font-size: 14px;
+	max-height: calc(100% - 10px);
+	max-width: calc(100% - 10px);
+	margin: 8px;
+	display: flex;
+	flex-direction: column;
+	min-height: 228px;
+}
+
+.productItem:hover {
+	border-radius: 10px;
+	border: 2px solid rgba(124, 124, 124, 0.938);
+	opacity: 1;
+	transition: 1s;
+	box-shadow: rgba(124, 124, 124, 0.938) 0px 2px 8px;
+}
+
+.productItem:hover .header {
+	visibility: visible;
+	opacity: 1;
+}
+
+.header {
+	height: 25px;
+	max-height: 35px;
+	margin: 0 auto;
+	display: flex;
+	justify-content: space-between;
+	padding: 5px;
+
+	visibility: hidden;
+	opacity: 0;
+	transition: visibility 0s, opacity 0.5s linear;
+	color: #8a8a8a;
+}
+
+.header > span {
+	padding: 5px;
+	border-radius: 7px;
+}
+
+.attrBestseller {
+	border: 1px solid rgb(255, 73, 73);
+	box-shadow: rgba(255, 75, 75, 0.938) 0px 2px 8px;
+}
+
+.attrFreeShipping {
+	border: 1px solid rgb(86, 204, 50);
+	box-shadow: rgba(86, 204, 50, 0.938) 0px 2px 8px;
+}
+
+.attrSpecialOffer {
+	border: 1px solid rgb(76, 73, 255);
+	box-shadow: rgba(76, 73, 255, 0.938) 0px 2px 8px;
+}
+
+.content {
+	max-height: 50%;
+	margin: 8px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+.productItem img {
+	width: 60%;
+	margin: auto;
+	display: block;
+	max-height: 50%;
+}
+
+.title {
+	overflow: hidden;
+	word-wrap: break-word;
+	text-overflow: ellipsis;
+	font-weight: bold;
+	display: -webkit-box;
+	-webkit-line-clamp: 2;
+	-webkit-box-orient: vertical;
+}
+
+.infoOldPrice {
+	color: #8a8a8a;
+}

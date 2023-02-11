@@ -1,0 +1,31 @@
+.recommendedProductsSection {
+	display: flex;
+	margin: 10px 0px;
+}
+
+.recommendedProducts {
+	width: 100%;
+	display: flex;
+	flex-flow: wrap;
+	align-content: baseline;
+}
+
+.recommendedProduct {
+	max-width: 30%;
+	height: 250px;
+	min-width: 220px;
+	text-decoration: none;
+	color: black;
+}
+
+@media (max-width: 910px) {
+	.recommendedProductsSection {
+		display: block;
+	}
+}
+
+@media (max-width: 600px) {
+	.recommendedProducts {
+		justify-content: center;
+	}
+}
