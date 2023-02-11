@@ -1,0 +1,135 @@
+.scorePanel {
+	display: flex;
+	width: calc(100% -20px);
+	margin: 10px 10%;
+}
+
+.averageScorePanel {
+	width: 20%;
+	text-align: center;
+	margin: 5% 10px 0 10px;
+}
+
+.averageScoreGraphic {
+	display: flex;
+	justify-content: center;
+	height: 20px;
+}
+
+.averageScoreGraphic img {
+	width: 20px;
+	height: 20px;
+	display: block;
+}
+
+.averageScorePanel > span {
+	font-size: 0.9em;
+	color: rgb(117, 117, 117);
+}
+
+.averageScore > span:first-child {
+	font-size: 2.5em;
+}
+
+.averageScore > span:last-child {
+	color: rgb(117, 117, 117);
+}
+
+.perScoreOpinions {
+	width: 40%;
+	margin: 0 10px;
+}
+
+.svgStar {
+	width: 20px;
+	height: 20px;
+}
+
+.perScoreOptionRow {
+	display: flex;
+	width: 100%;
+}
+
+.perScoreOptionRow > span {
+	align-self: center;
+	padding: 0 5px;
+	min-width: 20px;
+}
+
+.perScoreOptionRow > div {
+	width: 100%;
+	align-self: center;
+}
+
+.perScoreOptionRow svg {
+	height: 20px;
+}
+
+.addOpinion {
+	width: 30%;
+	padding: 20px 5%;
+	height: 100%;
+	border: 1px solid rgb(117, 117, 117);
+	border-radius: 12px;
+	margin: 0 10px;
+}
+
+.addOpinion span {
+	text-align: center;
+}
+
+.addOpinion > span:first-child {
+	display: block;
+	font-weight: bold;
+}
+
+.addOpinion > span:nth-child(2) {
+	display: block;
+	overflow-wrap: break-word;
+	color: rgb(117, 117, 117);
+	margin-top: 10px;
+	margin-bottom: 20px;
+}
+
+.addOpinion button {
+	display: block;
+	margin: auto;
+}
+
+@media (max-width: 900px) {
+	.scorePanel {
+		flex-wrap: wrap;
+	}
+
+	.averageScorePanel {
+		width: 40%;
+	}
+
+	.addOpinion {
+		width: 50%;
+		margin: auto;
+	}
+
+	.perScoreOpinions {
+		width: 50%;
+	}
+}
+
+@media (max-width: 600px) {
+	.scorePanel {
+		display: block;
+	}
+
+	.averageScorePanel {
+		width: 100%;
+	}
+
+	.addOpinion {
+		width: 90%;
+	}
+
+	.perScoreOpinions {
+		width: 100%;
+		margin: 20px 0;
+	}
+}

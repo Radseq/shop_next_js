@@ -17,6 +17,7 @@ import { HitsOfTheWeek } from "@/components/homePage/hitsOfTheWeekSlider/HitsOfT
 import { HitOfWeekProduct } from "@/components/homePage/hitsOfTheWeekSlider/Types";
 import { BestSellers } from "@/components/homePage/bestsellers/BestSellers";
 import { BestsellerProduct } from "@/components/homePage/bestsellers/Types";
+import axios from "axios";
 
 export default function Home(props: {
 	navigationData: RootNavigation[];
@@ -89,44 +90,26 @@ export default function Home(props: {
 }
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
-	const navigationsResult = await fetch(
-		"http://localhost:3000/api/navigation/navigation/"
-	);
-	const navigations = await navigationsResult.json();
+	const urls = [
+		"http://localhost:3000/api/navigation/navigation/",
+		"http://localhost:3000/api/advertising/advertisement/",
+		"http://localhost:3000/api/recommendedProduct/recommendedProduct/",
+		"http://localhost:3000/api/promotion/promotion/",
+		"http://localhost:3000/api/hitsOfTheWeek/hitsOfTheWeek/",
+		"http://localhost:3000/api/bestsellerProduct/bestsellerProduct/",
+	];
 
-	const advertisingResult = await fetch(
-		"http://localhost:3000/api/advertising/advertisement/"
-	);
-	const advertisement = await advertisingResult.json();
-
-	const recommendedProductsResult = await fetch(
-		"http://localhost:3000/api/recommendedProduct/recommendedProduct/"
-	);
-	const recommendedProducts = await recommendedProductsResult.json();
-
-	const promotionsResult = await fetch(
-		"http://localhost:3000/api/promotion/promotion/"
-	);
-	const promotions = await promotionsResult.json();
-
-	const hitsOfTheWeekResult = await fetch(
-		"http://localhost:3000/api/hitsOfTheWeek/hitsOfTheWeek/"
-	);
-	const hitsOfTheWeekProducts = await hitsOfTheWeekResult.json();
-
-	const bestsellerResult = await fetch(
-		"http://localhost:3000/api/bestsellerProduct/bestsellerProduct/"
-	);
-	const bestsellers = await bestsellerResult.json();
+	const requests = urls.map((url) => axios.get(url));
+	const respons = await axios.all(requests);
 
 	return {
 		props: {
-			navigationData: navigations,
-			advertisementData: advertisement,
-			recommendedProductsData: recommendedProducts,
-			promotions,
-			hitsOfTheWeekProducts,
-			bestsellers,
+			navigationData: respons[0].data,
+			advertisementData: respons[1].data,
+			recommendedProductsData: respons[2].data,
+			promotions: respons[3].data,
+			hitsOfTheWeekProducts: respons[4].data,
+			bestsellers: respons[5].data,
 		},
 	};
 };

@@ -38,6 +38,10 @@
 	max-width: 400px;
 }
 
+.searchProducts a {
+	padding: 0;
+}
+
 .searchProducts > span {
 	margin: 10px;
 	display: block;
@@ -50,8 +54,8 @@
 }
 
 .product img {
-	width: 50px;
-	padding: 0 10px;
+	padding-right: 10px;
+	width: 30%;
 }
 
 .score svg {
@@ -67,7 +71,7 @@
 	-webkit-line-clamp: 2;
 	-webkit-box-orient: vertical;
 	padding: 0;
-	width: 90%;
+	/* width: 90%; */
 }
 
 @media screen and (max-width: 900px) {

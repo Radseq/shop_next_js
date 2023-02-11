@@ -2,9 +2,10 @@ import axios from "axios";
 import React, { FC } from "react";
 import { useQuery } from "react-query";
 import { StarScore } from "../StarScore";
-
+import Image from "next/image";
 import styles from "./SearchedProducts.module.css";
 import { SearchProduct, SearchResult } from "./Types";
+import Link from "next/link";
 
 const AdditionalProducts: FC<{
 	products?: SearchProduct[];
@@ -21,12 +22,14 @@ const AdditionalProducts: FC<{
 				{products.map((product) => {
 					return (
 						<li key={product.id}>
-							<a href={"/product/" + product.id}>
+							<Link href={`/products/${product.id}`}>
 								<div className={styles.product}>
-									<img
+									<Image
+										width="70"
+										height="70"
 										src={product.imgSrc}
 										alt="product"
-									></img>
+									/>
 									<div>
 										<span className={styles.productTitle}>
 											{product.name}
@@ -40,7 +43,7 @@ const AdditionalProducts: FC<{
 										<span>{product.price} pln</span>
 									</div>
 								</div>
-							</a>
+							</Link>
 						</li>
 					);
 				})}
@@ -84,10 +87,10 @@ export const SearchedProducts: FC<{ search: string; callback: () => void }> = ({
 					{searchResultQuery.productSearchResult.map((product) => {
 						return (
 							<li key={product.id + product.name}>
-								<a href={`/product/${product.id}`}>
+								<Link href={`/products/${product.id}`}>
 									{product.name}
 									<span>{product.price} pln</span>
-								</a>
+								</Link>
 							</li>
 						);
 					})}

@@ -2,6 +2,7 @@ import { useAutoSlider } from "@/hooks/useAutoSlider";
 import React, { FC, useMemo } from "react";
 import { ImageToSlide } from "../Types";
 import styles from "./ImageSlider.module.css";
+import Image from "next/image";
 
 export const ImageSlider: FC<{
 	autoSlideInSeconds: number;
@@ -25,7 +26,9 @@ export const ImageSlider: FC<{
 							{slider.currentIndex + 1} /{" "}
 							{props.itemsToSlide.length}
 						</div>
-						<img
+						<Image
+							width="1160"
+							height="320"
 							src={selectedImage.imageSrc}
 							alt={selectedImage.name}
 						/>

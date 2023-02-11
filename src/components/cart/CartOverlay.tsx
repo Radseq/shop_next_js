@@ -16,7 +16,12 @@ const CartItem: FC<{ product: ShippingCartProduct }> = ({ product }) => {
 	return (
 		<div className={styles.cartItem}>
 			<div className={styles.productImage}>
-				<img src={product.imageSrc} alt="product" />
+				<Image
+					width="32"
+					height="32"
+					src={product.imageSrc}
+					alt="product"
+				/>
 			</div>
 			<div className={styles.itemAside}>
 				<span>{product.name}</span>
@@ -32,6 +37,8 @@ const CartItem: FC<{ product: ShippingCartProduct }> = ({ product }) => {
 				</div>
 			</div>
 			<Image
+				width="32"
+				height="32"
 				onClick={() => {
 					deleteProductFromCart(product.id);
 				}}

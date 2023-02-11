@@ -1,5 +1,6 @@
 import { FC } from "react";
 import styles from "./SeparateSection.module.css";
+import Link from "next/link";
 
 type SeparateSectionProps = {
 	sectionName: string;
@@ -14,9 +15,9 @@ export const SeparateSection: FC<SeparateSectionProps> = ({
 		<div className={styles.sectionNavContainer}>
 			<h2>{sectionName}</h2>
 			{url && (
-				<a href={url} className={styles.sectionNavShowAll}>
+				<Link href={url} className={styles.sectionNavShowAll}>
 					Show all ❯
-				</a>
+				</Link>
 			)}
 		</div>
 	);

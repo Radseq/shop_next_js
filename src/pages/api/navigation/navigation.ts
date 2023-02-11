@@ -10,6 +10,7 @@ export default function userHandler(
         {
             "id": 1,
             "name": "Laptops",
+            "url": "/laptops",
             "categories": [
                 {
                     "id": 2,
@@ -20,7 +21,7 @@ export default function userHandler(
                         "id": 1,
                         "name": "Some prod name",
                         "price": 23.24,
-                        "imgUrl": "https://cdn.x-kom.pl/i/setup/images/prod/big/product-new-big,,2022/8/pr_2022_8_5_8_40_19_116_06.jpg",
+                        "imgUrl": "/products/10.png",
                         "descFirst": "description 1",
                         "descSecond": "description 2",
                         "descThird": "description 3"
@@ -80,6 +81,7 @@ export default function userHandler(
         {
             "id": 6,
             "name": "Smartphones",
+            "url": "/smartphones",
             "categories": [
                 {
                     "id": 7,

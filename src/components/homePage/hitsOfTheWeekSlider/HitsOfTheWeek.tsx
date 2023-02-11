@@ -4,6 +4,7 @@ import { useMutipleItemsSlider } from "../../../hooks/useMutipleItemsSlider";
 import { ProductItem } from "../../productItem/ProductItem";
 import styles from "./HitsOfTheWeek.module.css";
 import { HitOfWeekProduct } from "./Types";
+import Link from "next/link";
 
 const HitsOfTheWeekSlider: FC<{
 	products: HitOfWeekProduct[];
@@ -40,7 +41,7 @@ const HitsOfTheWeekSlider: FC<{
 			</div>
 			{promotionSlider.currentPromotions.map((product) => {
 				return (
-					<a href={`/Product/${product.id}`} key={product.id}>
+					<Link href={`/products/${product.id}`} key={product.id}>
 						<ProductItem
 							id={product.id}
 							imageSrc={product.imageSrc}
@@ -50,7 +51,7 @@ const HitsOfTheWeekSlider: FC<{
 							bestseller={false}
 							freeShipping={false}
 						/>
-					</a>
+					</Link>
 				);
 			})}
 			<div className={styles.next} onClick={promotionSlider.nextSlide}>

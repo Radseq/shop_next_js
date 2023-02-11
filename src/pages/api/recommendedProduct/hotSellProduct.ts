@@ -13,7 +13,7 @@ export default function userHandler(
     const dummyData = {
         "id": 1,
         "name": "Slider 1",
-        "imageSrc": "https://www.w3schools.com/howto/img_nature_wide.jpg",
+        "imageSrc": "/advertisement/adv2.jpg",
         "price": 2000,
         "priceDiscount": 300,
         "endDateTime": timeToEnd.getTime(),

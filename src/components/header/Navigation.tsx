@@ -3,6 +3,7 @@ import React, { FC, useState } from "react";
 import { MenuItem } from "./MenuItem";
 import styles from "./Navigation.module.css";
 import { RootNavigation, RootNavigationExt } from "./Types";
+import Link from "next/link";
 
 export const Navigation: FC<{ navigations: RootNavigation[] }> = ({
 	navigations,
@@ -55,7 +56,7 @@ export const Navigation: FC<{ navigations: RootNavigation[] }> = ({
 				{navigations.map((menuItem) => {
 					return (
 						<li key={menuItem.id}>
-							<a
+							<Link
 								href={menuItem.url}
 								onMouseEnter={(e) => {
 									handleMenuItemLinkHover(
@@ -71,7 +72,7 @@ export const Navigation: FC<{ navigations: RootNavigation[] }> = ({
 								)}
 							>
 								{menuItem.name}
-							</a>
+							</Link>
 						</li>
 					);
 				})}
