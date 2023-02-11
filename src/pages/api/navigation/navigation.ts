@@ -35,17 +35,17 @@ export default function userHandler(
                         {
                             "id": 1,
                             "name": "Laptop 2 in 1 #1",
-                            "linkUrl": "Laptop2in11"
+                            "linkUrl": "/Laptop2in11"
                         },
                         {
                             "id": 2,
                             "name": "Laptop 2 in 1 #2",
-                            "linkUrl": "Laptop2in12"
+                            "linkUrl": "/Laptop2in12"
                         },
                         {
                             "id": 3,
                             "name": "Laptop 2 in 1 #3",
-                            "linkUrl": "Laptop2in13"
+                            "linkUrl": "/Laptop2in13"
                         }
                     ]
                 },
@@ -57,17 +57,17 @@ export default function userHandler(
                         {
                             "id": 1,
                             "name": "NoterBooks #1",
-                            "linkUrl": "NoterBooks1"
+                            "linkUrl": "/NoterBooks1"
                         },
                         {
                             "id": 2,
                             "name": "NoterBooks #2",
-                            "linkUrl": "NoterBooks2"
+                            "linkUrl": "/NoterBooks2"
                         },
                         {
                             "id": 3,
                             "name": "NoterBooks #3",
-                            "linkUrl": "NoterBooks3"
+                            "linkUrl": "/NoterBooks3"
                         }
                     ]
                 },
@@ -86,17 +86,17 @@ export default function userHandler(
                 {
                     "id": 7,
                     "name": "Tablets",
-                    "url": "Tablets"
+                    "url": "/Tablets"
                 },
                 {
                     "id": 8,
                     "name": "Cases",
-                    "url": "Cases"
+                    "url": "/Cases"
                 },
                 {
                     "id": 9,
                     "name": "Chargers",
-                    "url": "Chargers"
+                    "url": "/Chargers"
                 }
             ]
         }

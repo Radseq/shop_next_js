@@ -24,15 +24,6 @@ const SubCategoryProduct: FC<{ value: NavProduct | SubCategory[] }> = (
 						<Link href={subCategory.linkUrl}>
 							{subCategory.name}
 						</Link>
-
-						<Image
-							width="32"
-							height="32"
-							src={subCategory.linkUrl}
-							alt="icon"
-						>
-							{subCategory.name}
-						</Image>
 					</li>
 				))}
 			</ul>
