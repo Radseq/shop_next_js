@@ -1,37 +1,19 @@
 import { PageFooter } from "@/components/footer/PageFooter";
 import { Navigation } from "@/components/header/Navigation";
 import { TopBar } from "@/components/header/TopBar";
-import axios from "axios";
+import { News } from "@/components/homePage/News";
 import { GetStaticProps } from "next";
 import Head from "next/head";
-import { dehydrate, QueryClient, useQuery } from "react-query";
 import styles from "../styles/MainPageBody.module.css";
+import { RootNavigation } from "@/components/header/Types";
+import { ImageToSlide } from "@/components/homePage/Types";
 
-export const fetchData = () =>
-	axios
-		.get(`http://localhost:3000/api/navigation/navigation/`)
-		.then(({ data }) => data);
-
-export default function Home() {
-	const { data, isLoading, isError, error } = useQuery(
-		["getNavigationData"],
-		() => fetchData(),
-		{
-			enabled: false,
-			staleTime: Infinity,
-		}
-	);
-
-	if (isLoading) {
-		return <span>Loading...</span>;
-	}
-
-	if (isError) {
-		return <span>Error...</span>;
-	}
-
+export default function Home(props: {
+	navigationData: RootNavigation[];
+	advertisementData: ImageToSlide[];
+}) {
 	return (
-		<>
+		<div>
 			<Head>
 				<title>Create Next App</title>
 				<meta
@@ -48,27 +30,36 @@ export default function Home() {
 				<div className={styles.webMain}>
 					<header>
 						<TopBar />
-						<Navigation navigations={data} />
+						<Navigation navigations={props.navigationData} />
 					</header>
 					<main>
-						<div className={styles.mainPageBody}></div>
+						<div className={styles.mainPageBody}>
+							<News advertising={props.advertisementData} />
+						</div>
 					</main>
 					<footer>
 						<PageFooter />
 					</footer>
 				</div>
 			</main>
-		</>
+		</div>
 	);
 }
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
-	const queryClient = new QueryClient();
+	const navigationsResult = await fetch(
+		"http://localhost:3000/api/navigation/navigation/"
+	);
+	const navigations = await navigationsResult.json();
 
-	await queryClient.prefetchQuery(["getNavigationData"], () => fetchData());
+	const advertisingResult = await fetch(
+		"http://localhost:3000/api/advertising/advertisement/"
+	);
+	const advertisement = await advertisingResult.json();
 	return {
 		props: {
-			dehydratedState: dehydrate(queryClient),
+			navigationData: navigations,
+			advertisementData: advertisement,
 		},
 	};
 };
