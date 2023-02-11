@@ -1,3 +1,4 @@
+import { PageFooter } from "@/components/footer/PageFooter";
 import { Navigation } from "@/components/header/Navigation";
 import { TopBar } from "@/components/header/TopBar";
 import axios from "axios";
@@ -52,7 +53,9 @@ export default function Home() {
 					<main>
 						<div className={styles.mainPageBody}></div>
 					</main>
-					<footer></footer>
+					<footer>
+						<PageFooter />
+					</footer>
 				</div>
 			</main>
 		</>
