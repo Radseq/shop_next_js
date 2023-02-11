@@ -1,8 +1,34 @@
+import { Navigation } from "@/components/header/Navigation";
 import { TopBar } from "@/components/header/TopBar";
+import axios from "axios";
+import { GetStaticProps } from "next";
 import Head from "next/head";
+import { dehydrate, QueryClient, useQuery } from "react-query";
 import styles from "../styles/MainPageBody.module.css";
 
+export const fetchData = () =>
+	axios
+		.get(`http://localhost:3000/api/navigation/navigation/`)
+		.then(({ data }) => data);
+
 export default function Home() {
+	const { data, isLoading, isError, error } = useQuery(
+		["getNavigationData"],
+		() => fetchData(),
+		{
+			enabled: false,
+			staleTime: Infinity,
+		}
+	);
+
+	if (isLoading) {
+		return <span>Loading...</span>;
+	}
+
+	if (isError) {
+		return <span>Error...</span>;
+	}
+
 	return (
 		<>
 			<Head>
@@ -21,6 +47,7 @@ export default function Home() {
 				<div className={styles.webMain}>
 					<header>
 						<TopBar />
+						<Navigation navigations={data} />
 					</header>
 					<main>
 						<div className={styles.mainPageBody}></div>
@@ -31,3 +58,14 @@ export default function Home() {
 		</>
 	);
 }
+
+export const getStaticProps: GetStaticProps = async ({ params }) => {
+	const queryClient = new QueryClient();
+
+	await queryClient.prefetchQuery(["getNavigationData"], () => fetchData());
+	return {
+		props: {
+			dehydratedState: dehydrate(queryClient),
+		},
+	};
+};

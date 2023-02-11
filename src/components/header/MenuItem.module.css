@@ -1,0 +1,119 @@
+.menuItemCategories {
+	z-index: 2;
+	left: 0;
+	display: flex;
+	position: absolute;
+	min-width: 200px;
+	background-color: rgba(255, 255, 255, 1);
+	box-shadow: 0px 5px 4px 3px #0000002a;
+	transition: 0.5s ease;
+	-moz-transition: 0.5s ease;
+	-webkit-transition: 0.5s ease;
+}
+
+.menuItem {
+	padding: 10px;
+	overflow: hidden;
+	position: relative;
+}
+
+.menuItem:hover {
+	background-color: white;
+	border-radius: 10px;
+	box-shadow: rgba(0 0 0 / 20%) 0px 2px 8px 0px,
+		rgb(0 0 0 / 10%) 0px 0px 2px 1px;
+}
+
+.menuItemCategories {
+	z-index: 2;
+	left: 0;
+	position: absolute;
+	min-width: 200px;
+	background-color: rgba(255, 255, 255, 1);
+	box-shadow: 0px 5px 4px 3px #0000002a;
+}
+
+.menuItemCategories > ul {
+	list-style-type: none;
+	margin: 0;
+	padding: 20px;
+}
+
+.rightSide {
+	width: 300px;
+}
+
+.leftSide {
+	width: 220px;
+}
+
+.leftSideCategorySelected {
+	background-color: rgba(0, 0, 0, 0.089);
+	border-radius: 0 25px 25px 0;
+}
+
+.leftSide > ul > li {
+	padding-left: 10px;
+}
+
+.leftSide > ul > li:hover {
+	background-color: rgba(0, 0, 0, 0.089);
+	border-radius: 0 25px 25px 0;
+}
+
+.rightSide > ul > li:hover {
+	background-color: rgba(0, 0, 0, 0.089);
+	border-radius: 25px 0 0 25px;
+}
+
+.rightSide > ul > li > a {
+	text-decoration: none;
+	color: black;
+}
+
+.recommendedProduct {
+	display: flex;
+	flex-direction: column;
+	margin: 10%;
+}
+
+.recommendedProduct span {
+	color: rgba(0, 0, 0, 0.6);
+	font-size: 0.8em;
+}
+
+.recommendedProduct h3 {
+	margin-top: 10%;
+	margin-bottom: 0;
+	font-family: Lato, sans-serif;
+	color: rgba(0, 0, 0, 0.67);
+}
+
+.recommendedProduct h2 {
+	margin: 10%;
+	font-family: Lato, sans-serif;
+	color: rgba(0, 0, 0, 0.8);
+}
+
+.recommendedProductBody {
+	display: flex;
+}
+
+.recommendedProductBody img {
+	position: relative;
+	width: 200px;
+}
+
+.recommendedProductDesc {
+	margin: auto 0;
+}
+
+.recommendedProductDesc > div {
+	color: rgba(0, 0, 0, 0.6);
+	width: 200px;
+	margin-top: 7%;
+}
+
+.recommendedProductPrice span {
+	font-size: 0.9em;
+}

@@ -26,6 +26,7 @@ export type RootNavigation = {
     id: number;
     name: string;
     categories: MenuCategory[];
+    url: string;
 }
 
 export type SearchProduct = {
@@ -46,4 +47,9 @@ export type SearchResult = {
     productSearchResult: ProductSearchResult[],
     recomendedProducts?: SearchProduct[],
     lastSeenProducts?: SearchProduct[]
+}
+
+export type RootNavigationExt = RootNavigation & {
+    menuItemLeftOffset: number,
+    menuItemWidth: number
 }

@@ -4,6 +4,7 @@ import React, { FC } from "react";
 import styles from "./CartOverlay.module.css";
 import { ShippingCartProduct } from "./types";
 import Image from "next/image";
+import classNames from "classnames";
 
 const CartItem: FC<{ product: ShippingCartProduct }> = ({ product }) => {
 	const dispatch = useCartDispatch();
@@ -67,7 +68,12 @@ export const CartOverlay: FC<{ cartItems: ShippingCartProduct[] }> = ({
 			})}
 
 			<div className={styles.footer}>
-				<div className={`${styles.cartSum} ${styles.cartSumDiscount}`}>
+				<div
+					className={classNames(
+						styles.cartSum,
+						styles.cartSumDiscount
+					)}
+				>
 					Saving
 					<span>{sumItemsPrice - sumItemsPriceDiscount} pln</span>
 				</div>

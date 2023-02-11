@@ -43,7 +43,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 	const id = params?.id as string;
 
 	const queryClient = new QueryClient();
-	console.log("id: ", id);
+
 	await queryClient.prefetchQuery(["getDummyData", id], () => fetchData(id));
 	return {
 		props: {

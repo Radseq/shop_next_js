@@ -1,6 +1,7 @@
 import React from "react";
 import Image from "next/image";
 import styles from "./Icon.module.css";
+import classNames from "classnames";
 
 type IconProps = {
 	kind: "cart" | "account" | "shop" | "help" | "none";
@@ -10,7 +11,7 @@ type IconProps = {
 export const Icon: React.FC<IconProps> = ({ kind, className = "" }) => {
 	return (
 		<Image
-			className={`${styles.icon} ${className}`}
+			className={classNames(styles.icon, styles.className)}
 			width="32"
 			height="32"
 			src={getIconSrcByKind(kind)}
