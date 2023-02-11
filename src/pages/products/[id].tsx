@@ -8,6 +8,9 @@ import { BuyPanel } from "@/components/productPage/BuyPanel";
 import axios from "axios";
 import { ScorePanel } from "@/components/productPage/ScorePanel";
 import { CommentsPanel } from "@/components/productPage/Comments";
+import { Layout } from "@/components/Layout";
+import { RootNavigation } from "@/components/header/Types";
+import Image from "next/image";
 
 const ProductDescriptions: FC<{ descriptions: Description[] }> = (props) => {
 	return (
@@ -25,6 +28,7 @@ const ProductDescriptions: FC<{ descriptions: Description[] }> = (props) => {
 };
 
 export default function Product(props: {
+	navigationData: RootNavigation[];
 	product: ProductProps;
 	productId: string;
 }) {
@@ -34,9 +38,14 @@ export default function Product(props: {
 	);
 
 	return (
-		<div>
+		<Layout navigation={props.navigationData}>
 			<div className={styles.header}>
-				<img src={props.product.imageSrc} alt="product" />
+				<Image
+					width="600"
+					height="600"
+					src={props.product.imageSrc}
+					alt={props.product.name}
+				/>
 				<div className={styles.asidePanel}>
 					<div className={styles.asideHeader}>
 						<h2>{props.product.name}</h2>
@@ -82,7 +91,7 @@ export default function Product(props: {
 				<CommentsPanel productId={Number(props.productId)} />
 			</div>
 			<hr />
-		</div>
+		</Layout>
 	);
 }
 
@@ -96,13 +105,18 @@ export const getStaticPaths: GetStaticPaths = async () => {
 export const getStaticProps: GetStaticProps = async ({ params }) => {
 	const id = params?.id as string;
 
-	const productResult = await axios.get(
-		`http://localhost:3000/api/product/${id}/`
-	);
+	const urls = [
+		"http://localhost:3000/api/navigation/navigation/",
+		`http://localhost:3000/api/product/${id}/`,
+	];
+
+	const requests = urls.map((url) => axios.get(url));
+	const respons = await axios.all(requests);
 
 	return {
 		props: {
-			product: productResult.data,
+			navigationData: respons[0].data,
+			product: respons[1].data,
 			productId: id,
 		},
 	};

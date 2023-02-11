@@ -18,6 +18,7 @@ import { HitOfWeekProduct } from "@/components/homePage/hitsOfTheWeekSlider/Type
 import { BestSellers } from "@/components/homePage/bestsellers/BestSellers";
 import { BestsellerProduct } from "@/components/homePage/bestsellers/Types";
 import axios from "axios";
+import { Layout } from "@/components/Layout";
 
 export default function Home(props: {
 	navigationData: RootNavigation[];
@@ -42,49 +43,27 @@ export default function Home(props: {
 				/>
 				<link rel="icon" href="/favicon.ico" />
 			</Head>
-			<main>
-				<div className={styles.webMain}>
-					<header>
-						<TopBar />
-						<Navigation navigations={props.navigationData} />
-					</header>
-					<main>
-						<div className={styles.mainPageBody}>
-							<News advertising={props.advertisementData} />
-							<SeparateSection sectionName="Recomended products" />
-							<RecommendedProducts
-								recommendedProduct={
-									props.recommendedProductsData
-								}
-							/>
-							<hr />
-							<SeparateSection
-								sectionName="Promotions"
-								url="/promotions"
-							/>
-							<Promotions promotionsData={props.promotions} />
-							<hr />
-							<SeparateSection
-								sectionName="Hits of the week"
-								url="/hitsoftheweek"
-							/>
-							<HitsOfTheWeek
-								hitsOfTheWeek={props.hitsOfTheWeekProducts}
-							/>
-							<hr />
-							<SeparateSection
-								sectionName="Bestsellers"
-								url="/bestsellers"
-							/>
-							<BestSellers products={props.bestsellers} />
-							<hr />
-						</div>
-					</main>
-					<footer>
-						<PageFooter />
-					</footer>
-				</div>
-			</main>
+
+			<Layout navigation={props.navigationData}>
+				<News advertising={props.advertisementData} />
+				<SeparateSection sectionName="Recomended products" />
+				<RecommendedProducts
+					recommendedProduct={props.recommendedProductsData}
+				/>
+				<hr />
+				<SeparateSection sectionName="Promotions" url="/promotions" />
+				<Promotions promotionsData={props.promotions} />
+				<hr />
+				<SeparateSection
+					sectionName="Hits of the week"
+					url="/hitsoftheweek"
+				/>
+				<HitsOfTheWeek hitsOfTheWeek={props.hitsOfTheWeekProducts} />
+				<hr />
+				<SeparateSection sectionName="Bestsellers" url="/bestsellers" />
+				<BestSellers products={props.bestsellers} />
+				<hr />
+			</Layout>
 		</div>
 	);
 }
