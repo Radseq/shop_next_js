@@ -103,15 +103,17 @@ export const HotSellPanel = () => {
 	return (
 		<Link href="/">
 			<div className={styles.hotSell}>
-				<div className={styles.title}>
-					<h1>Hot sell</h1>
+				<div className={styles.head}>
+					<div className={styles.title}>
+						<h1>Hot sell</h1>
+					</div>
+					<Image
+						width="200"
+						height="200"
+						src={hotSellProduct.imageSrc}
+						alt={hotSellProduct.name}
+					/>
 				</div>
-				<Image
-					width="200"
-					height="200"
-					src={hotSellProduct.imageSrc}
-					alt={hotSellProduct.name}
-				/>
 				<div className={styles.container}>
 					<span className={styles.productTitle}>
 						{hotSellProduct.name}

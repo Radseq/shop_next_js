@@ -143,21 +143,38 @@
 		width: 100%;
 		display: flex;
 	}
+
 	.container {
 		width: 50%;
 	}
+
 	.savesPanel {
 		display: flex;
 		position: static;
 		width: 150px;
 		margin: auto;
 	}
+
 	.savesPanel span:first-child {
 		padding-right: 5px;
 	}
+
 	.savesPanel span {
 		padding: 0;
 		margin: auto;
+	}
+
+	.title {
+		display: block;
+	}
+
+	.head {
+		width: 50%;
+	}
+
+	.hotSell img {
+		margin: auto;
+		width: 70%;
 	}
 }
 
