@@ -1,3 +1,4 @@
+import { ShopCartItem } from "@/components/cartPage/ShopCartItem";
 import { RootNavigation } from "@/components/header/Types";
 import { Layout } from "@/components/Layout";
 import { useCartSelector } from "@/lib/storeCart";
@@ -29,8 +30,10 @@ export default function Cart(props: { navigationData: RootNavigation[] }) {
 				<div className={styles.cartPageMain}>
 					<div className={styles.catrItems}>
 						<h2>Cart({shoppingCart.length})</h2>
+						{shoppingCart.map((item) => (
+							<ShopCartItem item={item} />
+						))}
 					</div>
-
 				</div>
 			</Layout>
 		</div>
