@@ -1,0 +1,45 @@
+.cartSum {
+	display: flex;
+	flex-grow: 1;
+	justify-content: space-between;
+	font-weight: bold;
+	margin: 10px 0;
+	font-size: 1.1em;
+}
+
+.cartSumDiscount {
+	color: rgb(2, 177, 2);
+	font-weight: normal;
+	font-size: 1em;
+}
+
+.footer {
+	padding: 10px 15px;
+	background-color: #e6e6e6;
+	border-radius: 10px;
+	border-top: 2px solid rgb(211, 211, 211);
+}
+
+.footer a {
+	padding: 5px 6px;
+	display: block;
+	width: 50%;
+	margin: auto;
+	text-align: center;
+
+	font-size: 1em;
+
+	border-radius: 5px;
+	background-color: transparent;
+
+	color: royalblue;
+	border: 2px solid royalblue;
+	text-decoration: none;
+	transition: all 0.2s ease-in-out;
+}
+
+.footer a:hover {
+	background-color: royalblue;
+	border-color: royalblue;
+	color: white;
+}

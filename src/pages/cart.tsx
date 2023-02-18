@@ -1,3 +1,4 @@
+import { CartFooter } from "@/components/cartPage/CartFooter";
 import { PromotionCodePanel } from "@/components/cartPage/PromotionCodePanel";
 import { ShopCartItem } from "@/components/cartPage/ShopCartItem";
 import { RootNavigation } from "@/components/header/Types";
@@ -34,6 +35,9 @@ export default function Cart(props: { navigationData: RootNavigation[] }) {
 					</div>
 					<aside>
 						<PromotionCodePanel />
+						<CartFooter cartItems={shoppingCart}>
+							<Link href="/delivery">Go to delivery</Link>
+						</CartFooter>
 					</aside>
 				</div>
 			</Layout>
