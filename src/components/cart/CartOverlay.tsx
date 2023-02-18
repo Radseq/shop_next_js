@@ -18,8 +18,8 @@ const CartItem: FC<{ product: ShippingCartProduct }> = ({ product }) => {
 		<div className={styles.cartItem}>
 			<div className={styles.productImage}>
 				<Image
-					width="32"
-					height="32"
+					width="128"
+					height="128"
 					src={product.imageSrc}
 					alt="product"
 				/>

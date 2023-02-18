@@ -36,7 +36,7 @@ export default function Cart(props: { navigationData: RootNavigation[] }) {
 					<aside>
 						<PromotionCodePanel />
 						<CartFooter cartItems={shoppingCart}>
-							<Link href="/delivery">Go to delivery</Link>
+							<Link href="/delivery">Buy</Link>
 						</CartFooter>
 					</aside>
 				</div>
