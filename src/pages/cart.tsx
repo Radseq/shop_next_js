@@ -1,3 +1,4 @@
+import { PromotionCodePanel } from "@/components/cartPage/PromotionCodePanel";
 import { ShopCartItem } from "@/components/cartPage/ShopCartItem";
 import { RootNavigation } from "@/components/header/Types";
 import { Layout } from "@/components/Layout";
@@ -15,10 +16,7 @@ export default function Cart(props: { navigationData: RootNavigation[] }) {
 		<div>
 			<Head>
 				<title>Cart</title>
-				<meta
-					name="description"
-					content="Your shop cart"
-				/>
+				<meta name="description" content="Your shop cart" />
 				<meta
 					name="viewport"
 					content="width=device-width, initial-scale=1"
@@ -34,6 +32,9 @@ export default function Cart(props: { navigationData: RootNavigation[] }) {
 							<ShopCartItem item={item} />
 						))}
 					</div>
+					<aside>
+						<PromotionCodePanel />
+					</aside>
 				</div>
 			</Layout>
 		</div>
