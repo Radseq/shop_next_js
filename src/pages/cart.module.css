@@ -1,0 +1,41 @@
+.cartPageMain {
+	display: flex;
+	margin: 10px 0px;
+}
+
+.cartPageMain aside {
+	width: 30%;
+}
+
+.cartPageMain aside {
+	border: 2px solid rgb(205, 205, 203);
+	border-radius: 20px;
+	padding: 10px;
+}
+
+.catrItems {
+	width: 60%;
+	margin-right: 5%;
+}
+
+@media (max-width: 930px) {
+	.cartPageMain {
+		display: block;
+		margin: 0 5%;
+	}
+
+	.catrItems {
+		width: 100%;
+	}
+
+	.cartPageMain aside {
+		width: 50%;
+		margin: auto;
+	}
+}
+
+@media (max-width: 600px) {
+	.cartPageMain {
+		margin: 0;
+	}
+}
