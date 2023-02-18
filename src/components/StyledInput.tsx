@@ -22,8 +22,7 @@ export const StyledInput = styled.input<{ kind: InputKind }>`
 	padding-left: 20px;
 	font-size: 1.5em;
 	transition: all 0.5s ease-in-out;
-	/* 20px of peding, border size *2 */
-	width: calc(100% - 24px);
+	width: 100%;
 
 	&:hover {
 		border: 2px solid
