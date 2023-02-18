@@ -11,6 +11,8 @@ import { CommentsPanel } from "@/components/productPage/Comments";
 import { Layout } from "@/components/Layout";
 import { RootNavigation } from "@/components/header/Types";
 import Image from "next/image";
+import { getNavigation } from "@/server/navigation";
+import { getProduct } from "@/server/product";
 
 const ProductDescriptions: FC<{ descriptions: Description[] }> = (props) => {
 	return (
@@ -28,17 +30,15 @@ const ProductDescriptions: FC<{ descriptions: Description[] }> = (props) => {
 };
 
 export default function Product(props: {
-	navigationData: RootNavigation[];
+	navigation: RootNavigation[];
 	product: ProductProps;
-	productId: string;
 }) {
 	const votesCount = Object.values(props.product.scores).reduce(
 		(prev, curr) => prev + curr,
 		0
 	);
-
 	return (
-		<Layout navigation={props.navigationData}>
+		<Layout navigation={props.navigation}>
 			<div className={styles.header}>
 				<Image
 					width="600"
@@ -88,7 +88,7 @@ export default function Product(props: {
 					productName={props.product.name}
 				/>
 				<hr />
-				<CommentsPanel productId={Number(props.productId)} />
+				<CommentsPanel productId={Number(props.product.id)} />
 			</div>
 			<hr />
 		</Layout>
@@ -98,20 +98,15 @@ export default function Product(props: {
 export const getServerSideProps: GetStaticProps = async ({ params }) => {
 	const id = params?.id as string;
 
-	// todo error handle
-	const urls = [
-		"http://localhost:3000/api/navigation/navigation/",
-		`http://localhost:3000/api/product/${id}/`,
-	];
-
-	const requests = urls.map((url) => axios.get(url));
-	const respons = await axios.all(requests);
+	const [navigation, product] = await Promise.all([
+		getNavigation(),
+		getProduct(parseInt(id)),
+	]);
 
 	return {
 		props: {
-			navigationData: respons[0].data,
-			product: respons[1].data,
-			productId: id,
+			navigation,
+			product,
 		},
 	};
 };

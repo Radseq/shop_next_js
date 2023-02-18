@@ -17,10 +17,10 @@ const STYLES_PER_KIND: Record<ButtonKind, ButtonStyleProps> = {
 		hoverBorderColor: "royalblue",
 	},
 	secondary: {
-		color: "gb(68, 68, 68)",
-		borderColor: "gb(68, 68, 68)",
-		hoverBackgroundColor: "gb(68, 68, 68)",
-		hoverBorderColor: "gb(68, 68, 68)",
+		color: "rgb(68, 68, 68)",
+		borderColor: "rgb(68, 68, 68)",
+		hoverBackgroundColor: "rgb(68, 68, 68)",
+		hoverBorderColor: "rgb(68, 68, 68)",
 	},
 };
 
