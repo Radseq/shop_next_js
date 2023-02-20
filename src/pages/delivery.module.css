@@ -1,0 +1,42 @@
+.content {
+	width: 70%;
+}
+
+.delivery > div:first-child {
+	margin-right: 10px;
+}
+
+.delivery > div {
+	display: flex;
+	width: 200px;
+}
+
+.buyerType {
+	display: flex;
+}
+
+.buyerType > fieldset:first-child {
+	margin-right: 10px;
+}
+
+.buyerType > fieldset {
+	display: flex;
+	width: 50%;
+}
+
+.deliveryAddress {
+	width: 70%;
+}
+
+.deliveryAddress input {
+	padding: 10px;
+	margin-bottom: 10px;
+}
+
+.deliveryAddress input[type="text"] {
+	font-size: 1rem;
+}
+
+.deliveryAddress input[type="email"] {
+	font-size: 1rem;
+}

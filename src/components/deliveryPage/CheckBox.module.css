@@ -1,0 +1,9 @@
+.checkBox {
+	display: flex;
+	justify-content: space-between;
+	border-radius: 10px;
+}
+
+.checkBox label:nth-child(2) {
+	color: rgb(116, 116, 116);
+}
