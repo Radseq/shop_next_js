@@ -9,26 +9,8 @@ import stylesUtils from "../styles/utils.module.css";
 import { FC, useState } from "react";
 import { StyledInput } from "@/components/StyledInput";
 import { CheckBox } from "@/components/deliveryPage/CheckBox";
-
-type DeliveryAddress = {
-	name: string;
-	surname: string;
-	street: string;
-	buildingNumber: string;
-	zipCode: string;
-	city: string;
-	phoneNumber: string;
-	email: string;
-};
-
-type DeliveryPostData = {
-	deliveryType: "currier" | "pickUpInShop";
-	buyerType: "private" | "company";
-	deliveryAddres: DeliveryAddress;
-	invoideDeliveryAddres?: DeliveryAddress;
-	paimentId: number;
-	termsAndConditions: boolean;
-};
+import { DeliveryPostData } from "@/components/deliveryPage/types";
+import { DeliveryAddress } from "@/components/deliveryPage/DeliveryAddress";
 
 export default function Cart(props: { navigationData: RootNavigation[] }) {
 	const shoppingCart = useCartSelector((state) => state.shoppingCart);
@@ -51,6 +33,18 @@ export default function Cart(props: { navigationData: RootNavigation[] }) {
 	};
 
 	const [deliveryPostData, setDeliveryPostData] = useState(postData);
+	const [invoiceDeliveryAddress, setInvoiceDeliveryAddress] = useState({
+		city: "",
+		email: "",
+		name: "",
+		phoneNumber: "",
+		street: "",
+		buildingNumber: "",
+		surname: "",
+		zipCode: "",
+	});
+	const [checkDeliveryDateInvoice, setCheckDeliveryDateInvoice] =
+		useState(false);
 
 	return (
 		<div>
@@ -124,137 +118,35 @@ export default function Cart(props: { navigationData: RootNavigation[] }) {
 							}
 						/>
 					</div>
-					<h1 className={stylesUtils.headingLg}>Delivery address</h1>
-					<div className={styles.deliveryAddress}>
-						<StyledInput
-							type="text"
-							placeholder="Name or company name"
-							required
-							kind="primary"
-							onChange={(e) =>
-								setDeliveryPostData({
-									...deliveryPostData,
-									deliveryAddres: {
-										...deliveryPostData.deliveryAddres,
-										name: e.target.value,
-									},
-								})
-							}
-						/>
-						<StyledInput
-							type="text"
-							placeholder="Surame or company name"
-							required
-							kind="primary"
-							onChange={(e) =>
-								setDeliveryPostData({
-									...deliveryPostData,
-									deliveryAddres: {
-										...deliveryPostData.deliveryAddres,
-										surname: e.target.value,
-									},
-								})
-							}
-						/>
-						<StyledInput
-							type="text"
-							placeholder="Street"
-							required
-							kind="primary"
-							onChange={(e) =>
-								setDeliveryPostData({
-									...deliveryPostData,
-									deliveryAddres: {
-										...deliveryPostData.deliveryAddres,
-										street: e.target.value,
-									},
-								})
-							}
-						/>
-						<StyledInput
-							type="text"
-							placeholder="Building number"
-							required
-							kind="primary"
-							onChange={(e) =>
-								setDeliveryPostData({
-									...deliveryPostData,
-									deliveryAddres: {
-										...deliveryPostData.deliveryAddres,
-										buildingNumber: e.target.value,
-									},
-								})
-							}
-						/>
-						<StyledInput
-							type="text"
-							placeholder="Zip code"
-							required
-							kind="primary"
-							onChange={(e) =>
-								setDeliveryPostData({
-									...deliveryPostData,
-									deliveryAddres: {
-										...deliveryPostData.deliveryAddres,
-										zipCode: e.target.value,
-									},
-								})
-							}
-						/>
-						<StyledInput
-							type="text"
-							placeholder="City"
-							required
-							kind="primary"
-							onChange={(e) =>
-								setDeliveryPostData({
-									...deliveryPostData,
-									deliveryAddres: {
-										...deliveryPostData.deliveryAddres,
-										city: e.target.value,
-									},
-								})
-							}
-						/>
-						<StyledInput
-							type="text"
-							placeholder="Phone number"
-							required
-							kind="primary"
-							onChange={(e) =>
-								setDeliveryPostData({
-									...deliveryPostData,
-									deliveryAddres: {
-										...deliveryPostData.deliveryAddres,
-										phoneNumber: e.target.value,
-									},
-								})
-							}
-						/>
-						<StyledInput
-							type="email"
-							placeholder="Email"
-							required
-							kind="primary"
-							onChange={(e) =>
-								setDeliveryPostData({
-									...deliveryPostData,
-									deliveryAddres: {
-										...deliveryPostData.deliveryAddres,
-										email: e.target.value,
-									},
-								})
-							}
-						/>
-					</div>
+					<DeliveryAddress
+						deliveryData={deliveryPostData}
+						setDeliveryData={setDeliveryPostData}
+						title="Delivery Address"
+					/>
 					<h1 className={stylesUtils.headingLg}>Invoice data</h1>
-					{/* todo */}
 					<div className={styles.deliveryAddress}>
 						<label>
-							<input type="checkbox" />I want to provide other
-							invoice details
+							<input
+								type="checkbox"
+								checked={checkDeliveryDateInvoice}
+								onChange={() =>
+									setCheckDeliveryDateInvoice(
+										!checkDeliveryDateInvoice
+									)
+								}
+							/>
+							I want to provide other invoice details
 						</label>
 					</div>
+
+					{checkDeliveryDateInvoice && (
+						<DeliveryAddress
+							title="Invoice Delivery Address"
+							deliveryData={invoiceDeliveryAddress}
+							setDeliveryData={setInvoiceDeliveryAddress}
+						/>
+					)}
+
 					<h1 className={stylesUtils.headingLg}>Payments</h1>
 					<div className={styles.deliveryAddress}>
 						<CheckBox
