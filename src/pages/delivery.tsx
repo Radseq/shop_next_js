@@ -6,11 +6,11 @@ import { GetStaticProps } from "next";
 import Head from "next/head";
 import styles from "./delivery.module.css";
 import stylesUtils from "../styles/utils.module.css";
-import { FC, useState } from "react";
-import { StyledInput } from "@/components/StyledInput";
+import { useState } from "react";
 import { CheckBox } from "@/components/deliveryPage/CheckBox";
 import { DeliveryPostData } from "@/components/deliveryPage/types";
 import { DeliveryAddress } from "@/components/deliveryPage/DeliveryAddress";
+import { Icon } from "@/components/Icon";
 
 export default function Cart(props: { navigationData: RootNavigation[] }) {
 	const shoppingCart = useCartSelector((state) => state.shoppingCart);
@@ -43,6 +43,7 @@ export default function Cart(props: { navigationData: RootNavigation[] }) {
 		surname: "",
 		zipCode: "",
 	});
+
 	const [checkDeliveryDateInvoice, setCheckDeliveryDateInvoice] =
 		useState(false);
 
@@ -75,7 +76,7 @@ export default function Cart(props: { navigationData: RootNavigation[] }) {
 								})
 							}
 							labelExtension={"(free)"}
-							iconSource={"/images/truck.png"}
+							icon={<Icon kind="truck" />}
 						/>
 						<CheckBox
 							checkedValue={
@@ -89,6 +90,7 @@ export default function Cart(props: { navigationData: RootNavigation[] }) {
 								})
 							}
 							labelExtension={"(free)"}
+							icon={<Icon kind="shop" />}
 						/>
 					</div>
 					<h1 className={stylesUtils.headingLg}>Buying as</h1>
@@ -159,6 +161,7 @@ export default function Cart(props: { navigationData: RootNavigation[] }) {
 								})
 							}
 							labelExtension={"(free)"}
+							icon={<Icon kind="dotpay" />}
 						/>
 						<CheckBox
 							checkedValue={deliveryPostData.paimentId === 1}
@@ -170,6 +173,7 @@ export default function Cart(props: { navigationData: RootNavigation[] }) {
 								})
 							}
 							labelExtension={"(free)"}
+							icon={<Icon kind="credit_cart" />}
 						/>
 						<CheckBox
 							checkedValue={deliveryPostData.paimentId === 2}
@@ -181,6 +185,7 @@ export default function Cart(props: { navigationData: RootNavigation[] }) {
 								})
 							}
 							labelExtension={"(free)"}
+							icon={<Icon kind="blik" />}
 						/>
 						<CheckBox
 							checkedValue={deliveryPostData.paimentId === 3}
@@ -203,6 +208,7 @@ export default function Cart(props: { navigationData: RootNavigation[] }) {
 								})
 							}
 							labelExtension={"(20 pln)"}
+							icon={<Icon kind="wallet" />}
 						/>
 					</div>
 					<h1 className={stylesUtils.headingMd}>Formal approvals</h1>

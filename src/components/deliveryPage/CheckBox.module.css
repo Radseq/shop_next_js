@@ -4,6 +4,7 @@
 	border-radius: 10px;
 }
 
-.checkBox label:nth-child(2) {
+/*todo fix me, how 3 work and 2 don't*/
+.checkBox label span:nth-child(3) {
 	color: rgb(116, 116, 116);
 }

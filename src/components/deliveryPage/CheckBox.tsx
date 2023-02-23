@@ -1,5 +1,4 @@
-import { FC } from "react";
-import Image from "next/image";
+import { FC, ReactElement } from "react";
 import styles from "./CheckBox.module.css";
 
 export const CheckBox: FC<{
@@ -7,13 +6,13 @@ export const CheckBox: FC<{
 	labelExtension?: string;
 	checkedValue: boolean;
 	handleOnChange: CallableFunction;
-	iconSource?: string;
+	icon?: ReactElement;
 }> = ({
 	labelName,
 	labelExtension,
 	checkedValue,
 	handleOnChange,
-	iconSource,
+	icon,
 }) => {
 	return (
 		<fieldset className={styles.checkBox}>
@@ -26,9 +25,7 @@ export const CheckBox: FC<{
 				<span>{labelName}</span>
 				{labelExtension && <span> {labelExtension}</span>}
 			</label>
-			{iconSource && (
-				<Image width="32" height="32" src={iconSource} alt="icon" />
-			)}
+			{icon}
 		</fieldset>
 	);
 };
