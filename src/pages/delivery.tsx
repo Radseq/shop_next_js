@@ -60,172 +60,182 @@ export default function Cart(props: { navigationData: RootNavigation[] }) {
 			</Head>
 
 			<Layout navigation={props.navigationData}>
-				<h1 className={stylesUtils.headingXl}>Delivery and payment</h1>
-				<div className={styles.content}>
-					<h1 className={stylesUtils.headingLg}>Delivery</h1>
-					<div className={styles.delivery}>
-						<CheckBox
-							checkedValue={
-								deliveryPostData.deliveryType === "currier"
-							}
-							labelName={"Currier - DLS, DHL"}
-							handleOnChange={() =>
-								setDeliveryPostData({
-									...deliveryPostData,
-									deliveryType: "currier",
-								})
-							}
-							labelExtension={"(free)"}
-							icon={<Icon kind="truck" />}
-						/>
-						<CheckBox
-							checkedValue={
-								deliveryPostData.deliveryType === "pickUpInShop"
-							}
-							labelName={"Pick up in shop"}
-							handleOnChange={() =>
-								setDeliveryPostData({
-									...deliveryPostData,
-									deliveryType: "pickUpInShop",
-								})
-							}
-							labelExtension={"(free)"}
-							icon={<Icon kind="shop" />}
-						/>
-					</div>
-					<h1 className={stylesUtils.headingLg}>Buying as</h1>
-					<div className={styles.buyerType}>
-						<CheckBox
-							checkedValue={
-								deliveryPostData.buyerType === "private"
-							}
-							labelName={"Private person"}
-							handleOnChange={() =>
-								setDeliveryPostData({
-									...deliveryPostData,
-									buyerType: "private",
-								})
-							}
-						/>
-						<CheckBox
-							checkedValue={
-								deliveryPostData.buyerType === "company"
-							}
-							labelName={"Company"}
-							handleOnChange={() =>
-								setDeliveryPostData({
-									...deliveryPostData,
-									buyerType: "company",
-								})
-							}
-						/>
-					</div>
-					<DeliveryAddress
-						deliveryData={deliveryPostData}
-						setDeliveryData={setDeliveryPostData}
-						title="Delivery Address"
-					/>
-					<h1 className={stylesUtils.headingLg}>Invoice data</h1>
-					<div className={styles.deliveryAddress}>
-						<label>
-							<input
-								type="checkbox"
-								checked={checkDeliveryDateInvoice}
-								onChange={() =>
-									setCheckDeliveryDateInvoice(
-										!checkDeliveryDateInvoice
-									)
+				<div className={styles.delivery}>
+					<div className={styles.content}>
+						<h1 className={stylesUtils.headingXl}>
+							Delivery and payment
+						</h1>
+						<h1 className={stylesUtils.headingLg}>Delivery</h1>
+						<div className={styles.deliveryType}>
+							<CheckBox
+								checkedValue={
+									deliveryPostData.deliveryType === "currier"
+								}
+								labelName={"Currier - DLS, DHL"}
+								handleOnChange={() =>
+									setDeliveryPostData({
+										...deliveryPostData,
+										deliveryType: "currier",
+									})
+								}
+								labelExtension={"(free)"}
+								icon={<Icon kind="truck" />}
+							/>
+							<CheckBox
+								checkedValue={
+									deliveryPostData.deliveryType ===
+									"pickUpInShop"
+								}
+								labelName={"Pick up in shop"}
+								handleOnChange={() =>
+									setDeliveryPostData({
+										...deliveryPostData,
+										deliveryType: "pickUpInShop",
+									})
+								}
+								labelExtension={"(free)"}
+								icon={<Icon kind="shop" />}
+							/>
+						</div>
+						<h1 className={stylesUtils.headingLg}>Buying as</h1>
+						<div className={styles.buyerType}>
+							<CheckBox
+								checkedValue={
+									deliveryPostData.buyerType === "private"
+								}
+								labelName={"Private person"}
+								handleOnChange={() =>
+									setDeliveryPostData({
+										...deliveryPostData,
+										buyerType: "private",
+									})
 								}
 							/>
-							I want to provide other invoice details
-						</label>
-					</div>
-
-					{checkDeliveryDateInvoice && (
+							<CheckBox
+								checkedValue={
+									deliveryPostData.buyerType === "company"
+								}
+								labelName={"Company"}
+								handleOnChange={() =>
+									setDeliveryPostData({
+										...deliveryPostData,
+										buyerType: "company",
+									})
+								}
+							/>
+						</div>
 						<DeliveryAddress
-							title="Invoice Delivery Address"
-							deliveryData={invoiceDeliveryAddress}
-							setDeliveryData={setInvoiceDeliveryAddress}
+							deliveryData={deliveryPostData}
+							setDeliveryData={setDeliveryPostData}
+							title="Delivery Address"
 						/>
-					)}
+						<h1 className={stylesUtils.headingLg}>Invoice data</h1>
+						<div className={styles.deliveryAddress}>
+							<label>
+								<input
+									type="checkbox"
+									checked={checkDeliveryDateInvoice}
+									onChange={() =>
+										setCheckDeliveryDateInvoice(
+											!checkDeliveryDateInvoice
+										)
+									}
+								/>
+								I want to provide other invoice details
+							</label>
+						</div>
 
-					<h1 className={stylesUtils.headingLg}>Payments</h1>
-					<div className={styles.deliveryAddress}>
-						<CheckBox
-							checkedValue={deliveryPostData.paimentId === 0}
-							labelName={"Online"}
-							handleOnChange={() =>
-								setDeliveryPostData({
-									...deliveryPostData,
-									paimentId: 0,
-								})
-							}
-							labelExtension={"(free)"}
-							icon={<Icon kind="dotpay" />}
-						/>
-						<CheckBox
-							checkedValue={deliveryPostData.paimentId === 1}
-							labelName={"Credit card"}
-							handleOnChange={() =>
-								setDeliveryPostData({
-									...deliveryPostData,
-									paimentId: 1,
-								})
-							}
-							labelExtension={"(free)"}
-							icon={<Icon kind="credit_cart" />}
-						/>
-						<CheckBox
-							checkedValue={deliveryPostData.paimentId === 2}
-							labelName={"Blik"}
-							handleOnChange={() =>
-								setDeliveryPostData({
-									...deliveryPostData,
-									paimentId: 2,
-								})
-							}
-							labelExtension={"(free)"}
-							icon={<Icon kind="blik" />}
-						/>
-						<CheckBox
-							checkedValue={deliveryPostData.paimentId === 3}
-							labelName={"Transfer"}
-							handleOnChange={() =>
-								setDeliveryPostData({
-									...deliveryPostData,
-									paimentId: 3,
-								})
-							}
-							labelExtension={"(free)"}
-						/>
-						<CheckBox
-							checkedValue={deliveryPostData.paimentId === 4}
-							labelName={"Pay on delivery"}
-							handleOnChange={() =>
-								setDeliveryPostData({
-									...deliveryPostData,
-									paimentId: 4,
-								})
-							}
-							labelExtension={"(20 pln)"}
-							icon={<Icon kind="wallet" />}
-						/>
+						{checkDeliveryDateInvoice && (
+							<DeliveryAddress
+								title="Invoice Delivery Address"
+								deliveryData={invoiceDeliveryAddress}
+								setDeliveryData={setInvoiceDeliveryAddress}
+							/>
+						)}
+
+						<h1 className={stylesUtils.headingLg}>Payments</h1>
+						<div>
+							<CheckBox
+								checkedValue={deliveryPostData.paimentId === 0}
+								labelName={"Online"}
+								handleOnChange={() =>
+									setDeliveryPostData({
+										...deliveryPostData,
+										paimentId: 0,
+									})
+								}
+								labelExtension={"(free)"}
+								icon={<Icon kind="dotpay" />}
+							/>
+							<CheckBox
+								checkedValue={deliveryPostData.paimentId === 1}
+								labelName={"Credit card"}
+								handleOnChange={() =>
+									setDeliveryPostData({
+										...deliveryPostData,
+										paimentId: 1,
+									})
+								}
+								labelExtension={"(free)"}
+								icon={<Icon kind="credit_cart" />}
+							/>
+							<CheckBox
+								checkedValue={deliveryPostData.paimentId === 2}
+								labelName={"Blik"}
+								handleOnChange={() =>
+									setDeliveryPostData({
+										...deliveryPostData,
+										paimentId: 2,
+									})
+								}
+								labelExtension={"(free)"}
+								icon={<Icon kind="blik" />}
+							/>
+							<CheckBox
+								checkedValue={deliveryPostData.paimentId === 3}
+								labelName={"Transfer"}
+								handleOnChange={() =>
+									setDeliveryPostData({
+										...deliveryPostData,
+										paimentId: 3,
+									})
+								}
+								labelExtension={"(free)"}
+							/>
+							<CheckBox
+								checkedValue={deliveryPostData.paimentId === 4}
+								labelName={"Pay on delivery"}
+								handleOnChange={() =>
+									setDeliveryPostData({
+										...deliveryPostData,
+										paimentId: 4,
+									})
+								}
+								labelExtension={"(20 pln)"}
+								icon={<Icon kind="wallet" />}
+							/>
+						</div>
+						<h1 className={stylesUtils.headingMd}>
+							Formal approvals
+						</h1>
+						<div className={styles.formalApprovals}>
+							<CheckBox
+								checkedValue={
+									deliveryPostData.termsAndConditions
+								}
+								labelName={"Terms and conditions"}
+								handleOnChange={() =>
+									setDeliveryPostData({
+										...deliveryPostData,
+										termsAndConditions:
+											!deliveryPostData.termsAndConditions,
+									})
+								}
+								labelExtension={"(required)"}
+							/>
+						</div>
 					</div>
-					<h1 className={stylesUtils.headingMd}>Formal approvals</h1>
-					<div className={styles.formalApprovals}>
-						<CheckBox
-							checkedValue={deliveryPostData.termsAndConditions}
-							labelName={"Terms and conditions"}
-							handleOnChange={() =>
-								setDeliveryPostData({
-									...deliveryPostData,
-									termsAndConditions:
-										!deliveryPostData.termsAndConditions,
-								})
-							}
-							labelExtension={"(required)"}
-						/>
-					</div>
+					<aside className={styles.panel}>Panel</aside>
 				</div>
 			</Layout>
 		</div>

@@ -1,12 +1,17 @@
 .content {
-	width: 70%;
-}
-
-.delivery > div:first-child {
+	width: calc(70% - 10px);
 	margin-right: 10px;
 }
 
-.delivery > div {
+.delivery {
+	display: flex;
+}
+
+.deliveryType > div:first-child {
+	margin-right: 10px;
+}
+
+.deliveryType > div {
 	display: flex;
 	width: 200px;
 }
@@ -22,4 +27,18 @@
 .buyerType > fieldset {
 	display: flex;
 	width: 50%;
+}
+
+.panel {
+	border-radius: 10px;
+	border: 2px solid rgba(124, 124, 124, 0.938);
+	box-shadow: rgb(124 124 124 / 94%) 0px 2px 8px;
+
+	position: -webkit-sticky; /* Safari */
+	position: sticky;
+	width: 30%;
+	top: 0;
+	height: 100%;
+	margin-top: 20px;
+	padding: 10px;
 }
