@@ -33,7 +33,7 @@ export const ImageSlider: FC<{
 							alt={selectedImage.name}
 						/>
 						<div className={styles.sliderText}>
-							{selectedImage.desc}
+							{selectedImage.description}
 						</div>
 					</div>
 				)}
@@ -58,7 +58,7 @@ export const ImageSlider: FC<{
 								: styles.unSelected
 						}`}
 					>
-						<span>{itemSlide.desc}</span>
+						<span>{itemSlide.description}</span>
 					</div>
 				))}
 			</div>
