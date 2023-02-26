@@ -21,6 +21,7 @@ import { getRecommendedProduct } from "@/server/recommendedProduct";
 import { getPromotion } from "@/server/promotion";
 import { getHitsOfTheWeek } from "@/server/hitsOfTheWeek";
 import { getAllRecommendedProducts } from "@/server/recommendedProducts/recommendedProduct";
+import { getAllBestsellerProducts } from "@/server/bestseller/bestseller";
 
 export default function Home(props: {
 	navigationData: RootNavigation[];
@@ -85,7 +86,7 @@ export const getServerSideProps: GetStaticProps = async ({}) => {
 		getAllRecommendedProducts([]),
 		getPromotion(),
 		getHitsOfTheWeek(),
-		getBestsellerProduct(),
+		getAllBestsellerProducts(),
 	]);
 
 	return {
