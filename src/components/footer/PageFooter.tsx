@@ -25,6 +25,7 @@ const Newsletter = () => {
 	const [email, setEmail] = useState("");
 	const [emailResult, setEmailResult] = useState<EmailResultCode>();
 
+	// todo give user information e.g too short, too long
 	const sendEmailToApi = async () => {
 		const result = validate(email);
 
