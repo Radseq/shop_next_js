@@ -19,11 +19,29 @@ model Product {
   quantity        Int
   description     String   @db.VarChar(1000)
   scoreValue      Int
+  productInCategories ProductInCategory[]
 
   discountPrice     Int?
   installmentPrice  Int?
   isBestseller      Boolean?   
   hasFreeShipping   Boolean?
+}
+
+model Category {
+  id          Int     @id @default(autoincrement())
+  name        String  @db.VarChar(100)
+  parentId    Int?
+  url         String  @db.VarChar(100)
+  productInCategories ProductInCategory[]
+}
+
+model ProductInCategory {
+  product       Product   @relation(fields: [productId], references: [id])
+  productId     Int
+  category      Category  @relation(fields: [categoryId], references: [id])
+  categoryId    Int
+
+  @@id([productId, categoryId])
 }
 
 model Advertisement {
