@@ -23,7 +23,7 @@ const Comment: FC<{ commentProps: CommentProps }> = ({ commentProps }) => {
 					<StarScore score={commentProps.score} starCount={10} />
 					<span>{commentProps.addTimeToServerTimeDiffrenceText}</span>
 				</div>
-				<div className={styles.body}>{commentProps.commentText}</div>
+				<div className={styles.body}>{commentProps.comment}</div>
 				<div className={styles.footer}>
 					<span>This opinion was helpful?</span>
 					<button>
@@ -45,12 +45,19 @@ export const CommentsPanel: FC<{ productId: number }> = ({ productId }) => {
 	const [productCommentsData, setProductCommentsData] =
 		useState<ProductComments>();
 
+	const pageSize = 10;
+
 	useEffect(() => {
 		axios
-			.get(
-				`http://localhost:3000/api/product/comment/${productId}/${pageIndex}`
-			)
+			.get(`http://localhost:3000/api/product/comment`, {
+				params: {
+					productId: productId,
+					pageIndex: pageIndex,
+					pageSize: pageSize,
+				},
+			})
 			.then(({ data }) => {
+				console.log(data);
 				setProductCommentsData(data);
 			});
 	}, [productId, pageIndex]);
@@ -67,7 +74,6 @@ export const CommentsPanel: FC<{ productId: number }> = ({ productId }) => {
 		setPageIndex(pageIndex - 1);
 	};
 
-	// todo below replace pageIndex with productCommentsQuery.data.pageIndex, when api will be written
 	return (
 		<div className={styles.commentsPanel}>
 			<h2>
@@ -75,11 +81,8 @@ export const CommentsPanel: FC<{ productId: number }> = ({ productId }) => {
 			</h2>
 			<hr />
 			<span>
-				Results:{" "}
-				{pageIndex * productComments.pageSize -
-					productComments.pageSize}{" "}
-				- {pageIndex * productComments.pageSize} of{" "}
-				{productComments.allCommentsCount}{" "}
+				Results: {pageIndex * pageSize - pageSize + 1} -{" "}
+				{pageIndex * pageSize} of {productComments.allCommentsCount}{" "}
 			</span>
 			<hr />
 			{productComments.comments.map((comment) => {
@@ -101,8 +104,7 @@ export const CommentsPanel: FC<{ productId: number }> = ({ productId }) => {
 				<StyledButton onClick={loadPreviousComments} kind="secondary">
 					{pageIndex}
 				</StyledButton>
-				{pageIndex * productComments.pageSize <
-					productComments.allCommentsCount && (
+				{pageIndex * pageSize < productComments.allCommentsCount && (
 					<StyledButton onClick={loadNextComments} kind="primary">
 						{" "}
 						{pageIndex + 1}

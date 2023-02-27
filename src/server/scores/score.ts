@@ -1,3 +1,4 @@
+import { ProductScore } from "@prisma/client";
 import { prisma } from "prisma/prisma";
 
 export const getProductScores = async (productId: number) => {
