@@ -1,5 +1,7 @@
 import { CONFIG } from "@/config";
+import { ProductScore } from "@prisma/client";
 import { prisma } from "prisma/prisma";
+import { getDescriptionsByProductId } from "../descriptions/description";
 import { getProductScores, sumProductVotesByScore } from "../scores/score";
 
 export const getProductsByIds = async (productIds: number[]) => {
@@ -42,14 +44,14 @@ export const getProductById = async (productId: number) => {
 
 	const commentPageIndex = 1;
 
-	const [
-		productScoresDb,
-	] = await Promise.all([
+	const [productScoresDb, productDescriptionDb] = await Promise.all([
 		getProductScores(productId),
+		getDescriptionsByProductId(productId),
 	]);
 
 	return {
 		product: foundProductById,
+		descriptions: productDescriptionDb,
 		scores: getProductKeyValueVotes(productId, productScoresDb),
 	};
 };
