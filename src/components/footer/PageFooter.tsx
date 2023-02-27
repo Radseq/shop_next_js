@@ -1,16 +1,39 @@
-import React, { useState } from "react";
+import React, { FC, useEffect, useState } from "react";
 import styles from "./PageFooter.module.css";
 import { StyledInput } from "../StyledInput";
 import Image from "next/image";
 import classNames from "classnames";
+import { validate } from "@/lib/email";
+
+type EmailResultCode = "fail" | "ok" | "notValid";
+
+const getMessageFromCode = (code: EmailResultCode) => {
+	switch (code) {
+		case "fail":
+			return "Fail, please try again later";
+		case "notValid":
+			return "Email is not valid!";
+		case "ok":
+			return "Saved in";
+		default:
+			console.error(`Not found email code ${code}`);
+			return "";
+	}
+};
 
 const Newsletter = () => {
 	const [email, setEmail] = useState("");
-	const [emailPostResult, setEmailPostResult] = useState<
-		boolean | undefined
-	>();
+	const [emailResult, setEmailResult] = useState<EmailResultCode>();
 
+	// todo give user information e.g too short, too long
 	const sendEmailToApi = async () => {
+		const result = validate(email);
+
+		if (!result) {
+			setEmailResult("notValid");
+			return;
+		}
+
 		let res = await fetch(
 			`http://localhost:3000/api/newsletter/newsletter/`,
 			{
@@ -20,11 +43,11 @@ const Newsletter = () => {
 				}),
 			}
 		);
-		let resJson = await res.json();
+
 		if (res.status === 200) {
-			setEmailPostResult(true);
+			setEmailResult("ok");
 		} else {
-			setEmailPostResult(false);
+			setEmailResult("fail");
 		}
 	};
 
@@ -42,7 +65,10 @@ const Newsletter = () => {
 					placeholder="Type email"
 					required
 					kind="primary"
-					onChange={(e) => setEmail(e.target.value)}
+					onChange={(e) => {
+						console.log("email:", email);
+						setEmail(e.target.value);
+					}}
 				/>
 				<button
 					onClick={(e) => {
@@ -56,14 +82,11 @@ const Newsletter = () => {
 			<div
 				className={classNames(
 					styles.newsLetterMessage,
-					emailPostResult == true && styles.success,
-					emailPostResult == false && styles.fail
+					emailResult != "ok" && styles.fail,
+					emailResult == "ok" && styles.success
 				)}
 			>
-				{emailPostResult && "Saved in"}
-				{emailPostResult == false
-					? "Fail, please try again later"
-					: null}
+				{emailResult && getMessageFromCode(emailResult)}
 			</div>
 		</div>
 	);

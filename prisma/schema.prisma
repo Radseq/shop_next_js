@@ -35,3 +35,9 @@ model Advertisement {
   description String   @db.VarChar(200)
   url         String   @db.VarChar(300)
 }
+
+model Newsletter {
+    id      Int       @id @default(autoincrement())
+    email   String    @unique @db.VarChar(120)
+    addDate DateTime  @default(now())
+}
