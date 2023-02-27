@@ -1,13 +1,13 @@
 export type Description = {
 	id: number;
-	imageUrl: string;
+	imageSrc: string;
 	description: string;
 	title: string;
 };
 
 export type Specification = {
-	main: Record<string, string[]>;
-	other: Record<string, string[]>;
+	main: Record<string, string>;
+	other: Record<string, string>;
 };
 
 export type Product = {
