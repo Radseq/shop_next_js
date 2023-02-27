@@ -15,10 +15,10 @@ import { BestSellers } from "@/components/homePage/bestsellers/BestSellers";
 import { BestsellerProduct } from "@/components/homePage/bestsellers/Types";
 import { Layout } from "@/components/Layout";
 import { getNavigation } from "@/server/navigation";
-import { getBestsellerProduct } from "@/server/bestsellerProduct";
 import { getPromotion } from "@/server/promotion";
 import { getHitsOfTheWeek } from "@/server/hitsOfTheWeek";
 import { getAllRecommendedProducts } from "@/server/recommendedProducts/recommendedProduct";
+import { getAllBestsellerProducts } from "@/server/bestseller/bestseller";
 import { getAdvertisement } from "@/server/advertising/advertisement";
 
 export default function Home(props: {
@@ -84,7 +84,7 @@ export const getServerSideProps: GetStaticProps = async ({}) => {
 		getAllRecommendedProducts([]),
 		getPromotion(),
 		getHitsOfTheWeek(),
-		getBestsellerProduct(),
+		getAllBestsellerProducts(),
 	]);
 
 	return {
