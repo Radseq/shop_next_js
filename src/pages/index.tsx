@@ -15,13 +15,11 @@ import { BestSellers } from "@/components/homePage/bestsellers/BestSellers";
 import { BestsellerProduct } from "@/components/homePage/bestsellers/Types";
 import { Layout } from "@/components/Layout";
 import { getNavigation } from "@/server/navigation";
-import { getAdvertisement } from "@/server/advertisement";
-import { getBestsellerProduct } from "@/server/bestsellerProduct";
-import { getRecommendedProduct } from "@/server/recommendedProduct";
 import { getPromotion } from "@/server/promotion";
 import { getHitsOfTheWeek } from "@/server/hitsOfTheWeek";
 import { getAllRecommendedProducts } from "@/server/recommendedProducts/recommendedProduct";
 import { getAllBestsellerProducts } from "@/server/bestseller/bestseller";
+import { getAdvertisement } from "@/server/advertising/advertisement";
 
 export default function Home(props: {
 	navigationData: RootNavigation[];
