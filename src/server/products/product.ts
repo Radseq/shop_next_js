@@ -1,7 +1,6 @@
 import { CONFIG } from "@/config";
 import { ProductScore, Specification } from "@prisma/client";
 import { prisma } from "prisma/prisma";
-import { getProductComments } from "../comments/comment";
 import { getDescriptionsByProductId } from "../descriptions/description";
 import { getProductScores, sumProductVotesByScore } from "../scores/score";
 import { getSpecificationsByProductId } from "../specifications/specification";
@@ -57,23 +56,12 @@ export const getProductById = async (productId: number) => {
 
 	if (!foundProductById) return null;
 
-	const commentPageIndex = 1;
-
-	const [
-		productScoresDb,
-		productCommentsDb,
-		productSpecificationsDb,
-		productDescriptionDb,
-	] = await Promise.all([
-		getProductScores(productId),
-		getProductComments(
-			foundProductById.id,
-			commentPageIndex,
-			CONFIG.BASE_PRODUCT_COMMENTS_COUNT
-		),
-		getSpecificationsByProductId(productId),
-		getDescriptionsByProductId(productId),
-	]);
+	const [productScoresDb, productSpecificationsDb, productDescriptionDb] =
+		await Promise.all([
+			getProductScores(productId),
+			getSpecificationsByProductId(productId),
+			getDescriptionsByProductId(productId),
+		]);
 
 	return {
 		product: foundProductById,
@@ -82,7 +70,6 @@ export const getProductById = async (productId: number) => {
 			other: getSpecificationRecords(productSpecificationsDb),
 		},
 		descriptions: productDescriptionDb,
-		comments: productCommentsDb,
 		scores: getProductKeyValueVotes(productId, productScoresDb),
 	};
 };

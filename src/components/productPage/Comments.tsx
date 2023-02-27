@@ -57,7 +57,6 @@ export const CommentsPanel: FC<{ productId: number }> = ({ productId }) => {
 				},
 			})
 			.then(({ data }) => {
-				console.log(data);
 				setProductCommentsData(data);
 			});
 	}, [productId, pageIndex]);

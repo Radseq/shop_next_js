@@ -31,12 +31,12 @@ export const getProductComments = async (
 
 	const allCommentsCount = await getProductCommentsCount(productId);
 
-	const commentMapped = comments.map((comment) => {
+	const commentsMapped = comments.map((comment) => {
 		return {
 			id: comment.id,
 			username: comment.username,
 			avatarImgScr: comment.avatarImgScr,
-			addDate: comment.addDate,
+			addDate: comment.addDate.toString(),
 			comment: comment.comment,
 			score: comment.productScore.score,
 			helpfullCommentCount: comment.helpfullCommentCount,
@@ -45,9 +45,8 @@ export const getProductComments = async (
 		};
 	});
 
-	console.log("commentMapped:", commentMapped);
 	return {
 		allCommentsCount,
-		comments: commentMapped,
+		comments: commentsMapped,
 	};
 };

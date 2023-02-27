@@ -10,20 +10,25 @@ export type Specification = {
 	other: Record<string, string[]>;
 };
 
-export type ProductProps = {
+export type Product = {
 	id: number;
 	name: string;
 	description: string;
 	imageSrc: string;
 	price: number;
-	scoreValue: number;
-	priceDiscount: number;
+	discountPrice: number;
 	quantity: number;
-	descriptions: Description[];
-	specification: Specification;
+
 	installmentPrice?: number;
 	freeDelivery: boolean;
+};
+
+export type ProductDate = {
+	product: Product;
+	specifications: Specification;
+	descriptions: Description[];
 	scores: Record<number, number>;
+	comments: ProductComments;
 };
 
 export type ProductComments = {

@@ -1,6 +1,6 @@
 import { FC, useState } from "react";
 import styles from "./BuyPanel.module.css";
-import { ProductProps } from "./Types";
+import { Product, ProductDate } from "./Types";
 import { StyledInput } from "../StyledInput";
 import { useCartDispatch } from "@/lib/storeCart";
 import { addToCart } from "@/lib/cartSlice";
@@ -79,20 +79,45 @@ const LoanInstallmentItemDetailRow: FC<{
 	);
 };
 
-export const BuyPanel: FC<{ purchasedProduct: ProductProps }> = ({
+const Price: FC<{ discountPrice: number; price: number }> = ({
+	discountPrice,
+	price,
+}) => {
+	console.log("discountPrice:", discountPrice, " price:", price);
+	if (discountPrice) {
+		return (
+			<div>
+				<span>Save {price - discountPrice} pln</span>
+				<div className={styles.totalPrice}>
+					<del>{price} pln </del>
+					<h2>{discountPrice} pln</h2>
+				</div>
+			</div>
+		);
+	}
+	return (
+		<div>
+			<div className={styles.totalPrice}>
+				<h2>{price} pln</h2>
+			</div>
+		</div>
+	);
+};
+
+export const BuyPanel: FC<{ purchasedProduct: Product }> = ({
 	purchasedProduct,
 }) => {
 	const [quantity, setQuantity] = useState(1);
 	const dispatch = useCartDispatch();
 
-	const onAddToCartBtnClick = (product: ProductProps) => {
+	const onAddToCartBtnClick = (product: Product) => {
 		dispatch(
 			addToCart({
 				id: product.id,
 				imageSrc: product.imageSrc,
 				name: product.name,
 				price: product.price,
-				discountPrice: product.priceDiscount,
+				discountPrice: product.discountPrice,
 				quantity: quantity,
 			})
 		);
@@ -105,14 +130,10 @@ export const BuyPanel: FC<{ purchasedProduct: ProductProps }> = ({
 
 	return (
 		<div className={styles.buyPanel}>
-			<span>
-				Save {purchasedProduct.price - purchasedProduct.priceDiscount}{" "}
-				pln
-			</span>
-			<div className={styles.totalPrice}>
-				<del>{purchasedProduct.price} pln </del>
-				<h2>{purchasedProduct.priceDiscount} pln</h2>
-			</div>
+			<Price
+				discountPrice={purchasedProduct.discountPrice}
+				price={purchasedProduct.price}
+			/>
 			<div className={styles.addToCart}>
 				<StyledButton
 					onClick={() => onAddToCartBtnClick(purchasedProduct)}
