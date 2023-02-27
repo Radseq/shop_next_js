@@ -1,3 +1,4 @@
+import { getCacheData, setCacheData } from "@/cache";
 import { getProductComments } from "@/server/comments/comment";
 import type { NextApiRequest, NextApiResponse } from "next";
 import { z } from "zod";
@@ -27,18 +28,27 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 
 			const { productId, pageSize, pageIndex } = result.data;
 
-			const comments = await getProductComments(
-				productId,
-				pageIndex,
-				pageSize
-			);
+			let cacheResult = await getCacheData("productComments" + productId);
+			if (cacheResult) {
+				cacheResult = JSON.parse(cacheResult);
+			} else {
+				cacheResult = await getProductComments(
+					productId,
+					pageIndex,
+					pageSize
+				);
+				await setCacheData(
+					"productComments" + productId,
+					JSON.stringify(cacheResult)
+				);
+			}
 
-			if (!comments) {
+			if (!cacheResult) {
 				return res.status(404).send({
 					error: `Comemnts for product id ${query.productId} not found`,
 				});
 			}
-			return res.status(200).json(comments);
+			return res.status(200).json(cacheResult);
 		default:
 			res.setHeader("Allow", ["GET"]);
 			res.status(405).end(`Method ${method} Not Allowed`);

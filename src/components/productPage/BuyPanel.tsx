@@ -83,7 +83,6 @@ const Price: FC<{ discountPrice: number; price: number }> = ({
 	discountPrice,
 	price,
 }) => {
-	console.log("discountPrice:", discountPrice, " price:", price);
 	if (discountPrice) {
 		return (
 			<div>
