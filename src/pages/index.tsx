@@ -16,9 +16,9 @@ import { BestsellerProduct } from "@/components/homePage/bestsellers/Types";
 import { Layout } from "@/components/Layout";
 import { getNavigation } from "@/server/navigation";
 import { getBestsellerProduct } from "@/server/bestsellerProduct";
-import { getRecommendedProduct } from "@/server/recommendedProduct";
 import { getPromotion } from "@/server/promotion";
 import { getHitsOfTheWeek } from "@/server/hitsOfTheWeek";
+import { getAllRecommendedProducts } from "@/server/recommendedProducts/recommendedProduct";
 import { getAdvertisement } from "@/server/advertising/advertisement";
 
 export default function Home(props: {
@@ -81,7 +81,7 @@ export const getServerSideProps: GetStaticProps = async ({}) => {
 	] = await Promise.all([
 		getNavigation(),
 		getAdvertisement(),
-		getRecommendedProduct(),
+		getAllRecommendedProducts([]),
 		getPromotion(),
 		getHitsOfTheWeek(),
 		getBestsellerProduct(),
