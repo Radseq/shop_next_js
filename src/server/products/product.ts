@@ -1,4 +1,3 @@
-import { getCacheData, setCacheData } from "@/cache";
 import { CONFIG } from "@/config";
 import { ProductScore, Specification } from "@prisma/client";
 import { prisma } from "prisma/prisma";
@@ -74,14 +73,7 @@ export const getProductById = async (productId: number) => {
 		scores: getProductKeyValueVotes(productId, productScoresDb),
 	};
 
-	let cacheResult = await getCacheData("product" + productId);
-	if (cacheResult) {
-		cacheResult = JSON.parse(cacheResult);
-	} else {
-		cacheResult = result;
-		await setCacheData("product" + productId, JSON.stringify(cacheResult));
-	}
-	return cacheResult;
+	return result;
 };
 
 export const getProductsByName = async (productName: string) => {

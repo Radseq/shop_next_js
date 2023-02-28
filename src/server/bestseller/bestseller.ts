@@ -1,4 +1,3 @@
-import { getCacheData, setCacheData } from "@/cache";
 import { CONFIG } from "@/config";
 import { getOrderProductsByDate } from "../orderProducts/orderProducts";
 import { getProductsByIds } from "../products/product";
@@ -43,15 +42,5 @@ export const getAllBestsellerProducts = async () => {
 			CONFIG.LAST_MONTHS_PRODUCTS_IN_ORDER
 	);
 
-	let dataResult = await getCacheData("bestseller");
-	if (dataResult) {
-		dataResult = JSON.parse(dataResult);
-	} else {
-		dataResult = await getMostSoldProductsByDate(
-			bestsellerMonthsPriorToToday
-		);
-		await setCacheData("bestseller", JSON.stringify(dataResult));
-	}
-
-	return dataResult;
+	return await getMostSoldProductsByDate(bestsellerMonthsPriorToToday);
 };
