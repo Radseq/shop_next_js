@@ -1,4 +1,3 @@
-import { getCacheData, setCacheData } from "@/cache";
 import { prisma } from "prisma/prisma";
 
 const getAllAdvertisementFromDB = async () => {
@@ -19,15 +18,5 @@ const getAllAdvertisementFromDB = async () => {
 };
 
 export const getAdvertisement = async () => {
-	const advertisements = await getAllAdvertisementFromDB();
-
-	let result = await getCacheData("advertisement");
-	if (result) {
-		result = JSON.parse(result);
-	} else {
-		result = advertisements;
-		await setCacheData("advertisement", JSON.stringify(result));
-	}
-
-	return result;
+	return await getAllAdvertisementFromDB();
 };
