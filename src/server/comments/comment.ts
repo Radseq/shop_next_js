@@ -14,7 +14,7 @@ export const getProductComments = async (
 	pageIndex: number,
 	pageSize: number
 ) => {
-	const comments = await prisma.productComment.findMany({
+	const getPaginationComments = prisma.productComment.findMany({
 		where: {
 			productId: productId,
 		},
@@ -29,7 +29,10 @@ export const getProductComments = async (
 		take: pageSize,
 	});
 
-	const allCommentsCount = await getProductCommentsCount(productId);
+	const [comments, allCommentsCount] = await Promise.all([
+		getPaginationComments,
+		getProductCommentsCount(productId),
+	]);
 
 	const commentsMapped = comments.map((comment) => {
 		return {
