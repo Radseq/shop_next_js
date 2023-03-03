@@ -11,7 +11,7 @@ import { Layout } from "@/components/Layout";
 import { RootNavigation } from "@/components/header/Types";
 import Image from "next/image";
 import { getNavigation } from "@/server/navigation";
-import { getProductById } from "@/server/products/product";
+import { getAllProductsIds, getProductById } from "@/server/products/product";
 
 const ProductDescriptions: FC<{ descriptions: Description[] }> = (props) => {
 	return (
@@ -108,7 +108,7 @@ export default function Product(props: {
 	);
 }
 
-export const getServerSideProps: GetStaticProps = async ({ params }) => {
+export const getStaticProps: GetStaticProps = async ({ params }) => {
 	const id = params?.id as string;
 
 	const [navigation, productData] = await Promise.all([
@@ -116,10 +116,24 @@ export const getServerSideProps: GetStaticProps = async ({ params }) => {
 		getProductById(parseInt(id)),
 	]);
 
+	if (!navigation || !productData) {
+		return {
+			notFound: true,
+		};
+	}
+
 	return {
 		props: {
 			navigation,
 			productData,
 		},
 	};
+};
+
+export const getStaticPaths: GetStaticPaths = async () => {
+	const productIds = await getAllProductsIds();
+	const paths = productIds.map((productId) => ({
+		params: { id: productId.toString() },
+	}));
+	return { paths, fallback: "blocking" };
 };

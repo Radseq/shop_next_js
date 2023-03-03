@@ -69,8 +69,7 @@ export default function Home(props: {
 	);
 }
 
-export const getServerSideProps: GetStaticProps = async ({}) => {
-	// todo error handle
+export const getStaticProps: GetStaticProps = async () => {
 	const [
 		navigationData,
 		advertisementData,

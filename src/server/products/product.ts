@@ -5,6 +5,16 @@ import { getDescriptionsByProductId } from "../descriptions/description";
 import { getProductScores, sumProductVotesByScore } from "../scores/score";
 import { getSpecificationsByProductId } from "../specifications/specification";
 
+export const getAllProductsIds = async () => {
+	const product = await prisma.product.findMany({
+		select: {
+			id: true,
+		},
+	});
+
+	return product.map((productId) => productId.id);
+};
+
 export const getProductsByIds = async (productIds: number[]) => {
 	const product = await prisma.product.findMany({
 		where: {
