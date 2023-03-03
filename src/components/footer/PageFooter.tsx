@@ -65,10 +65,7 @@ const Newsletter = () => {
 					placeholder="Type email"
 					required
 					kind="primary"
-					onChange={(e) => {
-						console.log("email:", email);
-						setEmail(e.target.value);
-					}}
+					onChange={(e) => setEmail(e.target.value)}
 				/>
 				<button
 					onClick={(e) => {

@@ -7,7 +7,7 @@ const EMAIL_VERIFIER = z.coerce
 
 export const validate = (email: string) => {
 	const parseResult = EMAIL_VERIFIER.safeParse(email);
-	console.log(parseResult);
+
 	if (parseResult.success) {
 		return true;
 	}
