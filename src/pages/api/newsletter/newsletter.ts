@@ -18,6 +18,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 
 			const result = await addNewsletterEmail(incomeEmail.email);
 			if (result) {
+				await res.revalidate("/newsletterEmails");
 				res.send(200);
 			} else {
 				res.status(500).send({
