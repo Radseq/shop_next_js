@@ -1,8 +1,11 @@
 import { CONFIG } from "@/config";
-import { ProductScore, Specification } from "@prisma/client";
+import { Specification } from "@prisma/client";
 import { prisma } from "prisma/prisma";
 import { getDescriptionsByProductId } from "../descriptions/description";
-import { getProductScores, sumProductVotesByScore } from "../scores/score";
+import {
+	getProductCommentScores,
+	sumProductVotesByScore,
+} from "../comments/score";
 import { getSpecificationsByProductId } from "../specifications/specification";
 
 export const getProductsByIds = async (productIds: number[]) => {
@@ -19,7 +22,10 @@ export const getProductsByIds = async (productIds: number[]) => {
 
 export const getProductKeyValueVotes = (
 	productId: number,
-	productScoresDb: ProductScore[]
+	productCommentsScores: {
+		productId: number;
+		score: number | null;
+	}[]
 ) => {
 	const votes: Record<number, number> = {};
 	for (
@@ -30,7 +36,7 @@ export const getProductKeyValueVotes = (
 		votes[scoreIndex] = sumProductVotesByScore(
 			productId,
 			scoreIndex,
-			productScoresDb
+			productCommentsScores
 		);
 	}
 	return votes;
@@ -56,12 +62,15 @@ export const getProductById = async (productId: number) => {
 
 	if (!foundProductById) return null;
 
-	const [productScoresDb, productSpecificationsDb, productDescriptionDb] =
-		await Promise.all([
-			getProductScores(productId),
-			getSpecificationsByProductId(productId),
-			getDescriptionsByProductId(productId),
-		]);
+	const [
+		productCommentsScores,
+		productSpecificationsDb,
+		productDescriptionDb,
+	] = await Promise.all([
+		getProductCommentScores(productId),
+		getSpecificationsByProductId(productId),
+		getDescriptionsByProductId(productId),
+	]);
 
 	const result = {
 		product: foundProductById,
@@ -70,7 +79,7 @@ export const getProductById = async (productId: number) => {
 			other: getSpecificationRecords(productSpecificationsDb),
 		},
 		descriptions: productDescriptionDb,
-		scores: getProductKeyValueVotes(productId, productScoresDb),
+		scores: getProductKeyValueVotes(productId, productCommentsScores),
 	};
 
 	return result;

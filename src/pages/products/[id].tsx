@@ -1,4 +1,4 @@
-import { GetStaticProps, GetStaticPaths } from "next";
+import { GetStaticProps } from "next";
 import { Description, ProductDate } from "@/components/productPage/Types";
 import { FC } from "react";
 import styles from "./Product.module.css";

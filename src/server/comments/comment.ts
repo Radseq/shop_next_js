@@ -18,13 +18,6 @@ export const getProductComments = async (
 		where: {
 			productId: productId,
 		},
-		include: {
-			productScore: {
-				select: {
-					score: true,
-				},
-			},
-		},
 		skip: pageIndex * pageSize - pageSize,
 		take: pageSize,
 	});
@@ -38,7 +31,7 @@ export const getProductComments = async (
 			avatarImgScr: comment.avatarImgScr,
 			addDate: comment.addDate.toString(),
 			comment: comment.comment,
-			score: comment.productScore.score,
+			score: comment.score,
 			helpfullCommentCount: comment.helpfullCommentCount,
 			unhelpfulCommentCount: comment.unhelpfulCommentCount,
 			addTimeToServerTimeDiffrenceText: "",

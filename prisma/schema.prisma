@@ -18,25 +18,14 @@ model Product {
   vat             Int
   quantity        Int
   description     String   @db.VarChar(1000)
-  scoreValue      Int
-  scores              ProductScore[]
+
   productInCategories ProductInCategory[]
+  productComments     ProductComment[]
 
   discountPrice     Int?
   installmentPrice  Int?
   isBestseller      Boolean?   
   hasFreeShipping   Boolean?
-  productComment    ProductComment? 
-}
-
-model ProductScore {
- id             Int       @id @default(autoincrement())
- product        Product   @relation(fields: [productId], references: [id])
- productId      Int
- score          Int
- addDate        DateTime  @default(now())
- ipAddress      String    @db.VarChar(45)
- productComment ProductComment? 
 }
 
 model ProductSpecification {
@@ -79,10 +68,9 @@ model ProductComment {
   username      String    @db.VarChar(50)
   avatarImgScr  String    @db.VarChar(250)
 
-  productScore  ProductScore  @relation(fields: [scoreId], references: [id])
-  scoreId       Int           @unique
-  helpfullCommentCount  Int
-  unhelpfulCommentCount Int
+  helpfullCommentCount  Int   @default(0)
+  unhelpfulCommentCount Int   @default(0)
+  score         Int?
 }
 
 model Category {
