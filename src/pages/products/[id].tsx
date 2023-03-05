@@ -99,6 +99,7 @@ export default function Product(props: {
 					scores={scores}
 					productName={product.name}
 					averageVote={weightedAverage}
+					productId={product.id}
 				/>
 				<hr />
 				<CommentsPanel productId={Number(product.id)} />

@@ -1,12 +1,10 @@
-import React, { FC } from "react";
+import React, { FC, useState } from "react";
 import ProgressBar from "../ProgressBar";
 import styles from "./ScorePanel.module.css";
 import { StarScore } from "../StarScore";
 import { StyledButton } from "../StyledButton";
 import { SvgStar } from "../svg/SvgStar";
-
-// todo, i think about form in modal window
-const onAddComment = () => {};
+import { AddCommentPopup } from "./AddCommentPopUp";
 
 const calculateProgressOfProgressbar = (
 	keyPair: [string, number][],
@@ -25,10 +23,14 @@ export const ScorePanel: FC<{
 	votesCount: number;
 	scores: Record<number, number>;
 	averageVote: number;
-}> = ({ productName, votesCount, scores, averageVote }) => {
+	productId: number;
+}> = ({ productName, votesCount, scores, averageVote, productId }) => {
 	const sortedScoreDesc = Object.entries(scores).sort(
 		([leftKey], [rightKey]) => Number(rightKey) - Number(leftKey)
 	);
+
+	const [showAddCommentPopUp, setShowAddCommentPopUp] =
+		useState<boolean>(false);
 
 	const progressOfProgressBar = calculateProgressOfProgressbar(
 		sortedScoreDesc,
@@ -71,9 +73,18 @@ export const ScorePanel: FC<{
 			<div className={styles.addOpinion}>
 				<span>Have this product?</span>
 				<span>Score {productName} and help others to choose</span>
-				<StyledButton onClick={onAddComment} kind="secondary">
+				<StyledButton
+					onClick={() => setShowAddCommentPopUp(true)}
+					kind="secondary"
+				>
 					Add opinion
 				</StyledButton>
+				{showAddCommentPopUp && (
+					<AddCommentPopup
+						onCloseHandle={() => setShowAddCommentPopUp(false)}
+						productId={productId}
+					/>
+				)}
 			</div>
 		</div>
 	);

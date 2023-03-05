@@ -1,0 +1,49 @@
+.formPopUp {
+	display: block;
+	position: fixed;
+	bottom: 50%;
+	right: calc(50% - 250px);
+	border: 3px solid #f1f1f1;
+	z-index: 9;
+	max-width: 500px;
+	width: 100%;
+	border: transparent;
+}
+
+.formContainer {
+	border-radius: 10px;
+	border: 2px solid rgba(124, 124, 124, 0.938);
+	opacity: 1;
+	transition: 1s;
+	box-shadow: rgba(124, 124, 124, 0.938) 0px 2px 8px;
+	padding: 10px;
+	background-color: white;
+}
+
+.formContainer h1 {
+	text-align: center;
+}
+
+.formContainer textarea {
+	width: 100%;
+	padding: 5px;
+	border-radius: 10px;
+	border-width: 2px;
+	font-size: 1.1em;
+}
+
+.formContainer textarea:active {
+	border-radius: 10px;
+	border: 2px solid rgba(124, 124, 124, 0.938);
+	opacity: 1;
+	transition: 1s;
+}
+
+.footer {
+	display: flex;
+	flex-flow: column;
+}
+
+.footer button {
+	margin: 5px;
+}
