@@ -9,7 +9,7 @@ import axios from "axios";
 
 type ProductStock = Pick<HotSellProduct, "maxQuantity" | "orderQuantity">;
 const isSoldOut = (product: ProductStock) =>
-	product.maxQuantity >= product.orderQuantity;
+	product.maxQuantity <= product.orderQuantity;
 
 const HotSellProgressBar: FC<{ product: ProductStock }> = ({ product }) => {
 	if (isSoldOut(product)) {
@@ -101,40 +101,42 @@ export const HotSellPanel = () => {
 	}
 
 	return (
-		<div className={styles.hotSell}>
-			<Link href="/">
-				<div className={styles.title}>
-					<h1>Hot sell</h1>
+		<Link href="/">
+			<div className={styles.hotSell}>
+				<div className={styles.head}>
+					<div className={styles.title}>
+						<h1>Hot sell</h1>
+					</div>
+					<Image
+						width="200"
+						height="200"
+						src={hotSellProduct.imageSrc}
+						alt={hotSellProduct.name}
+					/>
 				</div>
-				<Image
-					width="200"
-					height="200"
-					src={hotSellProduct.imageSrc}
-					alt={hotSellProduct.name}
-				/>
-				<div className={styles.savesPanel}>
-					<span>Save</span>
-					<b>
+				<div className={styles.container}>
+					<span className={styles.productTitle}>
+						{hotSellProduct.name}
+					</span>
+					<del className={styles.productPrice}>
+						{hotSellProduct.price} pln
+					</del>
+					<span className={styles.productPriceAfterDiscount}>
+						{productSumPrice} pln
+					</span>
+					<div className={styles.savesPanel}>
+						<span>Save</span>
 						<span>{hotSellProduct.priceDiscount} pln</span>
-					</b>
+					</div>
+					<HotSellProgressBar product={hotSellProduct} />
+					<HotSellTimer
+						product={hotSellProduct}
+						hours={timer.hours}
+						minutes={timer.minutes}
+						seconds={timer.seconds}
+					/>
 				</div>
-				<span className={styles.productTitle}>
-					{hotSellProduct.name}
-				</span>
-				<del className={styles.productPrice}>
-					{hotSellProduct.price} pln
-				</del>
-				<span className={styles.productPriceAfterDiscount}>
-					{productSumPrice} pln
-				</span>
-				<HotSellProgressBar product={hotSellProduct} />
-				<HotSellTimer
-					product={hotSellProduct}
-					hours={timer.hours}
-					minutes={timer.minutes}
-					seconds={timer.seconds}
-				/>
-			</Link>
-		</div>
+			</div>
+		</Link>
 	);
 };
