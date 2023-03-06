@@ -1,3 +1,4 @@
+import classNames from "classnames";
 import { FC, useState } from "react";
 import { StyledButton } from "../StyledButton";
 import styles from "./AddCommentPopUp.module.css";
@@ -9,13 +10,23 @@ export const AddCommentPopup: FC<{
 	const [commentText, setCommentText] = useState<string>();
 
 	const sendComment = async () => {
+		if (!commentText) {
+			return;
+		}
+
 		let res = await fetch(`http://localhost:3000/api/product/comment/`, {
 			method: "POST",
 			body: JSON.stringify({
-				text: commentText,
 				productId: productId,
+				commentText: commentText,
 			}),
 		});
+
+		if (res.status === 200) {
+			alert("Thenks for comment!");
+		} else {
+			alert("Can't add comment, plese try again later!");
+		}
 	};
 
 	return (
@@ -28,7 +39,13 @@ export const AddCommentPopup: FC<{
 					onChange={(e) => setCommentText(e.target.value)}
 				/>
 				<div className={styles.footer}>
-					<StyledButton kind="primary" onClick={() => sendComment()}>
+					<StyledButton
+						kind="primary"
+						onClick={(e) => {
+							e.preventDefault();
+							sendComment();
+						}}
+					>
 						Send
 					</StyledButton>
 					<StyledButton

@@ -22,6 +22,7 @@ model Product {
   productInCategories ProductInCategory[]
   productComments     ProductComment[]
 
+  averageScore      Int     @default(0)
   discountPrice     Int?
   installmentPrice  Int?
   isBestseller      Boolean?   
@@ -62,7 +63,7 @@ model Description {
 model ProductComment {
   id            Int       @id @default(autoincrement())
   product       Product   @relation(fields: [productId], references: [id])
-  productId     Int       @unique
+  productId     Int       
   comment       String    @db.VarChar(1000)
   addDate       DateTime  @default(now())
   username      String    @db.VarChar(50)

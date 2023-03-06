@@ -1,9 +1,12 @@
 import { getCacheData, setCacheData } from "@/cache";
-import { getProductComments } from "@/server/comments/comment";
+import {
+	addCommentToProduct,
+	getProductComments,
+} from "@/server/comments/comment";
 import type { NextApiRequest, NextApiResponse } from "next";
 import { z } from "zod";
 
-const POST_DATA_VERIFIER = z.object({
+const GET_DATA_VERIFIER = z.object({
 	productId: z.coerce.number({
 		invalid_type_error: "productId must be a number",
 	}),
@@ -15,12 +18,21 @@ const POST_DATA_VERIFIER = z.object({
 	}),
 });
 
+const POST_DATA_VERIFIER = z.object({
+	productId: z.coerce.number({
+		invalid_type_error: "productId must be a number",
+	}),
+	commentText: z.coerce.string({
+		invalid_type_error: "commentText must be a string",
+	}),
+});
+
 export default async (req: NextApiRequest, res: NextApiResponse) => {
 	const { query, method } = req;
 
 	switch (method) {
-		case "GET":
-			const result = POST_DATA_VERIFIER.safeParse(query);
+		case "GET": {
+			const result = GET_DATA_VERIFIER.safeParse(query);
 
 			if (!result.success) {
 				return res.status(404).send(result.error);
@@ -49,8 +61,24 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 				});
 			}
 			return res.status(200).json(cacheResult);
+		}
+		case "POST": {
+			const result = POST_DATA_VERIFIER.safeParse(JSON.parse(req.body));
+
+			if (!result.success) {
+				return res.status(404).send(result.error);
+			}
+
+			const addedComment = await addCommentToProduct(
+				result.data.productId,
+				result.data.commentText
+			);
+
+			if (addedComment) return res.status(200).send("success");
+			return res.status(500).send("error");
+		}
 		default:
-			res.setHeader("Allow", ["GET"]);
+			res.setHeader("Allow", ["GET", "POST"]);
 			res.status(405).end(`Method ${method} Not Allowed`);
 	}
 };

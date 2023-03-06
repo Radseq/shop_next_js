@@ -1,5 +1,45 @@
 import { prisma } from "prisma/prisma";
 
+export const addCommentToProduct = async (
+	productId: number,
+	commentText: string
+) => {
+	// both not working
+	const addComment = await prisma.product.update({
+		data: {
+			productComments: {
+				create: {
+					comment: commentText,
+					addDate: new Date(),
+					avatarImgScr: "/avatar.png",
+					username: "test",
+				},
+			},
+		},
+		where: {
+			id: productId,
+		},
+	});
+
+	/*
+	const addComment = await prisma.productComment.create({
+		data: {
+			comment: commentText,
+			addDate: new Date(),
+			avatarImgScr: "/avatar.png",
+			username: "test",
+			product: {
+				connect: {
+					id: productId,
+				},
+			},
+		},
+	});
+	*/
+
+	return addComment;
+};
+
 const getProductCommentsCount = async (productId: number) => {
 	const commentsCount = await prisma.productComment.count({
 		where: {
