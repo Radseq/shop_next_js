@@ -1,7 +1,8 @@
-import classNames from "classnames";
 import { FC, useState } from "react";
 import { StyledButton } from "../StyledButton";
 import styles from "./AddCommentPopUp.module.css";
+import utilsStyles from "../../styles/utils.module.css";
+import { InteractiveScores } from "../InteractiveScores";
 
 export const AddCommentPopup: FC<{
 	onCloseHandle: CallableFunction;
@@ -29,11 +30,18 @@ export const AddCommentPopup: FC<{
 		}
 	};
 
+	const onSelectScore = (score: number) => {};
+
 	return (
 		<div className={styles.formPopUp}>
-			<form className={styles.formContainer}>
-				<h1>Add comment</h1>
-
+			<div className={styles.formContainer}>
+				<h1 className={utilsStyles.headingLg}>Add comment</h1>
+				<div className={styles.scorePanel}>
+					<InteractiveScores
+						onSelectedScore={onSelectScore}
+						starCount={10}
+					/>
+				</div>
 				<textarea
 					required
 					onChange={(e) => setCommentText(e.target.value)}
@@ -55,7 +63,7 @@ export const AddCommentPopup: FC<{
 						Cancel
 					</StyledButton>
 				</div>
-			</form>
+			</div>
 		</div>
 	);
 };

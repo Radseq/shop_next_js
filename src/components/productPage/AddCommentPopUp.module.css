@@ -22,6 +22,7 @@
 
 .formContainer h1 {
 	text-align: center;
+	margin: auto;
 }
 
 .formContainer textarea {
@@ -46,4 +47,16 @@
 
 .footer button {
 	margin: 5px;
+}
+
+.scorePanel div {
+	display: flex;
+	justify-content: center;
+	height: 20px;
+}
+
+.scorePanel div img {
+	width: 20px;
+	height: 20px;
+	display: block;
 }
