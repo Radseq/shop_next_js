@@ -9,6 +9,7 @@ export const AddCommentPopup: FC<{
 	productId: number;
 }> = ({ onCloseHandle, productId }) => {
 	const [commentText, setCommentText] = useState<string>();
+	const [productScore, setProductScore] = useState<number | null>(null);
 
 	const sendComment = async () => {
 		if (!commentText) {
@@ -18,8 +19,9 @@ export const AddCommentPopup: FC<{
 		let res = await fetch(`http://localhost:3000/api/product/comment/`, {
 			method: "POST",
 			body: JSON.stringify({
-				productId: productId,
-				commentText: commentText,
+				productId,
+				commentText,
+				productScore,
 			}),
 		});
 
@@ -30,7 +32,7 @@ export const AddCommentPopup: FC<{
 		}
 	};
 
-	const onSelectScore = (score: number) => {};
+	const onSelectScore = (score: number) => setProductScore(score);
 
 	return (
 		<div className={styles.formPopUp}>

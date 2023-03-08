@@ -25,6 +25,11 @@ const POST_DATA_VERIFIER = z.object({
 	commentText: z.coerce.string({
 		invalid_type_error: "commentText must be a string",
 	}),
+	productScore: z.nullable(
+		z.coerce.number({
+			invalid_type_error: "score must be a number",
+		})
+	),
 });
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
@@ -71,7 +76,8 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 
 			const addedComment = await addCommentToProduct(
 				result.data.productId,
-				result.data.commentText
+				result.data.commentText,
+				result.data.productScore
 			);
 
 			if (addedComment) return res.status(200).send("success");

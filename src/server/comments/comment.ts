@@ -2,7 +2,8 @@ import { prisma } from "prisma/prisma";
 
 export const addCommentToProduct = async (
 	productId: number,
-	commentText: string
+	commentText: string,
+	productScore: number | null
 ) => {
 	// both not working
 	const addComment = await prisma.product.update({
@@ -13,6 +14,7 @@ export const addCommentToProduct = async (
 					addDate: new Date(),
 					avatarImgScr: "/avatar.png",
 					username: "test",
+					score: productScore,
 				},
 			},
 		},
