@@ -55,17 +55,20 @@ export const ScorePanel: FC<{
 				<span>({votesCount} opinions)</span>
 			</div>
 			<div className={styles.perScoreOpinions}>
-				{sortedScoreDesc.map(([key, value], index) => {
+				{sortedScoreDesc.map(([scoredValue, scoredCount], index) => {
 					return (
-						<div className={styles.perScoreOptionRow} key={value}>
+						<div
+							className={styles.perScoreOptionRow}
+							key={scoredValue}
+						>
 							<SvgStar />
-							<span>{key}</span>
+							<span>{scoredValue}</span>
 							<ProgressBar
-								key={key}
+								key={scoredValue}
 								startValue={progressOfProgressBar[index]}
 								endValue={100}
 							/>
-							<span>{value}</span>
+							<span>{scoredCount}</span>
 						</div>
 					);
 				})}
