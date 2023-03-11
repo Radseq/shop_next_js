@@ -29,8 +29,7 @@ export const ScorePanel: FC<{
 		([leftKey], [rightKey]) => Number(rightKey) - Number(leftKey)
 	);
 
-	const [showAddCommentPopUp, setShowAddCommentPopUp] =
-		useState<boolean>(false);
+	const [showAddCommentPopUp, setShowAddCommentPopUp] = useState<boolean>();
 
 	const progressOfProgressBar = calculateProgressOfProgressbar(
 		sortedScoreDesc,

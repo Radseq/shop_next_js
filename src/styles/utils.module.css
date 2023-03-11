@@ -50,3 +50,11 @@
 .lightText {
 	color: #666;
 }
+
+.success {
+	color: green;
+}
+
+.fail {
+	color: red;
+}

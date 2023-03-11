@@ -1,8 +1,22 @@
-import { FC, useState } from "react";
+import { FC, useEffect, useState } from "react";
 import { StyledButton } from "../StyledButton";
 import styles from "./AddCommentPopUp.module.css";
 import utilsStyles from "../../styles/utils.module.css";
 import { InteractiveScores } from "../InteractiveScores";
+
+const ApiResult: FC<{ result: "successfully" | "failed" }> = ({ result }) => {
+	if (result === "successfully")
+		return (
+			<span className={utilsStyles.success}>
+				Comment successfully added!
+			</span>
+		);
+	return (
+		<span className={utilsStyles.fail}>
+			Can't add comment, plese try again later!
+		</span>
+	);
+};
 
 export const AddCommentPopup: FC<{
 	onCloseHandle: CallableFunction;
@@ -10,6 +24,15 @@ export const AddCommentPopup: FC<{
 }> = ({ onCloseHandle, productId }) => {
 	const [commentText, setCommentText] = useState<string>();
 	const [productScore, setProductScore] = useState<number | null>(null);
+	const [commentAddState, setCommentAddState] = useState<
+		"successfully" | "failed"
+	>();
+
+	const hideMessageAfterMS = 10000;
+
+	useEffect(() => {
+		setTimeout(() => setCommentAddState(undefined), hideMessageAfterMS);
+	}, [commentAddState, hideMessageAfterMS]);
 
 	const sendComment = async () => {
 		if (!commentText) {
@@ -26,13 +49,11 @@ export const AddCommentPopup: FC<{
 		});
 
 		if (res.status === 200) {
-			alert("Thenks for comment!");
+			setCommentAddState("successfully");
 		} else {
-			alert("Can't add comment, plese try again later!");
+			setCommentAddState("failed");
 		}
 	};
-
-	const onSelectScore = (score: number) => setProductScore(score);
 
 	return (
 		<div className={styles.formPopUp}>
@@ -40,7 +61,7 @@ export const AddCommentPopup: FC<{
 				<h1 className={utilsStyles.headingLg}>Add comment</h1>
 				<div className={styles.scorePanel}>
 					<InteractiveScores
-						onSelectedScore={onSelectScore}
+						onSelectedScore={setProductScore}
 						starCount={10}
 					/>
 				</div>
@@ -49,6 +70,8 @@ export const AddCommentPopup: FC<{
 					onChange={(e) => setCommentText(e.target.value)}
 				/>
 				<div className={styles.footer}>
+					{commentAddState && <ApiResult result={commentAddState} />}
+
 					<StyledButton
 						kind="primary"
 						onClick={(e) => {

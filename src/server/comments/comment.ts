@@ -5,25 +5,6 @@ export const addCommentToProduct = async (
 	commentText: string,
 	productScore: number | null
 ) => {
-	// both not working
-	const addComment = await prisma.product.update({
-		data: {
-			productComments: {
-				create: {
-					comment: commentText,
-					addDate: new Date(),
-					avatarImgScr: "/avatar.png",
-					username: "test",
-					score: productScore,
-				},
-			},
-		},
-		where: {
-			id: productId,
-		},
-	});
-
-	/*
 	const addComment = await prisma.productComment.create({
 		data: {
 			comment: commentText,
@@ -37,7 +18,6 @@ export const addCommentToProduct = async (
 			},
 		},
 	});
-	*/
 
 	return addComment;
 };
