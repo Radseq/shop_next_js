@@ -23,14 +23,14 @@ export const ShopCartItem: FC<{ item: ShippingCartProduct }> = ({ item }) => {
 		e
 	) => {
 		const inputValue = Number(e.target.value);
-		if (inputValue > 0) {
-			if (quantity > inputValue) {
-				dispatch(decrementQuantity(item.id));
-			} else {
-				dispatch(incrementQuantity(item.id));
-			}
-			setQuantity(inputValue);
+		if (!inputValue) return;
+
+		if (quantity > inputValue) {
+			dispatch(decrementQuantity(item.id));
+		} else {
+			dispatch(incrementQuantity(item.id));
 		}
+		setQuantity(inputValue);
 	};
 
 	return (

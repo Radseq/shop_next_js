@@ -10,6 +10,16 @@ import Head from "next/head";
 import Link from "next/link";
 import styles from "./cart.module.css";
 
+export const getStaticProps: GetStaticProps = async ({}) => {
+	const [navigationData] = await Promise.all([getNavigation()]);
+
+	return {
+		props: {
+			navigationData,
+		},
+	};
+};
+
 export default function Cart(props: { navigationData: RootNavigation[] }) {
 	const shoppingCart = useCartSelector((state) => state.shoppingCart);
 
@@ -44,13 +54,3 @@ export default function Cart(props: { navigationData: RootNavigation[] }) {
 		</div>
 	);
 }
-
-export const getStaticProps: GetStaticProps = async ({}) => {
-	const [navigationData] = await Promise.all([getNavigation()]);
-
-	return {
-		props: {
-			navigationData,
-		},
-	};
-};
