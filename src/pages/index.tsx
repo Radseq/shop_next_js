@@ -19,6 +19,7 @@ import { getPromotion } from "@/server/promotion";
 import { getAllRecommendedProducts } from "@/server/recommendedProducts/recommendedProduct";
 import { getAllBestsellerProducts } from "@/server/bestseller/bestseller";
 import { getAdvertisement } from "@/server/advertising/advertisement";
+import { getCacheData, setCacheData } from "@/cache";
 import { getHitsOfWeekProducts } from "@/server/hitsOfTheWeek/hitsOfTheWeek";
 
 export default function Home(props: {
@@ -70,30 +71,38 @@ export default function Home(props: {
 }
 
 export const getServerSideProps: GetStaticProps = async ({}) => {
-	const [
-		navigationData,
-		advertisementData,
-		recommendedProductsData,
-		promotions,
-		hitsOfTheWeekProducts,
-		bestsellers,
-	] = await Promise.all([
-		getNavigation(),
-		getAdvertisement(),
-		getAllRecommendedProducts([]),
-		getPromotion(),
-		getHitsOfWeekProducts(),
-		getAllBestsellerProducts(),
-	]);
-
-	return {
-		props: {
+	const cacheKey = "homePage";
+	let cacheResult = await getCacheData(cacheKey);
+	if (cacheResult) {
+		cacheResult = JSON.parse(cacheResult);
+	} else {
+		const [
 			navigationData,
 			advertisementData,
 			recommendedProductsData,
 			promotions,
 			hitsOfTheWeekProducts,
 			bestsellers,
-		},
+		] = await Promise.all([
+			getNavigation(),
+			getAdvertisement(),
+			getAllRecommendedProducts([]),
+			getPromotion(),
+			getHitsOfWeekProducts(),
+			getAllBestsellerProducts(),
+		]);
+		cacheResult = {
+			navigationData,
+			advertisementData,
+			recommendedProductsData,
+			promotions,
+			hitsOfTheWeekProducts,
+			bestsellers,
+		};
+		await setCacheData(cacheKey, JSON.stringify(cacheResult));
+	}
+
+	return {
+		props: cacheResult,
 	};
 };
