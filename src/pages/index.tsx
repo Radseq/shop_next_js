@@ -16,11 +16,11 @@ import { BestsellerProduct } from "@/components/homePage/bestsellers/Types";
 import { Layout } from "@/components/Layout";
 import { getNavigation } from "@/server/navigation";
 import { getPromotion } from "@/server/promotion";
-import { getHitsOfTheWeek } from "@/server/hitsOfTheWeek";
 import { getAllRecommendedProducts } from "@/server/recommendedProducts/recommendedProduct";
 import { getAllBestsellerProducts } from "@/server/bestseller/bestseller";
 import { getAdvertisement } from "@/server/advertising/advertisement";
 import { getCacheData, setCacheData } from "@/cache";
+import { getHitsOfWeekProducts } from "@/server/hitsOfTheWeek/hitsOfTheWeek";
 
 export default function Home(props: {
 	navigationData: RootNavigation[];
@@ -88,7 +88,7 @@ export const getServerSideProps: GetStaticProps = async ({}) => {
 			getAdvertisement(),
 			getAllRecommendedProducts([]),
 			getPromotion(),
-			getHitsOfTheWeek(),
+			getHitsOfWeekProducts(),
 			getAllBestsellerProducts(),
 		]);
 		cacheResult = {
