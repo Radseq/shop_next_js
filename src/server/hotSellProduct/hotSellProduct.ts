@@ -13,23 +13,45 @@ const getProductSoldQuantity = async (
 		productId
 	);
 
-	if (ordersProduct.length === 0) return 0;
-
-	const quantityArray = ordersProduct.map(
-		(ordersProduct) => ordersProduct.quantity
-	);
-
-	const sumQuantity = quantityArray.reduce(
-		(accumulator, currentValue) => accumulator + currentValue
+	const sumQuantity = ordersProduct.reduce(
+		(previusValue, currentValue) => previusValue + currentValue.quantity,
+		0
 	);
 
 	return sumQuantity;
 };
 
+const getNextHotSellStartDate = async (startDate: Date, toDate: Date) => {
+	const nextStarDate = await prisma.hotSellProduct.findFirst({
+		where: {
+			maxQuantity: {
+				gt: 0,
+			},
+			startDate: {
+				gte: startDate,
+				lte: toDate,
+			},
+		},
+		select: {
+			startDate: true,
+		},
+	});
+
+	return nextStarDate?.startDate;
+};
+
+export const getProductById = async (productId: number) => {
+	const foundProductById = await prisma.product.findUnique({
+		where: { id: productId },
+	});
+
+	return foundProductById;
+};
+
 export const getHotSellProduct = async () => {
-	const yesterdayBeginOfDay = new Date();
-	yesterdayBeginOfDay.setDate(new Date().getDate() - 1);
-	yesterdayBeginOfDay.setHours(1, 0, 0, 0);
+	const yesterdayStartOfDay = new Date();
+	yesterdayStartOfDay.setDate(new Date().getDate() - 1);
+	yesterdayStartOfDay.setHours(1, 0, 0, 0);
 
 	const dateLimitUntilNextHotSale = new Date();
 	dateLimitUntilNextHotSale.setDate(
@@ -42,51 +64,38 @@ export const getHotSellProduct = async () => {
 				gt: 0,
 			},
 			startDate: {
-				gte: yesterdayBeginOfDay,
+				gte: yesterdayStartOfDay,
 			},
 			expiredDate: {
 				gte: new Date(),
 			},
 		},
-		include: {
-			product: true,
-		},
 	});
 
-	const nextHotSellProduct = await prisma.hotSellProduct.findFirst({
-		where: {
-			maxQuantity: {
-				gt: 0,
-			},
-			startDate: {
-				gte: new Date(),
-				lte: dateLimitUntilNextHotSale,
-			},
-		},
-		select: {
-			startDate: true,
-		},
-	});
+	if (!hotSellProduct) return null;
 
-	if (!hotSellProduct || hotSellProduct.product.quantity < 1) {
-		return null;
-	}
+	const [product, orderQuantity, nextHotSellProductStartDate] =
+		await Promise.all([
+			getProductById(hotSellProduct.productId),
+			getProductSoldQuantity(
+				hotSellProduct.addDate,
+				hotSellProduct.expiredDate,
+				hotSellProduct.productId
+			),
+			getNextHotSellStartDate(new Date(), dateLimitUntilNextHotSale),
+		]);
 
-	const orderQuantity = await getProductSoldQuantity(
-		hotSellProduct.addDate,
-		hotSellProduct.expiredDate,
-		hotSellProduct.productId
-	);
+	if (!product || product.quantity < 1) return null;
 
 	return {
 		id: hotSellProduct.productId,
-		name: hotSellProduct.product.name,
-		imageSrc: hotSellProduct.product.imageSrc,
-		price: hotSellProduct.product.price,
-		priceDiscount: hotSellProduct.product.discountPrice,
+		name: product.name,
+		imageSrc: product.imageSrc,
+		price: product.price,
+		priceDiscount: product.discountPrice,
 		endDateTime: hotSellProduct.expiredDate,
 		orderQuantity,
 		maxQuantity: hotSellProduct.maxQuantity,
-		nextHotSellProductDate: nextHotSellProduct?.startDate,
+		nextHotSellProductDate: nextHotSellProductStartDate,
 	};
 };
