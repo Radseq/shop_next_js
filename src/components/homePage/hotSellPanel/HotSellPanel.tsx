@@ -2,11 +2,12 @@ import React, { FC, useEffect, useState } from "react";
 import styles from "./HotSellPanel.module.css";
 import { useTimer } from "../../../hooks/useTimer";
 import ProgressBar from "../../ProgressBar";
-import { HotSellProduct } from "./Types";
+import { HotSellProductProps as HotSellProductProps } from "./Types";
 import Image from "next/image";
 import Link from "next/link";
 
-type ProductStock = Pick<HotSellProduct, "maxQuantity" | "orderQuantity">;
+type ProductStock = Pick<HotSellProductProps, "maxQuantity" | "orderQuantity">;
+
 const isSoldOut = (product: ProductStock) =>
 	product.maxQuantity <= product.orderQuantity;
 
@@ -69,7 +70,7 @@ const HotSellTimer: FC<HotSellTimerProps> = (props) => {
 	);
 };
 
-export const HotSellPanel: FC<{ hotSellProduct: HotSellProduct }> = ({
+export const HotSellPanel: FC<{ hotSellProduct: HotSellProductProps }> = ({
 	hotSellProduct,
 }) => {
 	const endDateTime = Date.parse(hotSellProduct.endDateTime) ?? 0;
