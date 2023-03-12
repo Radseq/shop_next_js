@@ -7,16 +7,15 @@ import Link from "next/link";
 import axios from "axios";
 import { useQuery } from "react-query";
 
+const fetchData = async () =>
+	axios.get("http://localhost:3000/api/product/hotSellProduct");
+
 export const RecommendedProducts: FC<{
 	recommendedProduct: RecommendedProduct[];
 }> = ({ recommendedProduct }) => {
-	const fetchData = async () =>
-		axios.get("http://localhost:3000/api/product/hotSellProduct");
-
 	const getHotSellProductEveryMs = 10000;
 
 	const {
-		isSuccess,
 		data: request,
 		isLoading,
 		isError,
