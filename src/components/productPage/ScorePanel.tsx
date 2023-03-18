@@ -24,8 +24,8 @@ export const ScorePanel: FC<{
 	productName: string;
 	votesCount: number;
 	scores: Record<number, number>;
-	productScore: number;
-}> = ({ productName, votesCount, scores, productScore }) => {
+	averageVote: number;
+}> = ({ productName, votesCount, scores, averageVote }) => {
 	const sortedScoreDesc = Object.entries(scores).sort(
 		([leftKey], [rightKey]) => Number(rightKey) - Number(leftKey)
 	);
@@ -40,13 +40,13 @@ export const ScorePanel: FC<{
 			<div className={styles.averageScorePanel}>
 				<div className={styles.averageScore}>
 					<span>
-						{productScore.toFixed(2).toString().replace(".", ",")}
+						{averageVote.toFixed(2).toString().replace(".", ",")}
 					</span>
 					<span>/10</span>
 				</div>
 				<div className={styles.averageScoreGraphic}>
 					<StarScore
-						score={productScore}
+						score={averageVote}
 						starCount={progressOfProgressBar.length}
 					/>
 				</div>
