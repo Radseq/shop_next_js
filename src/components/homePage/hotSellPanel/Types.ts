@@ -1,4 +1,4 @@
-export type HotSellProductProps = {
+export type CurrentHotSellProduct = {
 	id: number;
 	name: string;
 	price: number;

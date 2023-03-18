@@ -5,7 +5,9 @@ import type { NextApiRequest, NextApiResponse } from "next";
 export default async (req: NextApiRequest, res: NextApiResponse) => {
 	const { query, method } = req;
 
-	if (method !== "GET") res.status(405).end(`Method ${method} Not Allowed`);
+	if (method !== "GET") {
+		return res.status(405).end(`Method ${method} Not Allowed`);
+	}
 
 	let dataResult = await getCacheData("hotsellProduct");
 	if (dataResult) {
