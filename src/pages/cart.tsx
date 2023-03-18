@@ -11,16 +11,16 @@ import Link from "next/link";
 import styles from "./cart.module.css";
 
 export const getStaticProps: GetStaticProps = async ({}) => {
-	const [navigationData] = await Promise.all([getNavigation()]);
+	const [navigation] = await getNavigation();
 
 	return {
 		props: {
-			navigationData,
+			navigation,
 		},
 	};
 };
 
-export default function Cart(props: { navigationData: RootNavigation[] }) {
+export default function Cart(props: { navigation: RootNavigation[] }) {
 	const shoppingCart = useCartSelector((state) => state.shoppingCart);
 
 	return (
@@ -35,7 +35,7 @@ export default function Cart(props: { navigationData: RootNavigation[] }) {
 				<link rel="icon" href="/favicon.ico" />
 			</Head>
 
-			<Layout navigation={props.navigationData}>
+			<Layout navigation={props.navigation}>
 				<div className={styles.cartPageMain}>
 					<div className={styles.catrItems}>
 						<h2>Cart({shoppingCart.length})</h2>
