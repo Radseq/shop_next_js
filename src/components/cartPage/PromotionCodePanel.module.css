@@ -1,0 +1,23 @@
+.promotionPanel > button {
+	width: 100%;
+	background-color: transparent;
+	border: none;
+	font-family: Lato, sans-serif;
+	font-size: 1.1em;
+}
+
+.inputPromotionCode {
+	margin-bottom: 15px;
+}
+
+.inputPromotionCode > button {
+	padding: 5px 6px;
+	display: block;
+	width: 50%;
+	margin: 5px auto;
+	text-align: center;
+}
+
+.inputPromotionCode > input {
+	margin: auto;
+}

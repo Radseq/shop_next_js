@@ -1,0 +1,60 @@
+.cartItem {
+	display: flex;
+
+	margin: 10px 0px;
+	padding: 10px 10px;
+
+	border-radius: 10px;
+	border: 2px solid rgba(124, 124, 124, 0.938);
+	opacity: 1;
+	transition: 1s;
+	box-shadow: rgb(124 124 124 / 94%) 0px 2px 8px;
+}
+
+.cartItem img {
+	width: 50px;
+	height: 50px;
+}
+
+.cartItem > span {
+	margin-left: 10px;
+}
+
+.cartItem input {
+	border-radius: 20px;
+	height: 40px;
+	border: 2px solid rgb(205, 205, 203);
+	padding-left: 20px;
+	margin-right: 20px;
+	font-size: 1.5em;
+	transition: all 0.5s ease-in-out;
+	width: 75px;
+	text-align: center;
+	align-self: center;
+}
+
+.prices {
+	width: 100px;
+	height: 50px;
+}
+
+.prices del {
+	color: rgb(99, 99, 99);
+	text-align: center;
+	display: block;
+}
+
+.prices span {
+	height: 25px;
+	display: block;
+	text-align: center;
+	width: 100px;
+}
+
+.cartItem button {
+	width: 35px;
+	height: 35px;
+	align-self: center;
+	background-color: transparent;
+	border: none;
+}
