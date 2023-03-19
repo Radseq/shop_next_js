@@ -1,4 +1,4 @@
-import { validate } from "@/lib/email";
+import { isValid } from "@/lib/email";
 import type { NextApiRequest, NextApiResponse } from "next";
 import { prisma } from "prisma/prisma";
 
@@ -35,7 +35,7 @@ export default async function userHandler(
 	switch (method) {
 		case "POST":
 			//req.body.email not working
-			const parseResult = validate(incomeEmail.email);
+			const parseResult = isValid(incomeEmail.email);
 
 			if (!parseResult) {
 				return res.status(400).send("Invalid email address");

@@ -3,7 +3,7 @@ import styles from "./PageFooter.module.css";
 import { StyledInput } from "../StyledInput";
 import Image from "next/image";
 import classNames from "classnames";
-import { validate } from "@/lib/email";
+import { isValid } from "@/lib/email";
 
 type EmailResultCode = "fail" | "ok" | "notValid";
 
@@ -27,7 +27,7 @@ const Newsletter = () => {
 
 	// todo give user information e.g too short, too long
 	const sendEmailToApi = async () => {
-		const result = validate(email);
+		const result = isValid(email);
 
 		if (!result) {
 			setEmailResult("notValid");
