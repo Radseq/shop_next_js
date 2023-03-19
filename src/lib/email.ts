@@ -5,12 +5,5 @@ const EMAIL_VERIFIER = z.coerce
 	.email({ message: "Invalid email address" })
 	.min(10, { message: "Email is too short" });
 
-export const validate = (email: string) => {
-	const parseResult = EMAIL_VERIFIER.safeParse(email);
-
-	if (parseResult.success) {
-		return true;
-	}
-
-	return false;
-};
+export const isValid = (email: string) =>
+	EMAIL_VERIFIER.safeParse(email).success;
