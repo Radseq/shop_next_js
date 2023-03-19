@@ -6,7 +6,6 @@ import { ImageToSlide } from "@/components/homePage/Types";
 import { SeparateSection } from "@/components/homePage/SeparateSection";
 import { RecommendedProducts } from "@/components/homePage/recommendedProducts/RecommendedProducts";
 import { RecommendedProduct } from "@/components/homePage/recommendedProducts/Types";
-import { HotSellProduct } from "@/components/homePage/hotSellPanel/Types";
 import { Promotions } from "@/components/homePage/promotions/Promotions";
 import { Promotion } from "@/components/homePage/promotions/Types";
 import { HitsOfTheWeek } from "@/components/homePage/hitsOfTheWeekSlider/HitsOfTheWeek";
@@ -26,7 +25,6 @@ export default function Home(props: {
 	navigation: RootNavigation[];
 	advertisement: ImageToSlide[];
 	recommendedProducts: RecommendedProduct[];
-	hotSellProduct: HotSellProduct;
 	promotions: Promotion[];
 	hitsOfTheWeekProducts: HitOfWeekProduct[];
 	bestsellers: BestsellerProduct[];
