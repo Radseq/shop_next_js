@@ -1,8 +1,8 @@
 import React, { FC, useState } from "react";
 import { SvgStar } from "./svg/SvgStar";
 
-const createAndFillArray = (index: number) =>
-	[...new Array(index + 1)].map((_, index) => (_ = index));
+const createArrayAndFillUpwards = (index: number) =>
+	Array.from(Array(index).keys());
 
 export const InteractiveScores: FC<{
 	starCount: number;
@@ -20,14 +20,16 @@ export const InteractiveScores: FC<{
 	const [selectedStarIndex, setSelectedStarIndex] = useState<number[]>();
 
 	const handleClickStar = (index: number) => {
-		onSelectedScore(index + 1);
-		setSelectedStarIndex(createAndFillArray(index));
-		setMouseHoverIndexArray(createAndFillArray(index));
+		const starsCount = index + 1;
+		const startArray = createArrayAndFillUpwards(starsCount);
+		onSelectedScore(starsCount);
+		setSelectedStarIndex(startArray);
+		setMouseHoverIndexArray(startArray);
 	};
 
 	const onMouseEnterHandle = (index: number) => {
 		if (!selectedStarIndex)
-			setMouseHoverIndexArray(createAndFillArray(index));
+			setMouseHoverIndexArray(createArrayAndFillUpwards(index + 1));
 	};
 
 	const setFullFilledColor = (index: number) => {
