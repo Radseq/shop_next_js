@@ -1,5 +1,27 @@
 import { prisma } from "prisma/prisma";
 
+export const addCommentToProduct = async (
+	productId: number,
+	commentText: string,
+	productScore: number | null
+) => {
+	const addComment = await prisma.productComment.create({
+		data: {
+			comment: commentText,
+			addDate: new Date(),
+			avatarImgScr: "/avatar.png",
+			username: "test",
+			product: {
+				connect: {
+					id: productId,
+				},
+			},
+		},
+	});
+
+	return addComment;
+};
+
 const getProductCommentsCount = async (productId: number) => {
 	const commentsCount = await prisma.productComment.count({
 		where: {
@@ -18,13 +40,6 @@ export const getProductComments = async (
 		where: {
 			productId: productId,
 		},
-		include: {
-			productScore: {
-				select: {
-					score: true,
-				},
-			},
-		},
 		skip: pageIndex * pageSize - pageSize,
 		take: pageSize,
 	});
@@ -38,7 +53,7 @@ export const getProductComments = async (
 			avatarImgScr: comment.avatarImgScr,
 			addDate: comment.addDate.toString(),
 			comment: comment.comment,
-			score: comment.productScore.score,
+			score: comment.score,
 			helpfullCommentCount: comment.helpfullCommentCount,
 			unhelpfulCommentCount: comment.unhelpfulCommentCount,
 			addTimeToServerTimeDiffrenceText: "",

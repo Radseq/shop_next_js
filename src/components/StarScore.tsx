@@ -2,6 +2,7 @@ import React, { FC } from "react";
 import { SvgHalfColoredStar, SvgStar } from "./svg/SvgStar";
 
 type StarFillType = "empty" | "fill" | "half";
+
 const Star = (props: {
 	fillColor: string;
 	emptyColor: string;

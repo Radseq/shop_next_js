@@ -46,7 +46,9 @@ export default function Product(props: {
 		})
 		.reduce((a, b) => a + b, 0);
 
-	const weightedAverage = averageVoteValue / votesCount;
+	const weightedAverage = isNaN(averageVoteValue / votesCount)
+		? 0
+		: averageVoteValue / votesCount;
 
 	return (
 		<Layout navigation={props.navigation}>
@@ -99,7 +101,8 @@ export default function Product(props: {
 					votesCount={votesCount}
 					scores={scores}
 					productName={product.name}
-					averageVote={weightedAverage}
+					averageVote={weightedAverage ?? 0}
+					productId={product.id}
 				/>
 				<hr />
 				<CommentsPanel productId={Number(product.id)} />

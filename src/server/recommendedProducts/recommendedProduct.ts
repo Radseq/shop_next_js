@@ -13,7 +13,7 @@ export const retrieveOneRecommendedProductsOfCategories = async (
 			id: { in: categoriesIds },
 		},
 		orderBy: {
-			scoreValue: "desc",
+			averageScore: "desc",
 		},
 		take: 1,
 	});
@@ -42,7 +42,7 @@ export const getAllRecommendedProducts = async (
 				},
 			},
 			orderBy: {
-				scoreValue: "desc",
+				averageScore: "desc",
 			},
 			take: CONFIG.MAX_PRODUCTS_PER_CATEGORY,
 		});
@@ -64,7 +64,7 @@ export const getAllRecommendedProducts = async (
 				},
 			},
 			orderBy: {
-				scoreValue: "desc",
+				averageScore: "desc",
 			},
 			take: recommendedProducts.length - CONFIG.MAX_RECOMMENDED_PRODUCTS,
 		});
