@@ -3,8 +3,9 @@ import { StyledButton } from "../StyledButton";
 import styles from "./AddCommentPopUp.module.css";
 import utilsStyles from "../../styles/utils.module.css";
 import { InteractiveScores } from "../InteractiveScores";
-import { CONFIG } from "@/config";
 import { StyledAlert } from "../StyledAlert";
+
+const HIDE_ADD_COMMENT_MESSAGE_IN_MS = 10000; //10sec
 
 export const AddCommentPopup: FC<{
 	onCloseHandle: CallableFunction;
@@ -22,7 +23,7 @@ export const AddCommentPopup: FC<{
 		}
 		setTimeout(
 			() => setCommentAddState(undefined),
-			CONFIG.HIDE_ADD_COMMENT_MESSAGE_IN_MS
+			HIDE_ADD_COMMENT_MESSAGE_IN_MS
 		);
 	}, [commentAddState]);
 
