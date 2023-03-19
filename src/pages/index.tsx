@@ -23,10 +23,10 @@ import { getCacheData, setCacheData } from "@/cache";
 import { getHitsOfWeekProducts } from "@/server/hitsOfTheWeek/hitsOfTheWeek";
 
 export default function Home(props: {
-	navigationData: RootNavigation[];
-	advertisementData: ImageToSlide[];
-	recommendedProductsData: RecommendedProduct[];
-	hotSellProductData: HotSellProduct;
+	navigation: RootNavigation[];
+	advertisement: ImageToSlide[];
+	recommendedProducts: RecommendedProduct[];
+	hotSellProduct: HotSellProduct;
 	promotions: Promotion[];
 	hitsOfTheWeekProducts: HitOfWeekProduct[];
 	bestsellers: BestsellerProduct[];
@@ -46,11 +46,11 @@ export default function Home(props: {
 				<link rel="icon" href="/favicon.ico" />
 			</Head>
 
-			<Layout navigation={props.navigationData}>
-				<News advertising={props.advertisementData} />
+			<Layout navigation={props.navigation}>
+				<News advertising={props.advertisement} />
 				<SeparateSection sectionName="Recomended products" />
 				<RecommendedProducts
-					recommendedProduct={props.recommendedProductsData}
+					recommendedProduct={props.recommendedProducts}
 				/>
 				<hr />
 				<SeparateSection sectionName="Promotions" url="/promotions" />
@@ -77,9 +77,9 @@ export const getServerSideProps: GetStaticProps = async ({}) => {
 		cacheResult = JSON.parse(cacheResult);
 	} else {
 		const [
-			navigationData,
-			advertisementData,
-			recommendedProductsData,
+			navigation,
+			advertisement,
+			recommendedProducts,
 			promotions,
 			hitsOfTheWeekProducts,
 			bestsellers,
@@ -92,9 +92,9 @@ export const getServerSideProps: GetStaticProps = async ({}) => {
 			getAllBestsellerProducts(),
 		]);
 		cacheResult = {
-			navigationData,
-			advertisementData,
-			recommendedProductsData,
+			navigation,
+			advertisement,
+			recommendedProducts,
 			promotions,
 			hitsOfTheWeekProducts,
 			bestsellers,

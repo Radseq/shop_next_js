@@ -1,6 +1,6 @@
 import { FC, useState } from "react";
 import styles from "./BuyPanel.module.css";
-import { Product, ProductDate } from "./Types";
+import { Product } from "./Types";
 import { StyledInput } from "../StyledInput";
 import { useCartDispatch } from "@/lib/storeCart";
 import { addToCart } from "@/lib/cartSlice";

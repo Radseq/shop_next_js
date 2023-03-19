@@ -23,7 +23,7 @@ export type Product = {
 	freeDelivery: boolean;
 };
 
-export type ProductDate = {
+export type ProductPage = {
 	product: Product;
 	specifications: Specification;
 	descriptions: Description[];

@@ -1,5 +1,5 @@
 import { GetStaticProps } from "next";
-import { Description, ProductDate } from "@/components/productPage/Types";
+import { Description, ProductPage } from "@/components/productPage/Types";
 import { FC } from "react";
 import styles from "./Product.module.css";
 import { StarScore } from "@/components/StarScore";
@@ -31,9 +31,9 @@ const ProductDescriptions: FC<{ descriptions: Description[] }> = (props) => {
 
 export default function Product(props: {
 	navigation: RootNavigation[];
-	productData: ProductDate;
+	productPage: ProductPage;
 }) {
-	const { product, specifications, scores } = props.productData;
+	const { product, specifications, scores } = props.productPage;
 
 	const votesCount = Object.values(scores).reduce(
 		(prev, curr) => prev + curr,
@@ -80,7 +80,7 @@ export default function Product(props: {
 				</div>
 			</div>
 			<ProductDescriptions
-				descriptions={props.productData.descriptions}
+				descriptions={props.productPage.descriptions}
 			/>
 			<h2>Specification</h2>
 			<div className={styles.specificationsOther}>
@@ -117,13 +117,13 @@ export const getServerSideProps: GetStaticProps = async ({ params }) => {
 	if (cacheResult) {
 		cacheResult = JSON.parse(cacheResult);
 	} else {
-		const [navigation, productData] = await Promise.all([
+		const [navigation, product] = await Promise.all([
 			getNavigation(),
 			getProductById(parseInt(id)),
 		]);
 		cacheResult = {
 			navigation,
-			productData,
+			product,
 		};
 		await setCacheData(cacheKey, JSON.stringify(cacheResult));
 	}
