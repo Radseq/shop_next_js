@@ -6,6 +6,7 @@ import { InteractiveScores } from "../InteractiveScores";
 import { StyledAlert } from "../StyledAlert";
 
 const HIDE_ADD_COMMENT_MESSAGE_IN_MS = 10000; //10sec
+const STAR_COUNT = 10;
 
 type ProductComment = {
 	productId: number;
@@ -70,7 +71,7 @@ export const AddCommentPopup: FC<{
 								productScore: score,
 							});
 						}}
-						starCount={10}
+						starCount={STAR_COUNT}
 					/>
 				</div>
 				<textarea

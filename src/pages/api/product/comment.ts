@@ -1,4 +1,5 @@
 import { getCacheData, setCacheData } from "@/cache";
+import { CONFIG } from "@/config";
 import {
 	addCommentToProduct,
 	getProductComments,
@@ -26,9 +27,11 @@ const POST_DATA_VERIFIER = z.object({
 		invalid_type_error: "commentText must be a string",
 	}),
 	productScore: z.nullable(
-		z.coerce.number({
-			invalid_type_error: "score must be a number",
-		})
+		z.coerce
+			.number({
+				invalid_type_error: "score must be a number",
+			})
+			.max(CONFIG.SCORES_MAX_SIZE)
 	),
 });
 
