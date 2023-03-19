@@ -2,7 +2,7 @@ import { CONFIG } from "@/config";
 import { getOrderProductsByDate } from "../orderProducts/orderProducts";
 import { getProductsByIds } from "../products/product";
 
-const getMostSoldProductsByDate = async (date: Date) => {
+export const getMostSoldProductsByDate = async (date: Date) => {
 	const orderProducts = await getOrderProductsByDate(date);
 
 	if (orderProducts.length === 0) {

@@ -1,17 +1,25 @@
-import { createClient } from 'redis'
+import { createClient } from "redis";
 
-let redisClientPromise: Promise<ReturnType<typeof createClient>> | null = null
+const globalRedis = global as unknown as {
+	redis: Promise<ReturnType<typeof createClient>>;
+};
 
-export function getCache(): Promise<ReturnType<typeof createClient>> {
-    if (!redisClientPromise) {
-        redisClientPromise = new Promise((resolve, reject) => {
-            const redisClient = createClient()
-            redisClient.on('error', err => reject(err))
-            redisClient.on('connect', () => console.log('Redis connecting'))
-            redisClient.on('reconnecting', () => console.log('Redis reconnecting'))
-            redisClient.on('ready', () => resolve(redisClient))
-            redisClient.connect()
-        })
-    }
-    return redisClientPromise;
+export const redisCache = globalRedis.redis || createCache();
+
+if (process.env.NODE_ENV !== "production") globalRedis.redis = redisCache;
+
+function createCache(): Promise<ReturnType<typeof createClient>> {
+	if (!globalRedis.redis) {
+		globalRedis.redis = new Promise((resolve, reject) => {
+			const redisClient = createClient();
+			redisClient.on("error", (err) => reject(err));
+			redisClient.on("connect", () => console.log("Redis connecting"));
+			redisClient.on("reconnecting", () =>
+				console.log("Redis reconnecting")
+			);
+			redisClient.on("ready", () => resolve(redisClient));
+			redisClient.connect();
+		});
+	}
+	return globalRedis.redis;
 }

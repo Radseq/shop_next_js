@@ -1,4 +1,4 @@
-import { GetStaticProps, GetStaticPaths } from "next";
+import { GetStaticProps } from "next";
 import { Description, ProductDate } from "@/components/productPage/Types";
 import { FC } from "react";
 import styles from "./Product.module.css";
@@ -12,6 +12,7 @@ import { RootNavigation } from "@/components/header/Types";
 import Image from "next/image";
 import { getNavigation } from "@/server/navigation";
 import { getProductById } from "@/server/products/product";
+import { getCacheData, setCacheData } from "@/cache";
 
 const ProductDescriptions: FC<{ descriptions: Description[] }> = (props) => {
 	return (
@@ -111,15 +112,23 @@ export default function Product(props: {
 export const getServerSideProps: GetStaticProps = async ({ params }) => {
 	const id = params?.id as string;
 
-	const [navigation, productData] = await Promise.all([
-		getNavigation(),
-		getProductById(parseInt(id)),
-	]);
-
-	return {
-		props: {
+	const cacheKey = "productPage" + id;
+	let cacheResult = await getCacheData(cacheKey);
+	if (cacheResult) {
+		cacheResult = JSON.parse(cacheResult);
+	} else {
+		const [navigation, productData] = await Promise.all([
+			getNavigation(),
+			getProductById(parseInt(id)),
+		]);
+		cacheResult = {
 			navigation,
 			productData,
-		},
+		};
+		await setCacheData(cacheKey, JSON.stringify(cacheResult));
+	}
+
+	return {
+		props: cacheResult,
 	};
 };
