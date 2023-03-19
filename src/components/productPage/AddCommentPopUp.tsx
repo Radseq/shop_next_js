@@ -7,12 +7,29 @@ import { StyledAlert } from "../StyledAlert";
 
 const HIDE_ADD_COMMENT_MESSAGE_IN_MS = 10000; //10sec
 
+type ProductComment = {
+	productId: number;
+	commentText: string;
+	productScore: number | null;
+};
+
+const SendCommentToApi = async (productComment: ProductComment) => {
+	return await fetch(`http://localhost:3000/api/product/comment/`, {
+		method: "POST",
+		body: JSON.stringify(productComment),
+	});
+};
+
 export const AddCommentPopup: FC<{
 	onCloseHandle: CallableFunction;
 	productId: number;
 }> = ({ onCloseHandle, productId }) => {
-	const [commentText, setCommentText] = useState<string>();
-	const [productScore, setProductScore] = useState<number | null>(null);
+	const [productComment, setProductComment] = useState<ProductComment>({
+		productId: productId,
+		commentText: "",
+		productScore: null,
+	});
+
 	const [commentAddState, setCommentAddState] = useState<
 		"success" | "failure"
 	>();
@@ -28,18 +45,11 @@ export const AddCommentPopup: FC<{
 	}, [commentAddState]);
 
 	const sendComment = async () => {
-		if (!commentText) {
+		if (!productComment.commentText) {
 			return;
 		}
 
-		const res = await fetch(`http://localhost:3000/api/product/comment/`, {
-			method: "POST",
-			body: JSON.stringify({
-				productId,
-				commentText,
-				productScore,
-			}),
-		});
+		const res = await SendCommentToApi(productComment);
 
 		if (res.status === 200) {
 			setCommentAddState("success");
@@ -54,13 +64,23 @@ export const AddCommentPopup: FC<{
 				<h1 className={utilsStyles.headingLg}>Add comment</h1>
 				<div className={styles.scorePanel}>
 					<InteractiveScores
-						onSelectedScore={setProductScore}
+						onSelectedScore={(score: number) => {
+							setProductComment({
+								...productComment,
+								productScore: score,
+							});
+						}}
 						starCount={10}
 					/>
 				</div>
 				<textarea
 					required
-					onChange={(e) => setCommentText(e.target.value)}
+					onChange={(e) =>
+						setProductComment({
+							...productComment,
+							commentText: e.target.value,
+						})
+					}
 				/>
 				<div className={styles.footer}>
 					{commentAddState && (
@@ -77,6 +97,7 @@ export const AddCommentPopup: FC<{
 							e.preventDefault();
 							sendComment();
 						}}
+						disabled={!productComment.commentText}
 					>
 						Send
 					</StyledButton>
