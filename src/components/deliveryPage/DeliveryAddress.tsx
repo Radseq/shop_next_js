@@ -1,11 +1,11 @@
 import { StyledInput } from "../StyledInput";
 import styles from "./DeliveryAddress.module.css";
 import stylesUtils from "../../styles/utils.module.css";
-import { DeliveryPostData } from "./types";
+import { DeliveryAddressProps } from "./types";
 import { FC } from "react";
 
 export const DeliveryAddress: FC<{
-	deliveryData: DeliveryPostData;
+	deliveryData: DeliveryAddressProps;
 	setDeliveryData: CallableFunction;
 	title: string;
 }> = ({ deliveryData, setDeliveryData, title }) => {
@@ -21,10 +21,7 @@ export const DeliveryAddress: FC<{
 					onChange={(e) =>
 						setDeliveryData({
 							...deliveryData,
-							deliveryAddres: {
-								...deliveryData,
-								name: e.target.value,
-							},
+							name: e.target.value,
 						})
 					}
 				/>
@@ -36,10 +33,7 @@ export const DeliveryAddress: FC<{
 					onChange={(e) =>
 						setDeliveryData({
 							...deliveryData,
-							deliveryAddres: {
-								...deliveryData.deliveryAddres,
-								surname: e.target.value,
-							},
+							surname: e.target.value,
 						})
 					}
 				/>
@@ -51,10 +45,7 @@ export const DeliveryAddress: FC<{
 					onChange={(e) =>
 						setDeliveryData({
 							...deliveryData,
-							deliveryAddres: {
-								...deliveryData.deliveryAddres,
-								street: e.target.value,
-							},
+							street: e.target.value,
 						})
 					}
 				/>
@@ -66,10 +57,7 @@ export const DeliveryAddress: FC<{
 					onChange={(e) =>
 						setDeliveryData({
 							...deliveryData,
-							deliveryAddres: {
-								...deliveryData.deliveryAddres,
-								buildingNumber: e.target.value,
-							},
+							buildingNumber: e.target.value,
 						})
 					}
 				/>
@@ -81,10 +69,7 @@ export const DeliveryAddress: FC<{
 					onChange={(e) =>
 						setDeliveryData({
 							...deliveryData,
-							deliveryAddres: {
-								...deliveryData.deliveryAddres,
-								zipCode: e.target.value,
-							},
+							zipCode: e.target.value,
 						})
 					}
 				/>
@@ -96,10 +81,7 @@ export const DeliveryAddress: FC<{
 					onChange={(e) =>
 						setDeliveryData({
 							...deliveryData,
-							deliveryAddres: {
-								...deliveryData.deliveryAddres,
-								city: e.target.value,
-							},
+							city: e.target.value,
 						})
 					}
 				/>
@@ -111,10 +93,7 @@ export const DeliveryAddress: FC<{
 					onChange={(e) =>
 						setDeliveryData({
 							...deliveryData,
-							deliveryAddres: {
-								...deliveryData.deliveryAddres,
-								phoneNumber: e.target.value,
-							},
+							phoneNumber: e.target.value,
 						})
 					}
 				/>
@@ -126,10 +105,7 @@ export const DeliveryAddress: FC<{
 					onChange={(e) =>
 						setDeliveryData({
 							...deliveryData,
-							deliveryAddres: {
-								...deliveryData.deliveryAddres,
-								email: e.target.value,
-							},
+							email: e.target.value,
 						})
 					}
 				/>

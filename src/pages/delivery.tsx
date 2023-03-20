@@ -8,32 +8,17 @@ import styles from "./delivery.module.css";
 import stylesUtils from "../styles/utils.module.css";
 import { useState } from "react";
 import { CheckBox } from "@/components/deliveryPage/CheckBox";
-import { DeliveryPostData } from "@/components/deliveryPage/types";
+import {
+	DeliveryAddressProps,
+	DeliveryPostData,
+} from "@/components/deliveryPage/types";
 import { DeliveryAddress } from "@/components/deliveryPage/DeliveryAddress";
 import { Icon } from "@/components/Icon";
 
 export default function Cart(props: { navigationData: RootNavigation[] }) {
 	const shoppingCart = useCartSelector((state) => state.shoppingCart);
 
-	const postData: DeliveryPostData = {
-		buyerType: "private",
-		deliveryType: "currier",
-		paimentId: 1,
-		termsAndConditions: false,
-		deliveryAddres: {
-			city: "",
-			email: "",
-			name: "",
-			phoneNumber: "",
-			street: "",
-			buildingNumber: "",
-			surname: "",
-			zipCode: "",
-		},
-	};
-
-	const [deliveryPostData, setDeliveryPostData] = useState(postData);
-	const [invoiceDeliveryAddress, setInvoiceDeliveryAddress] = useState({
+	const emptyDeliveryAddress: DeliveryAddressProps = {
 		city: "",
 		email: "",
 		name: "",
@@ -42,10 +27,38 @@ export default function Cart(props: { navigationData: RootNavigation[] }) {
 		buildingNumber: "",
 		surname: "",
 		zipCode: "",
-	});
+	};
+
+	const postData: DeliveryPostData = {
+		buyerType: "private",
+		deliveryType: "currier",
+		paimentId: 1,
+		termsAndConditions: false,
+		deliveryAddres: emptyDeliveryAddress,
+	};
+
+	const [deliveryPostData, setDeliveryPostData] = useState(postData);
 
 	const [checkDeliveryDateInvoice, setCheckDeliveryDateInvoice] =
-		useState(false);
+		useState<boolean>(false);
+
+	const handleInvoiceDeliveryCheckBox = () => {
+		const show = !checkDeliveryDateInvoice;
+		setCheckDeliveryDateInvoice(!checkDeliveryDateInvoice);
+		if (show) {
+			setDeliveryPostData({
+				...deliveryPostData,
+				invoideDeliveryAddres: emptyDeliveryAddress,
+			});
+		}
+
+		if (!show) {
+			setDeliveryPostData({
+				...deliveryPostData,
+				invoideDeliveryAddres: undefined,
+			});
+		}
+	};
 
 	return (
 		<div>
@@ -125,8 +138,15 @@ export default function Cart(props: { navigationData: RootNavigation[] }) {
 							/>
 						</div>
 						<DeliveryAddress
-							deliveryData={deliveryPostData}
-							setDeliveryData={setDeliveryPostData}
+							deliveryData={deliveryPostData.deliveryAddres}
+							setDeliveryData={(
+								deliveryAddres: DeliveryAddressProps
+							) => {
+								setDeliveryPostData({
+									...deliveryPostData,
+									deliveryAddres: deliveryAddres,
+								});
+							}}
 							title="Delivery Address"
 						/>
 						<h1 className={stylesUtils.headingLg}>Invoice data</h1>
@@ -135,23 +155,30 @@ export default function Cart(props: { navigationData: RootNavigation[] }) {
 								<input
 									type="checkbox"
 									checked={checkDeliveryDateInvoice}
-									onChange={() =>
-										setCheckDeliveryDateInvoice(
-											!checkDeliveryDateInvoice
-										)
-									}
+									onChange={handleInvoiceDeliveryCheckBox}
 								/>
 								I want to provide other invoice details
 							</label>
 						</div>
 
-						{checkDeliveryDateInvoice && (
-							<DeliveryAddress
-								title="Invoice Delivery Address"
-								deliveryData={invoiceDeliveryAddress}
-								setDeliveryData={setInvoiceDeliveryAddress}
-							/>
-						)}
+						{checkDeliveryDateInvoice &&
+							deliveryPostData.invoideDeliveryAddres && (
+								<DeliveryAddress
+									title="Invoice Delivery Address"
+									deliveryData={
+										deliveryPostData.invoideDeliveryAddres
+									}
+									setDeliveryData={(
+										deliveryAddres: DeliveryAddressProps
+									) => {
+										setDeliveryPostData({
+											...deliveryPostData,
+											invoideDeliveryAddres:
+												deliveryAddres,
+										});
+									}}
+								/>
+							)}
 
 						<h1 className={stylesUtils.headingLg}>Payments</h1>
 						<div>

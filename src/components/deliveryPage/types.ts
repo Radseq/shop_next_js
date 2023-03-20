@@ -1,4 +1,4 @@
-export type DeliveryAddress = {
+export type DeliveryAddressProps = {
 	name: string;
 	surname: string;
 	street: string;
@@ -12,8 +12,8 @@ export type DeliveryAddress = {
 export type DeliveryPostData = {
 	deliveryType: "currier" | "pickUpInShop";
 	buyerType: "private" | "company";
-	deliveryAddres: DeliveryAddress;
-	invoideDeliveryAddres?: DeliveryAddress;
+	deliveryAddres: DeliveryAddressProps;
+	invoideDeliveryAddres?: DeliveryAddressProps;
 	paimentId: number;
 	termsAndConditions: boolean;
 };
