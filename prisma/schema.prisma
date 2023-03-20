@@ -1,0 +1,148 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model Product {
+  id              Int      @id @default(autoincrement())
+  name            String   @db.VarChar(120)
+  imageSrc        String   @db.VarChar(200)
+  price           Int
+  vat             Int
+  quantity        Int
+  description     String   @db.VarChar(1000)
+  scoreValue      Int
+  scores              ProductScore[]
+  productInCategories ProductInCategory[]
+
+  discountPrice     Int?
+  installmentPrice  Int?
+  isBestseller      Boolean?   
+  hasFreeShipping   Boolean?
+  productComment    ProductComment?
+}
+
+model ProductScore {
+ id             Int       @id @default(autoincrement())
+ product        Product   @relation(fields: [productId], references: [id])
+ productId      Int
+ score          Int
+ addDate        DateTime  @default(now())
+ ipAddress      String    @db.VarChar(45)
+ productComment ProductComment? 
+}
+
+model ProductSpecification {
+  id              Int  @id @default(autoincrement())
+  productId       Int?
+  specification   Specification @relation(fields: [specificationId], references: [id])
+  specificationId Int
+}
+
+model Specification {
+ id       Int     @id @default(autoincrement())
+ name     String  @db.VarChar(50)
+ value    String  @db.VarChar(100)
+ isMain   Boolean
+ productSpecification ProductSpecification[]
+}
+
+model ProductDescription {
+  id       Int  @id @default(autoincrement())
+  productId     Int?
+  description   Description @relation(fields: [descriptionId], references: [id])
+  descriptionId Int
+}
+
+model Description {
+ id           Int     @id @default(autoincrement())
+ name         String  @db.VarChar(50)
+ imageSrc     String  @db.VarChar(200)
+ description  String  @db.VarChar(1000)
+
+ productDescription ProductDescription[]
+}
+
+model ProductComment {
+  id            Int       @id @default(autoincrement())
+  product       Product   @relation(fields: [productId], references: [id])
+  productId     Int       @unique
+  comment       String    @db.VarChar(1000)
+  addDate       DateTime  @default(now())
+  username      String    @db.VarChar(50)
+  avatarImgScr  String    @db.VarChar(250)
+
+  productScore  ProductScore  @relation(fields: [scoreId], references: [id])
+  scoreId       Int           @unique
+  helpfullCommentCount  Int
+  unhelpfulCommentCount Int
+}
+
+model Category {
+  id          Int     @id @default(autoincrement())
+  name        String  @db.VarChar(100)
+  parentId    Int?
+  url         String  @db.VarChar(100)
+  productInCategories ProductInCategory[]
+}
+
+model ProductInCategory {
+  product       Product   @relation(fields: [productId], references: [id])
+  productId     Int
+  category      Category  @relation(fields: [categoryId], references: [id])
+  categoryId    Int
+
+  @@id([productId, categoryId])
+}
+
+model Advertisement {
+  id          Int      @id @default(autoincrement())
+  addDate     DateTime @default(now())
+  expiredDate DateTime @default(now())
+  name        String   @db.VarChar(120)
+  imageSrc    String   @db.VarChar(200)
+  description String   @db.VarChar(200)
+  url         String   @db.VarChar(300)
+}
+
+model Newsletter {
+    id      Int       @id @default(autoincrement())
+    email   String    @unique @db.VarChar(120)
+    addDate DateTime  @default(now())
+}
+
+model Order {
+  id            Int         @id @default(autoincrement())
+  orderProducts OrderProduct[]
+  addDate       DateTime    @default(now())
+}
+
+model OrderProduct {
+  id          Int         @id @default(autoincrement())
+  addDate     DateTime    @default(now())
+  name        String      @db.VarChar(120)
+  imageSrc    String      @db.VarChar(200)
+  netPrice    Int
+  grossPrice  Int
+  vat         Int
+  order       Order       @relation(fields: [orderId], references: [id])
+  orderId     Int
+  quantity    Int
+  productId   Int?
+}
+
+model HotSellProduct {
+  id          Int       @id @default(autoincrement())
+  addDate     DateTime  @default(now())
+  expiredDate DateTime  @default(now())
+  startDate   DateTime  @default(now())
+  maxQuantity Int
+  productId   Int       @unique 
+}

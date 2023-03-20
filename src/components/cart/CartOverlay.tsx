@@ -4,8 +4,8 @@ import React, { FC } from "react";
 import styles from "./CartOverlay.module.css";
 import { ShippingCartProduct } from "./types";
 import Image from "next/image";
-import classNames from "classnames";
 import Link from "next/link";
+import { CartFooter } from "../cartPage/CartFooter";
 
 const CartItem: FC<{ product: ShippingCartProduct }> = ({ product }) => {
 	const dispatch = useCartDispatch();
@@ -18,8 +18,8 @@ const CartItem: FC<{ product: ShippingCartProduct }> = ({ product }) => {
 		<div className={styles.cartItem}>
 			<div className={styles.productImage}>
 				<Image
-					width="32"
-					height="32"
+					width="128"
+					height="128"
 					src={product.imageSrc}
 					alt="product"
 				/>
@@ -54,15 +54,6 @@ const CartItem: FC<{ product: ShippingCartProduct }> = ({ product }) => {
 export const CartOverlay: FC<{ cartItems: ShippingCartProduct[] }> = ({
 	cartItems,
 }) => {
-	const sumItemsPrice = cartItems.reduce(
-		(prev, curr) => prev + curr.price * curr.quantity,
-		0
-	);
-	const sumItemsPriceDiscount = cartItems.reduce(
-		(prev, curr) => prev + curr.discountPrice * curr.quantity,
-		0
-	);
-
 	return (
 		<div className={styles.cart}>
 			<div className={styles.header}>
@@ -75,22 +66,9 @@ export const CartOverlay: FC<{ cartItems: ShippingCartProduct[] }> = ({
 				return <CartItem key={item.id} product={item} />;
 			})}
 
-			<div className={styles.footer}>
-				<div
-					className={classNames(
-						styles.cartSum,
-						styles.cartSumDiscount
-					)}
-				>
-					Saving
-					<span>{sumItemsPrice - sumItemsPriceDiscount} pln</span>
-				</div>
-				<div className={styles.cartSum}>
-					To pay
-					<span>{sumItemsPriceDiscount} pln</span>
-				</div>
+			<CartFooter cartItems={cartItems}>
 				<Link href="/cart">Show cart</Link>
-			</div>
+			</CartFooter>
 		</div>
 	);
 };

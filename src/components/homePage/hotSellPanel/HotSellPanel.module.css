@@ -1,5 +1,5 @@
 .hotSell {
-	width: 35%;
+	min-width: 300px;
 	border: 2px solid rgb(120, 120, 120);
 	border-radius: 12px;
 	height: 100%;
@@ -35,6 +35,10 @@
 .savesPanel span {
 	padding: 5px 7px;
 	display: block;
+}
+
+.savesPanel span:nth-child(2) {
+	font-weight: bold;
 }
 
 .hotSell img {
@@ -137,6 +141,36 @@
 		border: 2px solid rgb(120, 120, 120);
 		border-radius: 12px;
 		width: 100%;
+		display: flex;
+	}
+
+	.container {
+		width: 50%;
+	}
+
+	.savesPanel {
+		display: flex;
+		position: static;
+		width: 150px;
+		margin: auto;
+	}
+
+	.savesPanel span:first-child {
+		padding-right: 5px;
+	}
+
+	.savesPanel span {
+		padding: 0;
+		margin: auto;
+	}
+
+	.title {
+		display: block;
+	}
+
+	.hotSell img {
+		margin: auto;
+		width: 70%;
 	}
 }
 

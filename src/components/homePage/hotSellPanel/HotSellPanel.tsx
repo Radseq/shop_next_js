@@ -1,15 +1,18 @@
-import React, { FC, useEffect, useState } from "react";
+import React, { FC } from "react";
 import styles from "./HotSellPanel.module.css";
 import { useTimer } from "../../../hooks/useTimer";
 import ProgressBar from "../../ProgressBar";
-import { HotSellProduct } from "./Types";
+import { CurrentHotSellProduct } from "./Types";
 import Image from "next/image";
 import Link from "next/link";
-import axios from "axios";
 
-type ProductStock = Pick<HotSellProduct, "maxQuantity" | "orderQuantity">;
+type ProductStock = Pick<
+	CurrentHotSellProduct,
+	"maxQuantity" | "orderQuantity"
+>;
+
 const isSoldOut = (product: ProductStock) =>
-	product.maxQuantity >= product.orderQuantity;
+	product.maxQuantity <= product.orderQuantity;
 
 const HotSellProgressBar: FC<{ product: ProductStock }> = ({ product }) => {
 	if (isSoldOut(product)) {
@@ -19,10 +22,11 @@ const HotSellProgressBar: FC<{ product: ProductStock }> = ({ product }) => {
 		<div className={styles.sellProgressBar}>
 			<div className={styles.sellProgressDesc}>
 				<div className={styles.ordered}>
-					Left <span>{product.orderQuantity}</span>
+					Left{" "}
+					<span>{product.maxQuantity - product.orderQuantity}</span>
 				</div>
 				<div className={styles.sold}>
-					Sold <span>{product.maxQuantity}</span>
+					Sold <span>{product.orderQuantity}</span>
 				</div>
 			</div>
 			<ProgressBar
@@ -69,30 +73,11 @@ const HotSellTimer: FC<HotSellTimerProps> = (props) => {
 	);
 };
 
-export const HotSellPanel = () => {
-	const [hotSellProduct, setHotSellProduct] = useState<HotSellProduct>();
-
-	// todo handle error
-	const fetchData = async () =>
-		axios.get(
-			"http://localhost:3000/api/recommendedProduct/hotSellProduct/"
-		);
-
-	const endDateTime = hotSellProduct?.endDateTime ?? 0;
-
+export const HotSellPanel: FC<{ hotSellProduct: CurrentHotSellProduct }> = ({
+	hotSellProduct,
+}) => {
+	const endDateTime = Date.parse(hotSellProduct.endDateTime) ?? 0;
 	const timer = useTimer(endDateTime);
-
-	const getHotSellProductEveryMs = 10000;
-
-	useEffect(() => {
-		setInterval(() => {
-			fetchData().then((data) => {
-				setHotSellProduct(data.data);
-			});
-		}, getHotSellProductEveryMs);
-	}, [setHotSellProduct, getHotSellProductEveryMs]);
-
-	if (!hotSellProduct) return null;
 
 	const productSumPrice = hotSellProduct.price - hotSellProduct.priceDiscount;
 
@@ -112,18 +97,22 @@ export const HotSellPanel = () => {
 					src={hotSellProduct.imageSrc}
 					alt={hotSellProduct.name}
 				/>
-				<div className={styles.savesPanel}>
-					<span>Save</span>
-					<b>
-						<span>{hotSellProduct.priceDiscount} pln</span>
-					</b>
-				</div>
+				{hotSellProduct.priceDiscount && (
+					<div className={styles.savesPanel}>
+						<span>Save</span>
+						<b>
+							<span>{hotSellProduct.priceDiscount} pln</span>
+						</b>
+					</div>
+				)}
 				<span className={styles.productTitle}>
 					{hotSellProduct.name}
 				</span>
-				<del className={styles.productPrice}>
-					{hotSellProduct.price} pln
-				</del>
+				{hotSellProduct.priceDiscount && (
+					<del className={styles.productPrice}>
+						{hotSellProduct.price} pln
+					</del>
+				)}
 				<span className={styles.productPriceAfterDiscount}>
 					{productSumPrice} pln
 				</span>

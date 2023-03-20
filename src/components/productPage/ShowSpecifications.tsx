@@ -16,14 +16,19 @@ export const ShowSpecifications: FC<{
 		>
 			{Object.entries(
 				isMain ? specifications.main : specifications.other
-			).map(([key, values]) => {
+			).map(([key, value]) => {
+				const values = value.split(/\r?\n/);
 				return (
 					<dl key={key}>
 						<dt>{key}:</dt>
 						<div>
-							{values.map((val) => {
-								return <dd key={val}>{val}</dd>;
-							})}
+							{values.length > 0 ? (
+								values.map((val) => {
+									return <dd key={val}>{val}</dd>;
+								})
+							) : (
+								<dd key={value}>{value}</dd>
+							)}
 						</div>
 					</dl>
 				);
