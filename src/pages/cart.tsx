@@ -11,7 +11,7 @@ import Link from "next/link";
 import styles from "./cart.module.css";
 
 export const getStaticProps: GetStaticProps = async ({}) => {
-	const [navigation] = await getNavigation();
+	const navigation = await getNavigation();
 
 	return {
 		props: {

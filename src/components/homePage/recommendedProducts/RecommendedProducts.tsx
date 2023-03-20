@@ -15,26 +15,15 @@ export const RecommendedProducts: FC<{
 }> = ({ recommendedProduct }) => {
 	const getHotSellProductEveryMs = 10000;
 
-	const {
-		data: request,
-		isLoading,
-		isError,
-	} = useQuery(["getHotSell"], () => fetchData(), {
+	const { data: request } = useQuery(["getHotSell"], () => fetchData(), {
 		enabled: true,
 		refetchInterval: getHotSellProductEveryMs,
 	});
 
-	if (isLoading) {
-		return <span>Loading...</span>;
-	}
-
-	if (isError) {
-		return <span>Cant load hot sell product</span>;
-	}
-
 	return (
 		<section className={styles.recommendedProductsSection}>
-			<HotSellPanel hotSellProduct={request?.data} />
+			{request && <HotSellPanel hotSellProduct={request?.data} />}
+
 			<div className={styles.recommendedProducts}>
 				{recommendedProduct.map((loadedProduct) => {
 					return (
