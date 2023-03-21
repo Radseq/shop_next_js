@@ -13,16 +13,24 @@ export const CartFooter: FC<{
 	);
 
 	const sumItemsPriceDiscount = props.cartItems.reduce(
-		(prev, curr) => prev + curr.discountPrice * curr.quantity,
+		(prev, curr) =>
+			prev + (curr.discountPrice ?? curr.price) * curr.quantity,
 		0
 	);
 
 	return (
 		<div className={styles.footer}>
-			<div className={classNames(styles.cartSum, styles.cartSumDiscount)}>
-				Saving
-				<span>{sumItemsPrice - sumItemsPriceDiscount} pln</span>
-			</div>
+			{sumItemsPrice - sumItemsPriceDiscount > 0 && (
+				<div
+					className={classNames(
+						styles.cartSum,
+						styles.cartSumDiscount
+					)}
+				>
+					Saving
+					<span>{sumItemsPrice - sumItemsPriceDiscount} pln</span>
+				</div>
+			)}
 			<div className={styles.cartSum}>
 				To pay
 				<span>{sumItemsPriceDiscount} pln</span>

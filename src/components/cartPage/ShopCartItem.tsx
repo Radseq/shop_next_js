@@ -43,8 +43,8 @@ export const ShopCartItem: FC<{ item: ShippingCartProduct }> = ({ item }) => {
 			/>
 			<span>{item.name}</span>
 			<div className={styles.prices}>
-				<del>{item.price} pln</del>
-				<span>{item.discountPrice} pln</span>
+				{item.discountPrice && <del>{item.price} pln</del>}
+				<span>{item.discountPrice ?? item.price} pln</span>
 			</div>
 			<input
 				type="number"
