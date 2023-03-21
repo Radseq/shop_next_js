@@ -14,6 +14,7 @@ import {
 } from "@/components/deliveryPage/types";
 import { DeliveryAddress } from "@/components/deliveryPage/DeliveryAddress";
 import { Icon } from "@/components/Icon";
+import { CartItem } from "@/components/cart/CartItem";
 
 const emptyDeliveryAddress: DeliveryAddressProps = {
 	city: "",
@@ -36,7 +37,6 @@ const postData: DeliveryPostData = {
 
 export default function Cart(props: { navigationData: RootNavigation[] }) {
 	const shoppingCart = useCartSelector((state) => state.shoppingCart);
-
 
 	const [deliveryPostData, setDeliveryPostData] = useState(postData);
 
@@ -262,9 +262,12 @@ export default function Cart(props: { navigationData: RootNavigation[] }) {
 								labelExtension={"(required)"}
 							/>
 						</div>
-						<button onClick={()=>console.log(deliveryPostData)}></button>
 					</div>
-					<aside className={styles.panel}>Panel</aside>
+					<aside className={styles.panel}>
+						{shoppingCart.map((cartProduct) => (
+							<CartItem cartProduct={cartProduct} />
+						))}
+					</aside>
 				</div>
 			</Layout>
 		</div>

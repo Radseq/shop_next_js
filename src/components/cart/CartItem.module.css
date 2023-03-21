@@ -1,0 +1,45 @@
+.cartItem {
+	display: flex;
+}
+
+.cartItem img {
+	width: 20%;
+	height: 80px;
+}
+
+.itemAside {
+	margin: auto 0;
+	padding-left: 10px;
+	width: 60%;
+}
+
+.itemAside > span {
+	overflow: hidden;
+
+	text-overflow: ellipsis;
+
+	display: -webkit-box;
+	-webkit-line-clamp: 2;
+	-webkit-box-orient: vertical;
+}
+
+.cartItemCount {
+	color: #a1a1a1;
+	font-size: 0.9em;
+}
+
+.prices {
+	margin: auto;
+	width: 20%;
+}
+
+.prices del {
+	color: rgb(99, 99, 99);
+	text-align: center;
+	display: block;
+}
+
+.prices span {
+	display: block;
+	text-align: center;
+}

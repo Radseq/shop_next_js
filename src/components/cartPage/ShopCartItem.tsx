@@ -41,10 +41,12 @@ export const ShopCartItem: FC<{ item: ShippingCartProduct }> = ({ item }) => {
 				src={item.imageSrc}
 				alt="cart product item"
 			/>
-			<span>{item.name}</span>
-			<div className={styles.prices}>
-				{item.discountPrice && <del>{item.price} pln</del>}
-				<span>{item.discountPrice ?? item.price} pln</span>
+			<div className={styles.content}>
+				<span>{item.name}</span>
+				<div className={styles.prices}>
+					{item.discountPrice && <del>{item.price} pln</del>}
+					<span>{item.discountPrice ?? item.price} pln</span>
+				</div>
 			</div>
 			<input
 				type="number"

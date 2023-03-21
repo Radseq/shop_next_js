@@ -12,12 +12,20 @@
 }
 
 .cartItem img {
-	width: 50px;
+	width: 10%;
 	height: 50px;
 }
 
-.cartItem > span {
+.content {
+	display: flex;
+	justify-content: space-between;
+	width: 100%;
+}
+
+.content > span {
 	margin-left: 10px;
+	overflow: hidden;
+	width: 90%;
 }
 
 .cartItem input {
@@ -35,6 +43,7 @@
 
 .prices {
 	margin: auto;
+	width: 100px;
 }
 
 .prices del {
@@ -44,10 +53,8 @@
 }
 
 .prices span {
-	height: 25px;
 	display: block;
 	text-align: center;
-	width: 100px;
 }
 
 .cartItem button {

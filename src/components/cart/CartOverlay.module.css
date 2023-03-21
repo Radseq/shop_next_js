@@ -22,35 +22,6 @@
 	font-weight: bold;
 }
 
-.cartItem {
-	display: flex;
-	width: calc(100% - 20px);
-	margin: 10px 10px;
-}
-
-.itemAside {
-	margin: auto 0;
-	width: 65%;
-}
-
-.itemAside > span {
-	width: 100%;
-	margin: auto 0;
-	height: 100%;
-	overflow: hidden;
-
-	text-overflow: ellipsis;
-
-	display: -webkit-box;
-	-webkit-line-clamp: 2;
-	-webkit-box-orient: vertical;
-}
-
-.cartItemCount {
-	color: #a1a1a1;
-	font-size: 0.9em;
-}
-
 .prices span {
 	display: block;
 }
@@ -59,12 +30,6 @@
 	color: rgb(116, 116, 116);
 	font-size: 0.9em;
 	margin-left: 5px;
-}
-
-.asideContairner {
-	display: flex;
-	margin-top: 5px;
-	justify-content: space-between;
 }
 
 .cartItemRemove {
@@ -91,16 +56,6 @@
 	color: rgb(2, 177, 2);
 	font-weight: normal;
 	font-size: 1em;
-}
-
-.productImage {
-	width: 30%;
-	height: 100px;
-}
-
-.productImage img {
-	width: 100%;
-	height: 100%;
 }
 
 .footer {
