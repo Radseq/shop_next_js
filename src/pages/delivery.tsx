@@ -15,6 +15,8 @@ import {
 import { DeliveryAddress } from "@/components/deliveryPage/DeliveryAddress";
 import { Icon } from "@/components/Icon";
 import { CartItem } from "@/components/cart/CartItem";
+import { Payments } from "@/components/deliveryPage/Payments";
+import { DeliveryMethod } from "@/components/deliveryPage/DeliveryMethod";
 
 const emptyDeliveryAddress: DeliveryAddressProps = {
 	city: "",
@@ -44,19 +46,38 @@ export default function Cart(props: { navigationData: RootNavigation[] }) {
 		useState<boolean>(false);
 
 	const handleInvoiceDeliveryCheckBox = () => {
-		const show = !checkDeliveryDateInvoice;
 		setCheckDeliveryDateInvoice(!checkDeliveryDateInvoice);
-		if (show) {
+		if (!checkDeliveryDateInvoice) {
 			setDeliveryPostData({
 				...deliveryPostData,
 				invoideDeliveryAddres: emptyDeliveryAddress,
 			});
 		}
 
-		if (!show) {
+		if (checkDeliveryDateInvoice) {
 			setDeliveryPostData({
 				...deliveryPostData,
 				invoideDeliveryAddres: undefined,
+			});
+		}
+	};
+
+	const handleChangeDeliveryType = (
+		deliveryType: "currier" | "pickUpInShop"
+	) => {
+		if (
+			deliveryType == "pickUpInShop" &&
+			deliveryPostData.paimentId === 4
+		) {
+			setDeliveryPostData({
+				...deliveryPostData,
+				paimentId: 3,
+				deliveryType: deliveryType,
+			});
+		} else {
+			setDeliveryPostData({
+				...deliveryPostData,
+				deliveryType: deliveryType,
 			});
 		}
 	};
@@ -80,37 +101,12 @@ export default function Cart(props: { navigationData: RootNavigation[] }) {
 							Delivery and payment
 						</h1>
 						<h1 className={stylesUtils.headingLg}>Delivery</h1>
-						<div className={styles.deliveryType}>
-							<CheckBox
-								checkedValue={
-									deliveryPostData.deliveryType === "currier"
-								}
-								labelName={"Currier - DLS, DHL"}
-								handleOnChange={() =>
-									setDeliveryPostData({
-										...deliveryPostData,
-										deliveryType: "currier",
-									})
-								}
-								labelExtension={"(free)"}
-								icon={<Icon kind="truck" />}
-							/>
-							<CheckBox
-								checkedValue={
-									deliveryPostData.deliveryType ===
-									"pickUpInShop"
-								}
-								labelName={"Pick up in shop"}
-								handleOnChange={() =>
-									setDeliveryPostData({
-										...deliveryPostData,
-										deliveryType: "pickUpInShop",
-									})
-								}
-								labelExtension={"(free)"}
-								icon={<Icon kind="shop" />}
-							/>
-						</div>
+						<DeliveryMethod
+							deliveryType={deliveryPostData.deliveryType}
+							setDeliveryType={(
+								deliveryType: "currier" | "pickUpInShop"
+							) => handleChangeDeliveryType(deliveryType)}
+						/>
 						<h1 className={stylesUtils.headingLg}>Buying as</h1>
 						<div className={styles.buyerType}>
 							<CheckBox
@@ -182,67 +178,16 @@ export default function Cart(props: { navigationData: RootNavigation[] }) {
 							)}
 
 						<h1 className={stylesUtils.headingLg}>Payments</h1>
-						<div>
-							<CheckBox
-								checkedValue={deliveryPostData.paimentId === 0}
-								labelName={"Online"}
-								handleOnChange={() =>
-									setDeliveryPostData({
-										...deliveryPostData,
-										paimentId: 0,
-									})
-								}
-								labelExtension={"(free)"}
-								icon={<Icon kind="dotpay" />}
-							/>
-							<CheckBox
-								checkedValue={deliveryPostData.paimentId === 1}
-								labelName={"Credit card"}
-								handleOnChange={() =>
-									setDeliveryPostData({
-										...deliveryPostData,
-										paimentId: 1,
-									})
-								}
-								labelExtension={"(free)"}
-								icon={<Icon kind="credit_cart" />}
-							/>
-							<CheckBox
-								checkedValue={deliveryPostData.paimentId === 2}
-								labelName={"Blik"}
-								handleOnChange={() =>
-									setDeliveryPostData({
-										...deliveryPostData,
-										paimentId: 2,
-									})
-								}
-								labelExtension={"(free)"}
-								icon={<Icon kind="blik" />}
-							/>
-							<CheckBox
-								checkedValue={deliveryPostData.paimentId === 3}
-								labelName={"Transfer"}
-								handleOnChange={() =>
-									setDeliveryPostData({
-										...deliveryPostData,
-										paimentId: 3,
-									})
-								}
-								labelExtension={"(free)"}
-							/>
-							<CheckBox
-								checkedValue={deliveryPostData.paimentId === 4}
-								labelName={"Pay on delivery"}
-								handleOnChange={() =>
-									setDeliveryPostData({
-										...deliveryPostData,
-										paimentId: 4,
-									})
-								}
-								labelExtension={"(20 pln)"}
-								icon={<Icon kind="wallet" />}
-							/>
-						</div>
+						<Payments
+							paymentId={deliveryPostData.paimentId}
+							deliveryType={deliveryPostData.deliveryType}
+							setPaymentId={(id: number) =>
+								setDeliveryPostData({
+									...deliveryPostData,
+									paimentId: id,
+								})
+							}
+						/>
 						<h1 className={stylesUtils.headingMd}>
 							Formal approvals
 						</h1>

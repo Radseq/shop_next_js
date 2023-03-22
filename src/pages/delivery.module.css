@@ -1,19 +1,10 @@
 .content {
-	width: calc(70% - 10px);
+	width: calc(60% - 10px);
 	margin-right: 10px;
 }
 
 .delivery {
 	display: flex;
-}
-
-.deliveryType > div:first-child {
-	margin-right: 10px;
-}
-
-.deliveryType > div {
-	display: flex;
-	width: 200px;
 }
 
 .buyerType {
@@ -36,7 +27,7 @@
 
 	position: -webkit-sticky; /* Safari */
 	position: sticky;
-	width: 30%;
+	width: 40%;
 	top: 0;
 	height: 100%;
 	margin-top: 20px;

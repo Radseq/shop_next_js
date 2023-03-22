@@ -1,0 +1,8 @@
+.deliveryType > div:first-child {
+	margin-right: 10px;
+}
+
+.deliveryType > div {
+	display: flex;
+	width: 200px;
+}
