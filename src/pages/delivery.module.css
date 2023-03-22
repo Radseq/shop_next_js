@@ -7,19 +7,6 @@
 	display: flex;
 }
 
-.buyerType {
-	display: flex;
-}
-
-.buyerType > fieldset:first-child {
-	margin-right: 10px;
-}
-
-.buyerType > fieldset {
-	display: flex;
-	width: 50%;
-}
-
 .panel {
 	border-radius: 10px;
 	border: 2px solid rgba(124, 124, 124, 0.938);

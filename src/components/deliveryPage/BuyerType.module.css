@@ -1,0 +1,12 @@
+.buyerType {
+	display: flex;
+}
+
+.buyerType > fieldset:first-child {
+	margin-right: 10px;
+}
+
+.buyerType > fieldset {
+	display: flex;
+	width: 50%;
+}

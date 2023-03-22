@@ -18,6 +18,7 @@ import { Icon } from "@/components/Icon";
 import { CartItem } from "@/components/cart/CartItem";
 import { Payments } from "@/components/deliveryPage/Payments";
 import { DeliveryMethod } from "@/components/deliveryPage/DeliveryMethod";
+import { BuyerType } from "@/components/deliveryPage/BuyerType";
 
 const emptyDeliveryAddress: DeliveryAddressProps = {
 	city: "",
@@ -110,32 +111,15 @@ export default function Cart(props: { navigationData: RootNavigation[] }) {
 							) => handleChangeDeliveryType(deliveryType)}
 						/>
 						<h1 className={stylesUtils.headingLg}>Buying as</h1>
-						<div className={styles.buyerType}>
-							<CheckBox
-								checkedValue={
-									deliveryPostData.buyerType === "private"
-								}
-								labelName={"Private person"}
-								handleOnChange={() =>
-									setDeliveryPostData({
-										...deliveryPostData,
-										buyerType: "private",
-									})
-								}
-							/>
-							<CheckBox
-								checkedValue={
-									deliveryPostData.buyerType === "company"
-								}
-								labelName={"Company"}
-								handleOnChange={() =>
-									setDeliveryPostData({
-										...deliveryPostData,
-										buyerType: "company",
-									})
-								}
-							/>
-						</div>
+						<BuyerType
+							type={deliveryPostData.buyerType}
+							setBuyerType={(type: "private" | "company") =>
+								setDeliveryPostData({
+									...deliveryPostData,
+									buyerType: type,
+								})
+							}
+						/>
 						<DeliveryAddress
 							deliveryData={deliveryPostData.deliveryAddres}
 							setDeliveryData={(
