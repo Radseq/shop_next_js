@@ -1,0 +1,13 @@
+.scores {
+	display: flex;
+	justify-content: center;
+}
+
+.scores li {
+	padding: 0px;
+}
+
+.scores svg {
+	height: 20px;
+	width: 20px;
+}

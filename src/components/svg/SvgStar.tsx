@@ -3,18 +3,9 @@ import React, { FC } from "react";
 export const SvgStar: FC<{
 	color?: string;
 	className?: string;
-	onClickHandle?: CallableFunction;
-	onMouseEnterHandle?: CallableFunction;
-}> = ({
-	color = "#757575",
-	className,
-	onClickHandle,
-	onMouseEnterHandle,
-}) => {
+}> = ({ color = "#757575", className }) => {
 	return (
 		<svg
-			onClick={() => onClickHandle && onClickHandle()}
-			onMouseEnter={() => onMouseEnterHandle && onMouseEnterHandle()}
 			className={className}
 			xmlns="http://www.w3.org/2000/svg"
 			viewBox="0 0 16 16"

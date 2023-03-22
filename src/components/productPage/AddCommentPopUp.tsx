@@ -2,8 +2,8 @@ import { FC, useEffect, useState } from "react";
 import { StyledButton } from "../StyledButton";
 import styles from "./AddCommentPopUp.module.css";
 import utilsStyles from "../../styles/utils.module.css";
-import { InteractiveScores } from "../InteractiveScores";
 import { StyledAlert } from "../StyledAlert";
+import { InteractiveScores } from "../InteractiveScores";
 
 const HIDE_ADD_COMMENT_MESSAGE_IN_MS = 10000; //10sec
 const STAR_COUNT = 10;
@@ -63,17 +63,16 @@ export const AddCommentPopup: FC<{
 		<div className={styles.formPopUp}>
 			<div className={styles.formContainer}>
 				<h1 className={utilsStyles.headingLg}>Add comment</h1>
-				<div className={styles.scorePanel}>
-					<InteractiveScores
-						onSelectedScore={(score: number) => {
-							setProductComment({
-								...productComment,
-								productScore: score,
-							});
-						}}
-						starCount={STAR_COUNT}
-					/>
-				</div>
+				<InteractiveScores
+					onSelectedScore={(score: number) => {
+						setProductComment({
+							...productComment,
+							productScore: score,
+						});
+					}}
+					currentScore={productComment.productScore ?? 0}
+					starCount={STAR_COUNT}
+				/>
 				<textarea
 					required
 					onChange={(e) =>
