@@ -1,46 +1,47 @@
-import { FC, useState } from "react";
+import { FC } from "react";
 import { Icon } from "../Icon";
 import { CheckBox } from "./CheckBox";
+import { PaymentType } from "./types";
 
 export const Payments: FC<{
-	paymentId: number;
+	paymentType: PaymentType;
 	deliveryType: "currier" | "pickUpInShop";
 	setPaymentId: CallableFunction;
-}> = ({ deliveryType, setPaymentId, paymentId }) => {
+}> = ({ deliveryType, setPaymentId, paymentType }) => {
 	return (
 		<div>
 			<CheckBox
-				checkedValue={paymentId === 0}
+				checkedValue={paymentType === "Online"}
 				labelName={"Online"}
-				handleOnChange={() => setPaymentId(0)}
+				handleOnChange={() => setPaymentId("Online")}
 				labelExtension={"(free)"}
 				icon={<Icon kind="dotpay" />}
 			/>
 			<CheckBox
-				checkedValue={paymentId === 1}
+				checkedValue={paymentType === "CreditCard"}
 				labelName={"Credit card"}
-				handleOnChange={() => setPaymentId(1)}
+				handleOnChange={() => setPaymentId("CreditCard")}
 				labelExtension={"(free)"}
 				icon={<Icon kind="credit_cart" />}
 			/>
 			<CheckBox
-				checkedValue={paymentId === 2}
+				checkedValue={paymentType === "Blik"}
 				labelName={"Blik"}
-				handleOnChange={() => setPaymentId(2)}
+				handleOnChange={() => setPaymentId("Blik")}
 				labelExtension={"(free)"}
 				icon={<Icon kind="blik" />}
 			/>
 			<CheckBox
-				checkedValue={paymentId === 3}
+				checkedValue={paymentType === "Transfer"}
 				labelName={"Transfer"}
-				handleOnChange={() => setPaymentId(3)}
+				handleOnChange={() => setPaymentId("Transfer")}
 				labelExtension={"(free)"}
 			/>
 			<CheckBox
-				checkedValue={paymentId === 4}
+				checkedValue={paymentType === "OnDelivery"}
 				labelName={"Pay on delivery"}
 				handleOnChange={() => {
-					if (deliveryType == "currier") setPaymentId(4);
+					if (deliveryType == "currier") setPaymentId("OnDelivery");
 				}}
 				labelExtension={"(20 pln)"}
 				icon={<Icon kind="wallet" />}

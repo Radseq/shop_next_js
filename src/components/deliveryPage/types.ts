@@ -9,11 +9,18 @@ export type DeliveryAddressProps = {
 	email: string;
 };
 
+export type PaymentType =
+	| "Online"
+	| "CreditCard"
+	| "Blik"
+	| "Transfer"
+	| "OnDelivery";
+
 export type DeliveryPostData = {
 	deliveryType: "currier" | "pickUpInShop";
 	buyerType: "private" | "company";
 	deliveryAddres: DeliveryAddressProps;
 	invoideDeliveryAddres?: DeliveryAddressProps;
-	paimentId: number;
+	paimentType: PaymentType;
 	termsAndConditions: boolean;
 };

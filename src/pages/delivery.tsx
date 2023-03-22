@@ -11,6 +11,7 @@ import { CheckBox } from "@/components/deliveryPage/CheckBox";
 import {
 	DeliveryAddressProps,
 	DeliveryPostData,
+	PaymentType,
 } from "@/components/deliveryPage/types";
 import { DeliveryAddress } from "@/components/deliveryPage/DeliveryAddress";
 import { Icon } from "@/components/Icon";
@@ -32,7 +33,7 @@ const emptyDeliveryAddress: DeliveryAddressProps = {
 const postData: DeliveryPostData = {
 	buyerType: "private",
 	deliveryType: "currier",
-	paimentId: 1,
+	paimentType: "Online",
 	termsAndConditions: false,
 	deliveryAddres: emptyDeliveryAddress,
 };
@@ -65,13 +66,14 @@ export default function Cart(props: { navigationData: RootNavigation[] }) {
 	const handleChangeDeliveryType = (
 		deliveryType: "currier" | "pickUpInShop"
 	) => {
+		// we can't pay on delivery when we pick up product in shop
 		if (
 			deliveryType == "pickUpInShop" &&
-			deliveryPostData.paimentId === 4
+			deliveryPostData.paimentType === "OnDelivery"
 		) {
 			setDeliveryPostData({
 				...deliveryPostData,
-				paimentId: 3,
+				paimentType: "Transfer",
 				deliveryType: deliveryType,
 			});
 		} else {
@@ -141,7 +143,7 @@ export default function Cart(props: { navigationData: RootNavigation[] }) {
 							) => {
 								setDeliveryPostData({
 									...deliveryPostData,
-									deliveryAddres: deliveryAddres,
+									deliveryAddres,
 								});
 							}}
 							title="Delivery Address"
@@ -179,12 +181,12 @@ export default function Cart(props: { navigationData: RootNavigation[] }) {
 
 						<h1 className={stylesUtils.headingLg}>Payments</h1>
 						<Payments
-							paymentId={deliveryPostData.paimentId}
+							paymentType={deliveryPostData.paimentType}
 							deliveryType={deliveryPostData.deliveryType}
-							setPaymentId={(id: number) =>
+							setPaymentId={(paimentType: PaymentType) =>
 								setDeliveryPostData({
 									...deliveryPostData,
-									paimentId: id,
+									paimentType,
 								})
 							}
 						/>
