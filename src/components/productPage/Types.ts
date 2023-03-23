@@ -23,14 +23,6 @@ export type Product = {
 	freeDelivery: boolean;
 };
 
-export type ProductPage = {
-	product: Product;
-	specifications: Specification;
-	descriptions: Description[];
-	scores: Record<number, number>;
-	comments: ProductComments;
-};
-
 export type ProductComments = {
 	allCommentsCount: number;
 	comments: CommentProps[];

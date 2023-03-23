@@ -1,5 +1,10 @@
 import { GetStaticProps } from "next";
-import { Description, ProductPage } from "@/components/productPage/Types";
+import {
+	Description,
+	ProductComments,
+	Product,
+	Specification,
+} from "@/components/productPage/Types";
 import { FC } from "react";
 import styles from "./Product.module.css";
 import { StarScore } from "@/components/StarScore";
@@ -13,6 +18,14 @@ import Image from "next/image";
 import { getNavigation } from "@/server/navigation";
 import { getProductById } from "@/server/products/product";
 import { getCacheData, setCacheData } from "@/cache";
+
+type ProductProps = {
+	product: Product;
+	specifications: Specification;
+	descriptions: Description[];
+	scores: Record<number, number>;
+	comments: ProductComments;
+};
 
 const ProductDescriptions: FC<{ descriptions: Description[] }> = (props) => {
 	return (
@@ -29,11 +42,11 @@ const ProductDescriptions: FC<{ descriptions: Description[] }> = (props) => {
 	);
 };
 
-export default function Product(props: {
+export default function Page(props: {
 	navigation: RootNavigation[];
-	productPage: ProductPage;
+	productProps: ProductProps;
 }) {
-	const { product, specifications, scores } = props.productPage;
+	const { product, specifications, scores } = props.productProps;
 
 	const votesCount = Object.values(scores).reduce(
 		(prev, curr) => prev + curr,
@@ -80,7 +93,7 @@ export default function Product(props: {
 				</div>
 			</div>
 			<ProductDescriptions
-				descriptions={props.productPage.descriptions}
+				descriptions={props.productProps.descriptions}
 			/>
 			<h2>Specification</h2>
 			<div className={styles.specificationsOther}>
@@ -113,6 +126,7 @@ export const getServerSideProps: GetStaticProps = async ({ params }) => {
 	const id = params?.id as string;
 
 	const cacheKey = "productPage" + id;
+
 	let cacheResult = await getCacheData(cacheKey);
 	if (cacheResult) {
 		cacheResult = JSON.parse(cacheResult);
