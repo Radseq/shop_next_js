@@ -4,32 +4,23 @@ import styles from "./AddCommentPopUp.module.css";
 import utilsStyles from "../../styles/utils.module.css";
 import { StyledAlert } from "../StyledAlert";
 import { InteractiveScores } from "../InteractiveScores";
+import { useAddComment } from "@/lib/useCommentData";
+import { ProductCommentRequest } from "./Types";
 
 const HIDE_ADD_COMMENT_MESSAGE_IN_MS = 10000; //10sec
 const STAR_COUNT = 10;
-
-type ProductComment = {
-	productId: number;
-	commentText: string;
-	productScore: number | null;
-};
-
-const SendCommentToApi = async (productComment: ProductComment) => {
-	return await fetch(`http://localhost:3000/api/product/comment/`, {
-		method: "POST",
-		body: JSON.stringify(productComment),
-	});
-};
 
 export const AddCommentPopup: FC<{
 	onCloseHandle: CallableFunction;
 	productId: number;
 }> = ({ onCloseHandle, productId }) => {
-	const [productComment, setProductComment] = useState<ProductComment>({
-		productId: productId,
-		commentText: "",
-		productScore: null,
-	});
+	const [productComment, setProductComment] = useState<ProductCommentRequest>(
+		{
+			productId: productId,
+			commentText: "",
+			productScore: null,
+		}
+	);
 
 	const [commentAddState, setCommentAddState] = useState<
 		"success" | "failure"
@@ -45,19 +36,10 @@ export const AddCommentPopup: FC<{
 		);
 	}, [commentAddState]);
 
-	const sendComment = async () => {
-		if (!productComment.commentText) {
-			return;
-		}
-
-		const res = await SendCommentToApi(productComment);
-
-		if (res.status === 200) {
-			setCommentAddState("success");
-		} else {
-			setCommentAddState("failure");
-		}
-	};
+	const { mutate: addComment } = useAddComment(
+		() => setCommentAddState("success"),
+		() => setCommentAddState("failure")
+	);
 
 	return (
 		<div className={styles.formPopUp}>
@@ -95,7 +77,7 @@ export const AddCommentPopup: FC<{
 						kind="primary"
 						onClick={(e) => {
 							e.preventDefault();
-							sendComment();
+							addComment(productComment);
 						}}
 						disabled={!productComment.commentText}
 					>

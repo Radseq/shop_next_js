@@ -71,7 +71,9 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 			return res.status(200).json(cacheResult);
 		}
 		case "POST": {
-			const result = POST_DATA_VERIFIER.safeParse(JSON.parse(req.body));
+			const result = POST_DATA_VERIFIER.safeParse(
+				JSON.parse(JSON.stringify(req.body))
+			);
 
 			if (!result.success) {
 				return res.status(404).send(result.error);

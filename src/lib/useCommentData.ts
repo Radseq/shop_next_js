@@ -21,6 +21,13 @@ const fetchProductComments = async (
 	return response.data;
 };
 
+const sendCommentToApi = async (productComment: ProductCommentRequest) => {
+	return await axios.post(
+		"http://localhost:3000/api/product/comment/",
+		productComment
+	);
+};
+
 export const useProductCommentData = (
 	productId: number,
 	pageIndex: number,
@@ -29,4 +36,15 @@ export const useProductCommentData = (
 	return useQuery("comments", () =>
 		fetchProductComments(productId, pageIndex, pageSize)
 	);
+};
+
+export const useAddComment = (onSuccess: () => void, onError: () => void) => {
+	return useMutation(sendCommentToApi, {
+		onSuccess: async () => {
+			onSuccess();
+		},
+		onError: async () => {
+			onError();
+		},
+	});
 };
