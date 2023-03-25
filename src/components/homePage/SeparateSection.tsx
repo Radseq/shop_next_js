@@ -1,11 +1,11 @@
-import { FC } from "react";
-import styles from "./SeparateSection.module.css";
-import Link from "next/link";
+import { FC } from "react"
+import styles from "./SeparateSection.module.css"
+import Link from "next/link"
 
 type SeparateSectionProps = {
-	sectionName: string;
-	url?: string;
-};
+	sectionName: string
+	url?: string
+}
 
 export const SeparateSection: FC<SeparateSectionProps> = ({
 	sectionName,
@@ -20,5 +20,5 @@ export const SeparateSection: FC<SeparateSectionProps> = ({
 				</Link>
 			)}
 		</div>
-	);
-};
+	)
+}

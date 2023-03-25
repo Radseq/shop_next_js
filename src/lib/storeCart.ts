@@ -1,47 +1,54 @@
-import { configureStore } from "@reduxjs/toolkit";
-import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
-import { cartReducer } from "./cartSlice";
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import { configureStore } from "@reduxjs/toolkit"
+import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux"
+import { cartReducer } from "./cartSlice"
+import AsyncStorage from "@react-native-async-storage/async-storage"
 
-
-import { combineReducers } from 'redux';
+import { combineReducers } from "redux"
 import {
-    persistReducer,
-    FLUSH,
-    REHYDRATE,
-    PAUSE,
-    PERSIST,
-    PURGE,
-    REGISTER,
-} from 'redux-persist';
-import { createWrapper } from "next-redux-wrapper";
+	persistReducer,
+	FLUSH,
+	REHYDRATE,
+	PAUSE,
+	PERSIST,
+	PURGE,
+	REGISTER,
+} from "redux-persist"
+import { createWrapper } from "next-redux-wrapper"
 
 const persistConfig = {
-    key: 'shoppingCart',
-    storage: AsyncStorage,
+	key: "shoppingCart",
+	storage: AsyncStorage,
 }
 
-const reducers = combineReducers({ shoppingCart: cartReducer });
+const reducers = combineReducers({ shoppingCart: cartReducer })
 
-const persistedReducer = persistReducer(persistConfig, reducers);
+const persistedReducer = persistReducer(persistConfig, reducers)
 
 const storeCart = configureStore({
-    reducer: persistedReducer,
-    middleware: (getDefaultMiddleware) =>
-        getDefaultMiddleware({
-            serializableCheck: {
-                ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
-            },
-        }),
-});
+	reducer: persistedReducer,
+	middleware: (getDefaultMiddleware) =>
+		getDefaultMiddleware({
+			serializableCheck: {
+				ignoredActions: [
+					FLUSH,
+					REHYDRATE,
+					PAUSE,
+					PERSIST,
+					PURGE,
+					REGISTER,
+				],
+			},
+		}),
+})
 
 type RootState = ReturnType<typeof storeCart.getState>
 
 type AppDispatch = typeof storeCart.dispatch
 
-export const useCartDispatch = () => useDispatch<AppDispatch>();
-export const useCartSelector: TypedUseSelectorHook<RootState> = useSelector;
+export const useCartDispatch = () => useDispatch<AppDispatch>()
+export const useCartSelector: TypedUseSelectorHook<RootState> = useSelector
 
-const makestoreCart = () => storeCart;
+const makestoreCart = () => storeCart
 
-export const wrapper = createWrapper<ReturnType<typeof makestoreCart>>(makestoreCart);
+export const wrapper =
+	createWrapper<ReturnType<typeof makestoreCart>>(makestoreCart)

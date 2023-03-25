@@ -1,6 +1,6 @@
-import { CONFIG } from "@/config";
-import { prisma } from "prisma/prisma";
-import { getOrderProductByDateRange } from "../orderProducts/orderProducts";
+import { CONFIG } from "@/config"
+import { prisma } from "prisma/prisma"
+import { getOrderProductByDateRange } from "../orderProducts/orderProducts"
 
 const getProductSoldQuantity = async (
 	dateFrom: Date,
@@ -11,15 +11,15 @@ const getProductSoldQuantity = async (
 		dateFrom,
 		dateTo,
 		productId
-	);
+	)
 
 	const sumQuantity = ordersProduct.reduce(
 		(previusValue, currentValue) => previusValue + currentValue.quantity,
 		0
-	);
+	)
 
-	return sumQuantity;
-};
+	return sumQuantity
+}
 
 const getNextHotSellStartDate = async (startDate: Date, toDate: Date) => {
 	const nextStarDate = await prisma.hotSellProduct.findFirst({
@@ -35,28 +35,28 @@ const getNextHotSellStartDate = async (startDate: Date, toDate: Date) => {
 		select: {
 			startDate: true,
 		},
-	});
+	})
 
-	return nextStarDate?.startDate;
-};
+	return nextStarDate?.startDate
+}
 
 export const getProductById = async (productId: number) => {
 	const foundProductById = await prisma.product.findUnique({
 		where: { id: productId },
-	});
+	})
 
-	return foundProductById;
-};
+	return foundProductById
+}
 
 export const getHotSellProduct = async () => {
-	const yesterdayStartOfDay = new Date();
-	yesterdayStartOfDay.setDate(new Date().getDate() - 1);
-	yesterdayStartOfDay.setHours(1, 0, 0, 0);
+	const yesterdayStartOfDay = new Date()
+	yesterdayStartOfDay.setDate(new Date().getDate() - 1)
+	yesterdayStartOfDay.setHours(1, 0, 0, 0)
 
-	const dateLimitUntilNextHotSale = new Date();
+	const dateLimitUntilNextHotSale = new Date()
 	dateLimitUntilNextHotSale.setDate(
 		dateLimitUntilNextHotSale.getDate() + CONFIG.DAYS_OF_SEARCH_NEXT_HOTSELL
-	);
+	)
 
 	const hotSellProduct = await prisma.hotSellProduct.findFirst({
 		where: {
@@ -70,9 +70,9 @@ export const getHotSellProduct = async () => {
 				gte: new Date(),
 			},
 		},
-	});
+	})
 
-	if (!hotSellProduct) return null;
+	if (!hotSellProduct) return null
 
 	const [product, orderQuantity, nextHotSellProductStartDate] =
 		await Promise.all([
@@ -83,9 +83,9 @@ export const getHotSellProduct = async () => {
 				hotSellProduct.productId
 			),
 			getNextHotSellStartDate(new Date(), dateLimitUntilNextHotSale),
-		]);
+		])
 
-	if (!product || product.quantity < 1) return null;
+	if (!product || product.quantity < 1) return null
 
 	return {
 		id: hotSellProduct.productId,
@@ -97,5 +97,5 @@ export const getHotSellProduct = async () => {
 		orderQuantity,
 		maxQuantity: hotSellProduct.maxQuantity,
 		nextHotSellProductDate: nextHotSellProductStartDate,
-	};
-};
+	}
+}

@@ -1,13 +1,13 @@
-import { prisma } from "prisma/prisma";
+import { prisma } from "prisma/prisma"
 
 const getProductCommentsCount = async (productId: number) => {
 	const commentsCount = await prisma.productComment.count({
 		where: {
 			productId: productId,
 		},
-	});
-	return commentsCount;
-};
+	})
+	return commentsCount
+}
 
 export const getProductComments = async (
 	productId: number,
@@ -27,9 +27,9 @@ export const getProductComments = async (
 		},
 		skip: pageIndex * pageSize - pageSize,
 		take: pageSize,
-	});
+	})
 
-	const allCommentsCount = await getProductCommentsCount(productId);
+	const allCommentsCount = await getProductCommentsCount(productId)
 
 	const commentsMapped = comments.map((comment) => {
 		return {
@@ -42,11 +42,11 @@ export const getProductComments = async (
 			helpfullCommentCount: comment.helpfullCommentCount,
 			unhelpfulCommentCount: comment.unhelpfulCommentCount,
 			addTimeToServerTimeDiffrenceText: "",
-		};
-	});
+		}
+	})
 
 	return {
 		allCommentsCount,
 		comments: commentsMapped,
-	};
-};
+	}
+}

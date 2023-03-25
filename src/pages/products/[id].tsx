@@ -1,18 +1,18 @@
-import { GetStaticProps } from "next";
-import { Description, ProductDate } from "@/components/productPage/Types";
-import { FC } from "react";
-import styles from "./Product.module.css";
-import { StarScore } from "@/components/StarScore";
-import { ShowSpecifications } from "@/components/productPage/ShowSpecifications";
-import { BuyPanel } from "@/components/productPage/BuyPanel";
-import { ScorePanel } from "@/components/productPage/ScorePanel";
-import { CommentsPanel } from "@/components/productPage/Comments";
-import { Layout } from "@/components/Layout";
-import { RootNavigation } from "@/components/header/Types";
-import Image from "next/image";
-import { getNavigation } from "@/server/navigation";
-import { getProductById } from "@/server/products/product";
-import { getCacheData, setCacheData } from "@/cache";
+import { GetStaticProps } from "next"
+import { Description, ProductDate } from "@/components/productPage/Types"
+import { FC } from "react"
+import styles from "./Product.module.css"
+import { StarScore } from "@/components/StarScore"
+import { ShowSpecifications } from "@/components/productPage/ShowSpecifications"
+import { BuyPanel } from "@/components/productPage/BuyPanel"
+import { ScorePanel } from "@/components/productPage/ScorePanel"
+import { CommentsPanel } from "@/components/productPage/Comments"
+import { Layout } from "@/components/Layout"
+import { RootNavigation } from "@/components/header/Types"
+import Image from "next/image"
+import { getNavigation } from "@/server/navigation"
+import { getProductById } from "@/server/products/product"
+import { getCacheData, setCacheData } from "@/cache"
 
 const ProductDescriptions: FC<{ descriptions: Description[] }> = (props) => {
 	return (
@@ -23,30 +23,30 @@ const ProductDescriptions: FC<{ descriptions: Description[] }> = (props) => {
 						<Image src={desc.imageSrc} alt="icon" />
 						<p>{desc.description}</p>
 					</div>
-				);
+				)
 			})}
 		</div>
-	);
-};
+	)
+}
 
 export default function Product(props: {
-	navigation: RootNavigation[];
-	productData: ProductDate;
+	navigation: RootNavigation[]
+	productData: ProductDate
 }) {
-	const { product, specifications, scores } = props.productData;
+	const { product, specifications, scores } = props.productData
 
 	const votesCount = Object.values(scores).reduce(
 		(prev, curr) => prev + curr,
 		0
-	);
+	)
 
 	const averageVoteValue = Object.entries(scores)
 		.map(([key, value]) => {
-			return Number(key) * value;
+			return Number(key) * value
 		})
-		.reduce((a, b) => a + b, 0);
+		.reduce((a, b) => a + b, 0)
 
-	const weightedAverage = averageVoteValue / votesCount;
+	const weightedAverage = averageVoteValue / votesCount
 
 	return (
 		<Layout navigation={props.navigation}>
@@ -106,29 +106,29 @@ export default function Product(props: {
 			</div>
 			<hr />
 		</Layout>
-	);
+	)
 }
 
 export const getServerSideProps: GetStaticProps = async ({ params }) => {
-	const id = params?.id as string;
+	const id = params?.id as string
 
-	const cacheKey = "productPage" + id;
-	let cacheResult = await getCacheData(cacheKey);
+	const cacheKey = "productPage" + id
+	let cacheResult = await getCacheData(cacheKey)
 	if (cacheResult) {
-		cacheResult = JSON.parse(cacheResult);
+		cacheResult = JSON.parse(cacheResult)
 	} else {
 		const [navigation, productData] = await Promise.all([
 			getNavigation(),
 			getProductById(parseInt(id)),
-		]);
+		])
 		cacheResult = {
 			navigation,
 			productData,
-		};
-		await setCacheData(cacheKey, JSON.stringify(cacheResult));
+		}
+		await setCacheData(cacheKey, JSON.stringify(cacheResult))
 	}
 
 	return {
 		props: cacheResult,
-	};
-};
+	}
+}

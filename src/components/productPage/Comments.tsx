@@ -1,12 +1,12 @@
-import { FC, useEffect, useState } from "react";
-import styles from "./Comments.module.css";
-import { CommentProps, ProductComments } from "./Types";
-import { StarScore } from "../StarScore";
-import { StyledButton } from "../StyledButton";
-import { ThumbUp } from "../svg/ThumbUp";
-import { ThumbDown } from "../svg/ThumbDown";
-import axios from "axios";
-import Image from "next/image";
+import { FC, useEffect, useState } from "react"
+import styles from "./Comments.module.css"
+import { CommentProps, ProductComments } from "./Types"
+import { StarScore } from "../StarScore"
+import { StyledButton } from "../StyledButton"
+import { ThumbUp } from "../svg/ThumbUp"
+import { ThumbDown } from "../svg/ThumbDown"
+import axios from "axios"
+import Image from "next/image"
 
 const Comment: FC<{ commentProps: CommentProps }> = ({ commentProps }) => {
 	return (
@@ -37,15 +37,15 @@ const Comment: FC<{ commentProps: CommentProps }> = ({ commentProps }) => {
 				</div>
 			</div>
 		</div>
-	);
-};
+	)
+}
 
 export const CommentsPanel: FC<{ productId: number }> = ({ productId }) => {
-	const [pageIndex, setPageIndex] = useState(1);
+	const [pageIndex, setPageIndex] = useState(1)
 	const [productCommentsData, setProductCommentsData] =
-		useState<ProductComments>();
+		useState<ProductComments>()
 
-	const pageSize = 10;
+	const pageSize = 10
 
 	useEffect(() => {
 		axios
@@ -57,21 +57,21 @@ export const CommentsPanel: FC<{ productId: number }> = ({ productId }) => {
 				},
 			})
 			.then(({ data }) => {
-				setProductCommentsData(data);
-			});
-	}, [productId, pageIndex]);
+				setProductCommentsData(data)
+			})
+	}, [productId, pageIndex])
 
-	if (!productCommentsData) return null;
+	if (!productCommentsData) return null
 
-	const productComments = productCommentsData!;
+	const productComments = productCommentsData!
 
 	const loadNextComments = () => {
-		setPageIndex(pageIndex + 1);
-	};
+		setPageIndex(pageIndex + 1)
+	}
 
 	const loadPreviousComments = () => {
-		setPageIndex(pageIndex - 1);
-	};
+		setPageIndex(pageIndex - 1)
+	}
 
 	return (
 		<div className={styles.commentsPanel}>
@@ -90,7 +90,7 @@ export const CommentsPanel: FC<{ productId: number }> = ({ productId }) => {
 						<Comment commentProps={comment} />
 						<hr />
 					</div>
-				);
+				)
 			})}
 			<div className={styles.pagining}>
 				<span>Page:</span>
@@ -111,5 +111,5 @@ export const CommentsPanel: FC<{ productId: number }> = ({ productId }) => {
 				)}
 			</div>
 		</div>
-	);
-};
+	)
+}

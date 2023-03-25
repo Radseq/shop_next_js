@@ -1,18 +1,18 @@
-import { removeItem } from "@/lib/cartSlice";
-import { useCartDispatch } from "@/lib/storeCart";
-import React, { FC } from "react";
-import styles from "./CartOverlay.module.css";
-import { ShippingCartProduct } from "./types";
-import Image from "next/image";
-import Link from "next/link";
-import { CartFooter } from "../cartPage/CartFooter";
+import { removeItem } from "@/lib/cartSlice"
+import { useCartDispatch } from "@/lib/storeCart"
+import React, { FC } from "react"
+import styles from "./CartOverlay.module.css"
+import { ShippingCartProduct } from "./types"
+import Image from "next/image"
+import Link from "next/link"
+import { CartFooter } from "../cartPage/CartFooter"
 
 const CartItem: FC<{ product: ShippingCartProduct }> = ({ product }) => {
-	const dispatch = useCartDispatch();
+	const dispatch = useCartDispatch()
 
 	const deleteProductFromCart = (productId: number) => {
-		dispatch(removeItem(productId));
-	};
+		dispatch(removeItem(productId))
+	}
 
 	return (
 		<div className={styles.cartItem}>
@@ -41,15 +41,15 @@ const CartItem: FC<{ product: ShippingCartProduct }> = ({ product }) => {
 				width="32"
 				height="32"
 				onClick={() => {
-					deleteProductFromCart(product.id);
+					deleteProductFromCart(product.id)
 				}}
 				className={styles.cartItemRemove}
 				src="/images/delete.png"
 				alt="delete icon"
 			/>
 		</div>
-	);
-};
+	)
+}
 
 export const CartOverlay: FC<{ cartItems: ShippingCartProduct[] }> = ({
 	cartItems,
@@ -63,12 +63,12 @@ export const CartOverlay: FC<{ cartItems: ShippingCartProduct[] }> = ({
 				<Link href="/cart">Edit</Link>
 			</div>
 			{cartItems.map((item) => {
-				return <CartItem key={item.id} product={item} />;
+				return <CartItem key={item.id} product={item} />
 			})}
 
 			<CartFooter cartItems={cartItems}>
 				<Link href="/cart">Show cart</Link>
 			</CartFooter>
 		</div>
-	);
-};
+	)
+}

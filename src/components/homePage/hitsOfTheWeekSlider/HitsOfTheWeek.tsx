@@ -1,35 +1,35 @@
-import { useWindowSize } from "@/hooks/useWindowSize";
-import React, { FC, useEffect, useState } from "react";
-import { useMutipleItemsSlider } from "../../../hooks/useMutipleItemsSlider";
-import { ProductItem } from "../../productItem/ProductItem";
-import styles from "./HitsOfTheWeek.module.css";
-import { HitOfWeekProduct } from "./Types";
-import Link from "next/link";
+import { useWindowSize } from "@/hooks/useWindowSize"
+import React, { FC, useEffect, useState } from "react"
+import { useMutipleItemsSlider } from "../../../hooks/useMutipleItemsSlider"
+import { ProductItem } from "../../productItem/ProductItem"
+import styles from "./HitsOfTheWeek.module.css"
+import { HitOfWeekProduct } from "./Types"
+import Link from "next/link"
 
 const HitsOfTheWeekSlider: FC<{
-	products: HitOfWeekProduct[];
-	productsPerSlider: number;
+	products: HitOfWeekProduct[]
+	productsPerSlider: number
 }> = ({ products, productsPerSlider }) => {
-	const [itemsPerSlide, setItemsPerSlide] = useState(productsPerSlider);
+	const [itemsPerSlide, setItemsPerSlide] = useState(productsPerSlider)
 
-	const [width] = useWindowSize();
+	const [width] = useWindowSize()
 
 	// decrease/increase itemsPerSlide by screen width
 	useEffect(() => {
-		const minSliderItemWidthInPx = 220;
-		const itemsPerWidth = Math.floor(width / minSliderItemWidthInPx);
+		const minSliderItemWidthInPx = 220
+		const itemsPerWidth = Math.floor(width / minSliderItemWidthInPx)
 
 		setItemsPerSlide(
 			width && itemsPerWidth <= productsPerSlider
 				? itemsPerWidth
 				: productsPerSlider
-		);
-	}, [width, productsPerSlider]);
+		)
+	}, [width, productsPerSlider])
 
 	const promotionSlider = useMutipleItemsSlider<HitOfWeekProduct>(
 		products,
 		itemsPerSlide
-	);
+	)
 
 	return (
 		<div className={styles.hitsOfTheWeekSlider}>
@@ -52,14 +52,14 @@ const HitsOfTheWeekSlider: FC<{
 							freeShipping={false}
 						/>
 					</Link>
-				);
+				)
 			})}
 			<div className={styles.next} onClick={promotionSlider.nextSlide}>
 				❯
 			</div>
 		</div>
-	);
-};
+	)
+}
 
 export const HitsOfTheWeek: FC<{ hitsOfTheWeek: HitOfWeekProduct[] }> = ({
 	hitsOfTheWeek,
@@ -71,5 +71,5 @@ export const HitsOfTheWeek: FC<{ hitsOfTheWeek: HitOfWeekProduct[] }> = ({
 				productsPerSlider={4}
 			/>
 		</section>
-	);
-};
+	)
+}

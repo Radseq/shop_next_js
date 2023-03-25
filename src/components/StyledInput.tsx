@@ -1,12 +1,12 @@
-import styled from "styled-components";
+import styled from "styled-components"
 
-type InputKind = "primary";
+type InputKind = "primary"
 
 type InputStyleProps = {
-	borderColor: string;
-	hoverBorderColor: string;
-	hoverBoxShadowColor: string;
-};
+	borderColor: string
+	hoverBorderColor: string
+	hoverBoxShadowColor: string
+}
 
 const STYLES_PER_KIND: Record<InputKind, InputStyleProps> = {
 	primary: {
@@ -14,7 +14,7 @@ const STYLES_PER_KIND: Record<InputKind, InputStyleProps> = {
 		hoverBorderColor: "rgb(126, 126, 126)",
 		hoverBoxShadowColor: "rgba(126, 126, 126, 0.938)",
 	},
-};
+}
 
 export const StyledInput = styled.input<{ kind: InputKind }>`
 	border-radius: 20px;
@@ -32,4 +32,4 @@ export const StyledInput = styled.input<{ kind: InputKind }>`
 				STYLES_PER_KIND[props.kind].hoverBoxShadowColor}
 			0px 2px 8px;
 	}
-`;
+`

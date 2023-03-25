@@ -14,4 +14,4 @@ export const CONFIG = {
 		process.env.DAYS_OF_SEARCH_NEXT_HOTSELL
 	),
 	HITS_OF_WEEK_DAYS_PERIOD: Number(process.env.HITS_OF_WEEK_DAYS_PERIOD),
-};
+}

@@ -120,5 +120,5 @@ export const getProduct = async () => {
 				"Kod producenta": ["17Z90Q-G.AA76Y"],
 			},
 		},
-	};
-};
+	}
+}

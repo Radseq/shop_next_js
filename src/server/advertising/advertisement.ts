@@ -1,4 +1,4 @@
-import { prisma } from "prisma/prisma";
+import { prisma } from "prisma/prisma"
 
 const getAllAdvertisementFromDB = async () => {
 	const allAdvertisements = await prisma.advertisement.findMany({
@@ -13,10 +13,10 @@ const getAllAdvertisementFromDB = async () => {
 				gte: new Date(),
 			},
 		},
-	});
-	return allAdvertisements;
-};
+	})
+	return allAdvertisements
+}
 
 export const getAdvertisement = async () => {
-	return await getAllAdvertisementFromDB();
-};
+	return await getAllAdvertisementFromDB()
+}

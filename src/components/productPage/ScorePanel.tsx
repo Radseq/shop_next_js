@@ -1,39 +1,39 @@
-import React, { FC } from "react";
-import ProgressBar from "../ProgressBar";
-import styles from "./ScorePanel.module.css";
-import { StarScore } from "../StarScore";
-import { StyledButton } from "../StyledButton";
-import { SvgStar } from "../svg/SvgStar";
+import React, { FC } from "react"
+import ProgressBar from "../ProgressBar"
+import styles from "./ScorePanel.module.css"
+import { StarScore } from "../StarScore"
+import { StyledButton } from "../StyledButton"
+import { SvgStar } from "../svg/SvgStar"
 
 // todo, i think about form in modal window
-const onAddComment = () => {};
+const onAddComment = () => {}
 
 const calculateProgressOfProgressbar = (
 	keyPair: [string, number][],
 	votesCount: number
 ): Array<number> => {
-	let progressValues = new Array<number>();
+	let progressValues = new Array<number>()
 
 	Object.values(keyPair).forEach((keyValue) => {
-		progressValues.push((keyValue[1] / votesCount) * 100);
-	});
-	return progressValues;
-};
+		progressValues.push((keyValue[1] / votesCount) * 100)
+	})
+	return progressValues
+}
 
 export const ScorePanel: FC<{
-	productName: string;
-	votesCount: number;
-	scores: Record<number, number>;
-	averageVote: number;
+	productName: string
+	votesCount: number
+	scores: Record<number, number>
+	averageVote: number
 }> = ({ productName, votesCount, scores, averageVote }) => {
 	const sortedScoreDesc = Object.entries(scores).sort(
 		([leftKey], [rightKey]) => Number(rightKey) - Number(leftKey)
-	);
+	)
 
 	const progressOfProgressBar = calculateProgressOfProgressbar(
 		sortedScoreDesc,
 		votesCount
-	);
+	)
 
 	return (
 		<div className={styles.scorePanel}>
@@ -65,7 +65,7 @@ export const ScorePanel: FC<{
 							/>
 							<span>{value}</span>
 						</div>
-					);
+					)
 				})}
 			</div>
 			<div className={styles.addOpinion}>
@@ -76,5 +76,5 @@ export const ScorePanel: FC<{
 				</StyledButton>
 			</div>
 		</div>
-	);
-};
+	)
+}

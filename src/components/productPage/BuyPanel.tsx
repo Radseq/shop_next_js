@@ -1,12 +1,12 @@
-import { FC, useState } from "react";
-import styles from "./BuyPanel.module.css";
-import { Product } from "./Types";
-import { StyledInput } from "../StyledInput";
-import { useCartDispatch } from "@/lib/storeCart";
-import { addToCart } from "@/lib/cartSlice";
-import { StyledButton } from "../StyledButton";
-import Image from "next/image";
-import Link from "next/link";
+import { FC, useState } from "react"
+import styles from "./BuyPanel.module.css"
+import { Product } from "./Types"
+import { StyledInput } from "../StyledInput"
+import { useCartDispatch } from "@/lib/storeCart"
+import { addToCart } from "@/lib/cartSlice"
+import { StyledButton } from "../StyledButton"
+import Image from "next/image"
+import Link from "next/link"
 
 const AvailableProductItem: FC<{ quantity: number; productId: number }> = ({
 	quantity,
@@ -20,7 +20,7 @@ const AvailableProductItem: FC<{ quantity: number; productId: number }> = ({
 					<Link href={"/available/" + productId}> Find out more</Link>
 				</span>
 			</div>
-		);
+		)
 	else
 		return (
 			<div className={styles.item}>
@@ -29,8 +29,8 @@ const AvailableProductItem: FC<{ quantity: number; productId: number }> = ({
 					<Link href="/inaccessible/1"> Find out more</Link>
 				</span>
 			</div>
-		);
-};
+		)
+}
 
 const DeliveryItem: FC<{ hasFreeDelivery: boolean }> = ({
 	hasFreeDelivery,
@@ -43,7 +43,7 @@ const DeliveryItem: FC<{ hasFreeDelivery: boolean }> = ({
 					<Link href={"/deliveryfree"}> Find out more</Link>
 				</span>
 			</div>
-		);
+		)
 	} else {
 		return (
 			<div className={styles.item}>
@@ -52,13 +52,13 @@ const DeliveryItem: FC<{ hasFreeDelivery: boolean }> = ({
 					<Link href={"/delivery"}> Find out more</Link>
 				</span>
 			</div>
-		);
+		)
 	}
-};
+}
 
 const LoanInstallmentItemDetailRow: FC<{
-	installmentPrice: number;
-	productId: number;
+	installmentPrice: number
+	productId: number
 }> = ({ installmentPrice, productId }) => {
 	return (
 		<div className={styles.detailRow}>
@@ -77,8 +77,8 @@ const LoanInstallmentItemDetailRow: FC<{
 				</span>
 			</div>
 		</div>
-	);
-};
+	)
+}
 
 const Price: FC<{ discountPrice: number; price: number }> = ({
 	discountPrice,
@@ -93,7 +93,7 @@ const Price: FC<{ discountPrice: number; price: number }> = ({
 					<h2>{discountPrice} pln</h2>
 				</div>
 			</div>
-		);
+		)
 	}
 	return (
 		<div>
@@ -101,14 +101,14 @@ const Price: FC<{ discountPrice: number; price: number }> = ({
 				<h2>{price} pln</h2>
 			</div>
 		</div>
-	);
-};
+	)
+}
 
 export const BuyPanel: FC<{ purchasedProduct: Product }> = ({
 	purchasedProduct,
 }) => {
-	const [quantity, setQuantity] = useState(1);
-	const dispatch = useCartDispatch();
+	const [quantity, setQuantity] = useState(1)
+	const dispatch = useCartDispatch()
 
 	const onAddToCartBtnClick = (product: Product) => {
 		dispatch(
@@ -120,13 +120,13 @@ export const BuyPanel: FC<{ purchasedProduct: Product }> = ({
 				discountPrice: product.discountPrice,
 				quantity: quantity,
 			})
-		);
-	};
+		)
+	}
 
 	const onQuntityChange: React.ChangeEventHandler<HTMLInputElement> = (e) => {
-		const inputValue = Number(e.target.value);
-		setQuantity(inputValue > 0 ? inputValue : 1);
-	};
+		const inputValue = Number(e.target.value)
+		setQuantity(inputValue > 0 ? inputValue : 1)
+	}
 
 	return (
 		<div className={styles.buyPanel}>
@@ -201,5 +201,5 @@ export const BuyPanel: FC<{ purchasedProduct: Product }> = ({
 				)}
 			</div>
 		</div>
-	);
-};
+	)
+}

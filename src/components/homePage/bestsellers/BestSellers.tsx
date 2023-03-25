@@ -1,8 +1,8 @@
-import React, { FC } from "react";
-import { ProductItem } from "../../productItem/ProductItem";
-import styles from "./BestSellers.module.css";
-import { BestsellerProduct } from "./Types";
-import Link from "next/link";
+import React, { FC } from "react"
+import { ProductItem } from "../../productItem/ProductItem"
+import styles from "./BestSellers.module.css"
+import { BestsellerProduct } from "./Types"
+import Link from "next/link"
 
 export const BestSellers: FC<{ products: BestsellerProduct[] }> = ({
 	products,
@@ -26,8 +26,8 @@ export const BestSellers: FC<{ products: BestsellerProduct[] }> = ({
 							promotionPrice={bestseller.promotionPrice}
 						/>
 					</Link>
-				);
+				)
 			})}
 		</section>
-	);
-};
+	)
+}

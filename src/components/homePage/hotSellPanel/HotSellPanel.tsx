@@ -1,22 +1,19 @@
-import React, { FC } from "react";
-import styles from "./HotSellPanel.module.css";
-import { useTimer } from "../../../hooks/useTimer";
-import ProgressBar from "../../ProgressBar";
-import { CurrentHotSellProduct } from "./Types";
-import Image from "next/image";
-import Link from "next/link";
+import React, { FC } from "react"
+import styles from "./HotSellPanel.module.css"
+import { useTimer } from "../../../hooks/useTimer"
+import ProgressBar from "../../ProgressBar"
+import { CurrentHotSellProduct } from "./Types"
+import Image from "next/image"
+import Link from "next/link"
 
-type ProductStock = Pick<
-	CurrentHotSellProduct,
-	"maxQuantity" | "orderQuantity"
->;
+type ProductStock = Pick<CurrentHotSellProduct, "maxQuantity" | "orderQuantity">
 
 const isSoldOut = (product: ProductStock) =>
-	product.maxQuantity <= product.orderQuantity;
+	product.maxQuantity <= product.orderQuantity
 
 const HotSellProgressBar: FC<{ product: ProductStock }> = ({ product }) => {
 	if (isSoldOut(product)) {
-		return <span className={styles.hotSellMessage}>Sold out!</span>;
+		return <span className={styles.hotSellMessage}>Sold out!</span>
 	}
 	return (
 		<div className={styles.sellProgressBar}>
@@ -34,15 +31,15 @@ const HotSellProgressBar: FC<{ product: ProductStock }> = ({ product }) => {
 				startValue={product.orderQuantity}
 			/>
 		</div>
-	);
-};
+	)
+}
 
 type HotSellTimerProps = {
-	hours: number;
-	minutes: number;
-	seconds: number;
-	product: ProductStock;
-};
+	hours: number
+	minutes: number
+	seconds: number
+	product: ProductStock
+}
 
 const HotSellTimer: FC<HotSellTimerProps> = (props) => {
 	return (
@@ -70,19 +67,19 @@ const HotSellTimer: FC<HotSellTimerProps> = (props) => {
 				</div>
 			</div>
 		</div>
-	);
-};
+	)
+}
 
 export const HotSellPanel: FC<{ hotSellProduct: CurrentHotSellProduct }> = ({
 	hotSellProduct,
 }) => {
-	const endDateTime = Date.parse(hotSellProduct.endDateTime) ?? 0;
-	const timer = useTimer(endDateTime);
+	const endDateTime = Date.parse(hotSellProduct.endDateTime) ?? 0
+	const timer = useTimer(endDateTime)
 
-	const productSumPrice = hotSellProduct.price - hotSellProduct.priceDiscount;
+	const productSumPrice = hotSellProduct.price - hotSellProduct.priceDiscount
 
 	if (timer.type === "Finished") {
-		return null;
+		return null
 	}
 
 	return (
@@ -125,5 +122,5 @@ export const HotSellPanel: FC<{ hotSellProduct: CurrentHotSellProduct }> = ({
 				/>
 			</Link>
 		</div>
-	);
-};
+	)
+}

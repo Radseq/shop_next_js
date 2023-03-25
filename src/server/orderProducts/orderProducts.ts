@@ -1,4 +1,4 @@
-import { prisma } from "prisma/prisma";
+import { prisma } from "prisma/prisma"
 
 export const getOrderProductsByDate = async (date: Date) => {
 	const orderProducts = await prisma.orderProduct.findMany({
@@ -7,10 +7,10 @@ export const getOrderProductsByDate = async (date: Date) => {
 				gt: date,
 			},
 		},
-	});
+	})
 
-	return orderProducts;
-};
+	return orderProducts
+}
 
 export const getOrderProductByDateRange = async (
 	dateFrom: Date,
@@ -25,7 +25,7 @@ export const getOrderProductByDateRange = async (
 			},
 			productId: productId,
 		},
-	});
+	})
 
-	return orderProducts;
-};
+	return orderProducts
+}

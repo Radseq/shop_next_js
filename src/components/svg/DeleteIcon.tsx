@@ -21,5 +21,5 @@ export const DeleteIconSvg = () => {
 				</g>
 			</g>
 		</svg>
-	);
-};
+	)
+}

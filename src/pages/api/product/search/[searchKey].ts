@@ -1,7 +1,7 @@
-import type { NextApiRequest, NextApiResponse } from "next";
+import type { NextApiRequest, NextApiResponse } from "next"
 
 export default function userHandler(req: NextApiRequest, res: NextApiResponse) {
-	const { method } = req;
+	const { method } = req
 
 	const searchRes = {
 		productSearchResult: [
@@ -41,14 +41,14 @@ export default function userHandler(req: NextApiRequest, res: NextApiResponse) {
 				price: 3454,
 			},
 		],
-	};
+	}
 
 	switch (method) {
 		case "GET":
-			res.status(200).json(searchRes);
-			break;
+			res.status(200).json(searchRes)
+			break
 		default:
-			res.setHeader("Allow", ["GET"]);
-			res.status(405).end(`Method ${method} Not Allowed`);
+			res.setHeader("Allow", ["GET"])
+			res.status(405).end(`Method ${method} Not Allowed`)
 	}
 }
