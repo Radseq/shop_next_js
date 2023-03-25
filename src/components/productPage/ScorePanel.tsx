@@ -6,13 +6,15 @@ import { StyledButton } from "../StyledButton"
 import { SvgStar } from "../svg/SvgStar"
 
 // todo, i think about form in modal window
-const onAddComment = () => {}
+const onAddComment = () => {
+	return
+}
 
 const calculateProgressOfProgressbar = (
 	keyPair: [string, number][],
 	votesCount: number
 ): Array<number> => {
-	let progressValues = new Array<number>()
+	const progressValues = new Array<number>()
 
 	Object.values(keyPair).forEach((keyValue) => {
 		progressValues.push((keyValue[1] / votesCount) * 100)

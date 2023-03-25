@@ -35,7 +35,7 @@ const Newsletter = () => {
 			return
 		}
 
-		let res = await fetch(
+		const res = await fetch(
 			`http://localhost:3000/api/newsletter/newsletter/`,
 			{
 				method: "POST",

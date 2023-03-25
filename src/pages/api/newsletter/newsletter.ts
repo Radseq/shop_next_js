@@ -11,7 +11,7 @@ const postNewsLettersEmail = async (
 	if (method !== "POST") {
 		return res.status(405).end(`Method ${method} Not Allowed`)
 	}
-	
+
 	const incomeEmail: { email: string } = JSON.parse(req.body)
 
 	//req.body.email not working
@@ -24,11 +24,11 @@ const postNewsLettersEmail = async (
 	const result = await addNewsletterEmail(incomeEmail.email)
 	if (result) {
 		return res.send(200)
-	} else {
-		return res.status(500).send({
-			error: `Email already exists!`,
-		})
 	}
+
+	return res.status(500).send({
+		error: `Email already exists!`,
+	})
 }
 
 export default postNewsLettersEmail

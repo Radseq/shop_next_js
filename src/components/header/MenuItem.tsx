@@ -76,7 +76,7 @@ export const MenuItem: React.FC<{
 
 	//whole pane is greater than  windows width, so we render from right to left
 	if (minWithToSwapRenderPosition > window.innerWidth) {
-		let leftPosition = leftOffset + rootNav.menuItemWidth - 520
+		const leftPosition = leftOffset + rootNav.menuItemWidth - 520
 		categoryLeftPosition = leftPosition < 0 ? 0 : leftPosition
 		categoryRightPosition =
 			window.innerWidth - leftOffset - rootNav.menuItemWidth
