@@ -1,17 +1,15 @@
 import React from "react";
 import Image from "next/image";
 import styles from "./Icon.module.css";
-import classNames from "classnames";
 
 type IconProps = {
 	kind: "cart" | "account" | "shop" | "help" | "none";
-	className?: string;
 };
 
-export const Icon: React.FC<IconProps> = ({ kind, className = "" }) => {
+export const Icon: React.FC<IconProps> = ({ kind }) => {
 	return (
 		<Image
-			className={classNames(styles.icon, styles.className)}
+			className={styles.icon}
 			width="32"
 			height="32"
 			src={getIconSrcByKind(kind)}
