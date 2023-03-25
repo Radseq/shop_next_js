@@ -8,9 +8,10 @@ const postNewsLettersEmail = async (
 ) => {
 	const { method } = req
 
-	if (method !== "POST")
+	if (method !== "POST") {
 		return res.status(405).end(`Method ${method} Not Allowed`)
-
+	}
+	
 	const incomeEmail: { email: string } = JSON.parse(req.body)
 
 	//req.body.email not working

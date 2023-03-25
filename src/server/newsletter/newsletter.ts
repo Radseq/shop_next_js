@@ -1,7 +1,9 @@
 import { prisma } from "prisma/prisma"
 
 export const addNewsletterEmail = async (email: string) => {
-	if (await isEmailExists(email)) return false
+	if (await isEmailExists(email)) {
+		return false
+	}
 
 	const add = await prisma.newsletter.create({
 		data: {

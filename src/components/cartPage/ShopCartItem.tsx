@@ -23,7 +23,9 @@ export const ShopCartItem: FC<{ item: ShippingCartProduct }> = ({ item }) => {
 		e
 	) => {
 		const inputValue = Number(e.target.value)
-		if (!inputValue) return
+		if (!inputValue) {
+			return
+		}
 
 		if (quantity > inputValue) {
 			dispatch(decrementQuantity(item.id))

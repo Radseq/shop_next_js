@@ -61,7 +61,9 @@ export const CommentsPanel: FC<{ productId: number }> = ({ productId }) => {
 			})
 	}, [productId, pageIndex])
 
-	if (!productCommentsData) return null
+	if (!productCommentsData) {
+		return null
+	}
 
 	const productComments = productCommentsData!
 

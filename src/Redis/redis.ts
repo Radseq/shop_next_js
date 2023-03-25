@@ -6,7 +6,9 @@ const globalRedis = global as unknown as {
 
 export const redisCache = globalRedis.redis || createCache()
 
-if (process.env.NODE_ENV !== "production") globalRedis.redis = redisCache
+if (process.env.NODE_ENV !== "production") {
+	globalRedis.redis = redisCache
+}
 
 function createCache(): Promise<ReturnType<typeof createClient>> {
 	if (!globalRedis.redis) {

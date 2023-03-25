@@ -12,7 +12,7 @@ const AvailableProductItem: FC<{ quantity: number; productId: number }> = ({
 	quantity,
 	productId,
 }) => {
-	if (quantity)
+	if (quantity) {
 		return (
 			<div className={styles.item}>
 				<span className={styles.ok}>Avaiable</span>
@@ -21,7 +21,7 @@ const AvailableProductItem: FC<{ quantity: number; productId: number }> = ({
 				</span>
 			</div>
 		)
-	else
+	} else
 		return (
 			<div className={styles.item}>
 				<span className={styles.error}>Inaccessible</span>

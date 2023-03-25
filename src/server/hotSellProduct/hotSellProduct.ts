@@ -72,7 +72,9 @@ export const getHotSellProduct = async () => {
 		},
 	})
 
-	if (!hotSellProduct) return null
+	if (!hotSellProduct) {
+		return null
+	}
 
 	const [product, orderQuantity, nextHotSellProductStartDate] =
 		await Promise.all([
@@ -85,7 +87,9 @@ export const getHotSellProduct = async () => {
 			getNextHotSellStartDate(new Date(), dateLimitUntilNextHotSale),
 		])
 
-	if (!product || product.quantity < 1) return null
+	if (!product || product.quantity < 1) {
+		return null
+	}
 
 	return {
 		id: hotSellProduct.productId,

@@ -46,7 +46,9 @@ type ProductPriceProp = {
 }
 
 const ProductPrice: FC<ProductPriceProp> = (productPrice) => {
-	if (!productPrice.promotionPrice) return <div>{productPrice.price} pln</div>
+	if (!productPrice.promotionPrice) {
+		return <div>{productPrice.price} pln</div>
+	}
 
 	return (
 		<div>

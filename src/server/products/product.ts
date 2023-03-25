@@ -54,7 +54,9 @@ export const getProductById = async (productId: number) => {
 		where: { id: productId },
 	})
 
-	if (!foundProductById) return null
+	if (!foundProductById) {
+		return null
+	}
 
 	const [productScoresDb, productSpecificationsDb, productDescriptionDb] =
 		await Promise.all([
