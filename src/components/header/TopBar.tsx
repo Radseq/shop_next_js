@@ -47,10 +47,10 @@ export const TopBar = () => {
 				)}
 			</div>
 
-			<a href="/help-center" className={styles.icon}>
+			<Link href="/help-center" className={styles.icon}>
 				<Icon kind="help" />
 				<span>Help</span>
-			</a>
+			</Link>
 
 			<div className={classNames(styles.icon, styles.cardInfo)}>
 				<Link href="/cart">
@@ -69,10 +69,10 @@ export const TopBar = () => {
 				</div>
 			</div>
 
-			<a href="/account" className={styles.icon}>
+			<Link href="/account" className={styles.icon}>
 				<Icon kind="account" />
 				<span>Account</span>
-			</a>
+			</Link>
 		</div>
 	);
 };

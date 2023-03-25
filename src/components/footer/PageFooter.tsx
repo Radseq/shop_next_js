@@ -4,6 +4,7 @@ import { StyledInput } from "../StyledInput";
 import Image from "next/image";
 import classNames from "classnames";
 import { isValid } from "@/lib/email";
+import Link from "next/link";
 
 type EmailResultCode = "fail" | "ok" | "notValid";
 
@@ -108,7 +109,7 @@ export const PageFooter = () => {
 							width="40"
 							height="40"
 						/>
-						<a href={"tel:" + phoneNumber}>{phoneNumber}</a>
+						<Link href={"tel:" + phoneNumber}>{phoneNumber}</Link>
 					</div>
 					<div className={styles.daysHours}>
 						<div>
@@ -128,7 +129,7 @@ export const PageFooter = () => {
 						width="40"
 						height="40"
 					/>
-					<a href={"mailto:" + email}> {email}</a>
+					<Link href={"mailto:" + email}> {email}</Link>
 				</div>
 				<div className={styles.icon}>
 					<Image
@@ -137,7 +138,7 @@ export const PageFooter = () => {
 						width="40"
 						height="40"
 					/>
-					<a href="/contact">Our shoop</a>
+					<Link href="/contact">Our shoop</Link>
 				</div>
 			</div>
 		</div>

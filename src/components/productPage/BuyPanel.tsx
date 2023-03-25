@@ -6,6 +6,7 @@ import { useCartDispatch } from "@/lib/storeCart";
 import { addToCart } from "@/lib/cartSlice";
 import { StyledButton } from "../StyledButton";
 import Image from "next/image";
+import Link from "next/link";
 
 const AvailableProductItem: FC<{ quantity: number; productId: number }> = ({
 	quantity,
@@ -16,7 +17,7 @@ const AvailableProductItem: FC<{ quantity: number; productId: number }> = ({
 			<div className={styles.item}>
 				<span className={styles.ok}>Avaiable</span>
 				<span>
-					<a href={"/available/" + productId}> Find out more</a>
+					<Link href={"/available/" + productId}> Find out more</Link>
 				</span>
 			</div>
 		);
@@ -25,7 +26,7 @@ const AvailableProductItem: FC<{ quantity: number; productId: number }> = ({
 			<div className={styles.item}>
 				<span className={styles.error}>Inaccessible</span>
 				<span>
-					<a href="/inaccessible/1"> Find out more</a>
+					<Link href="/inaccessible/1"> Find out more</Link>
 				</span>
 			</div>
 		);
@@ -39,7 +40,7 @@ const DeliveryItem: FC<{ hasFreeDelivery: boolean }> = ({
 			<div className={styles.item}>
 				<span className={styles.ok}>Free Delivery</span>
 				<span>
-					<a href={"/deliveryfree"}> Find out more</a>
+					<Link href={"/deliveryfree"}> Find out more</Link>
 				</span>
 			</div>
 		);
@@ -48,7 +49,7 @@ const DeliveryItem: FC<{ hasFreeDelivery: boolean }> = ({
 			<div className={styles.item}>
 				<span>Free pickup in the shop</span>
 				<span>
-					<a href={"/delivery"}> Find out more</a>
+					<Link href={"/delivery"}> Find out more</Link>
 				</span>
 			</div>
 		);
@@ -70,9 +71,9 @@ const LoanInstallmentItemDetailRow: FC<{
 			<div className={styles.item}>
 				<span>Installment only {installmentPrice} PLN</span>
 				<span>
-					<a href={"/installment/" + productId}>
+					<Link href={"/installment/" + productId}>
 						Calculate loan rate
-					</a>
+					</Link>
 				</span>
 			</div>
 		</div>
@@ -172,9 +173,9 @@ export const BuyPanel: FC<{ purchasedProduct: Product }> = ({
 					<div className={styles.item}>
 						<span>Buy now, receive day after tomorrow</span>
 						<span>
-							<a href={"/receiveday/" + purchasedProduct.id}>
+							<Link href={"/receiveday/" + purchasedProduct.id}>
 								Find out more
-							</a>
+							</Link>
 						</span>
 					</div>
 				</div>
