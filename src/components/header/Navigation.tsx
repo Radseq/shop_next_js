@@ -13,11 +13,11 @@ export const Navigation: FC<{ navigations: RootNavigation[] }> = ({
 	>(undefined)
 
 	const getNumberFromString = (str: string): number => {
-		let regex = /\d+/g
-		let matches = str.match(regex)
+		const regex = /\d+/g
+		const matches = str.match(regex)
 
 		if (matches) {
-			let result = Number(matches[0])
+			const result = Number(matches[0])
 			return result ? result : 0
 		}
 
