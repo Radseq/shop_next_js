@@ -65,8 +65,6 @@ export const CommentsPanel: FC<{ productId: number }> = ({ productId }) => {
 		return null
 	}
 
-	const productComments = productCommentsData!
-
 	const loadNextComments = () => {
 		setPageIndex(pageIndex + 1)
 	}
@@ -78,15 +76,16 @@ export const CommentsPanel: FC<{ productId: number }> = ({ productId }) => {
 	return (
 		<div className={styles.commentsPanel}>
 			<h2>
-				User Opinions <span>({productComments.allCommentsCount})</span>
+				User Opinions{" "}
+				<span>({productCommentsData.allCommentsCount})</span>
 			</h2>
 			<hr />
 			<span>
 				Results: {pageIndex * pageSize - pageSize + 1} -{" "}
-				{pageIndex * pageSize} of {productComments.allCommentsCount}{" "}
+				{pageIndex * pageSize} of {productCommentsData.allCommentsCount}{" "}
 			</span>
 			<hr />
-			{productComments.comments.map((comment) => {
+			{productCommentsData.comments.map((comment) => {
 				return (
 					<div key={comment.id}>
 						<Comment commentProps={comment} />
@@ -105,7 +104,8 @@ export const CommentsPanel: FC<{ productId: number }> = ({ productId }) => {
 				<StyledButton onClick={loadPreviousComments} kind="secondary">
 					{pageIndex}
 				</StyledButton>
-				{pageIndex * pageSize < productComments.allCommentsCount && (
+				{pageIndex * pageSize <
+					productCommentsData.allCommentsCount && (
 					<StyledButton onClick={loadNextComments} kind="primary">
 						{" "}
 						{pageIndex + 1}
