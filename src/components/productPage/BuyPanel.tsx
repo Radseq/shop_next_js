@@ -21,15 +21,15 @@ const AvailableProductItem: FC<{ quantity: number; productId: number }> = ({
 				</span>
 			</div>
 		)
-	} else
-		return (
-			<div className={styles.item}>
-				<span className={styles.error}>Inaccessible</span>
-				<span>
-					<Link href="/inaccessible/1"> Find out more</Link>
-				</span>
-			</div>
-		)
+	}
+	return (
+		<div className={styles.item}>
+			<span className={styles.error}>Inaccessible</span>
+			<span>
+				<Link href="/inaccessible/1"> Find out more</Link>
+			</span>
+		</div>
+	)
 }
 
 const DeliveryItem: FC<{ hasFreeDelivery: boolean }> = ({
@@ -44,16 +44,15 @@ const DeliveryItem: FC<{ hasFreeDelivery: boolean }> = ({
 				</span>
 			</div>
 		)
-	} else {
-		return (
-			<div className={styles.item}>
-				<span>Free pickup in the shop</span>
-				<span>
-					<Link href={"/delivery"}> Find out more</Link>
-				</span>
-			</div>
-		)
 	}
+	return (
+		<div className={styles.item}>
+			<span>Free pickup in the shop</span>
+			<span>
+				<Link href={"/delivery"}> Find out more</Link>
+			</span>
+		</div>
+	)
 }
 
 const LoanInstallmentItemDetailRow: FC<{
