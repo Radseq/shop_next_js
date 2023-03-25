@@ -1,6 +1,6 @@
 import React from "react"
 import type { AppProps } from "next/app"
-import { QueryClient, QueryClientProvider, Hydrate } from "react-query"
+import { Hydrate, QueryClient, QueryClientProvider } from "react-query"
 import { ReactQueryDevtools } from "react-query/devtools"
 import { Provider } from "react-redux"
 import { wrapper } from "@/lib/storeCart"

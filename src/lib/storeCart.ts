@@ -5,13 +5,13 @@ import AsyncStorage from "@react-native-async-storage/async-storage"
 
 import { combineReducers } from "redux"
 import {
-	persistReducer,
 	FLUSH,
-	REHYDRATE,
 	PAUSE,
 	PERSIST,
+	persistReducer,
 	PURGE,
 	REGISTER,
+	REHYDRATE,
 } from "redux-persist"
 import { createWrapper } from "next-redux-wrapper"
 
@@ -31,11 +31,11 @@ const storeCart = configureStore({
 			serializableCheck: {
 				ignoredActions: [
 					FLUSH,
-					REHYDRATE,
 					PAUSE,
 					PERSIST,
 					PURGE,
 					REGISTER,
+					REHYDRATE,
 				],
 			},
 		}),
