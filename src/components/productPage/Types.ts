@@ -47,3 +47,9 @@ export type CommentProps = {
 	unhelpfulCommentCount: number;
 	addTimeToServerTimeDiffrenceText: string;
 };
+
+export type ProductCommentRequest = {
+	productId: number;
+	commentText: string;
+	productScore: number | null;
+};

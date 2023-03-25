@@ -1,11 +1,11 @@
-import { FC, useEffect, useState } from "react";
+import { FC, useState } from "react";
 import styles from "./Comments.module.css";
 import { CommentProps, ProductComments } from "./Types";
 import { StarScore } from "../StarScore";
 import { StyledButton } from "../StyledButton";
 import { ThumbUp } from "../svg/ThumbUp";
 import { ThumbDown } from "../svg/ThumbDown";
-import axios from "axios";
+import { useProductCommentData } from "@/lib/useCommentData";
 
 const Comment: FC<{ commentProps: CommentProps }> = ({ commentProps }) => {
 	return (
@@ -41,26 +41,24 @@ const Comment: FC<{ commentProps: CommentProps }> = ({ commentProps }) => {
 
 export const CommentsPanel: FC<{ productId: number }> = ({ productId }) => {
 	const [pageIndex, setPageIndex] = useState(1);
-	const [productCommentsData, setProductCommentsData] =
-		useState<ProductComments>();
 
 	const pageSize = 10;
 
-	useEffect(() => {
-		axios
-			.get(`http://localhost:3000/api/product/comment`, {
-				params: {
-					productId: productId,
-					pageIndex: pageIndex,
-					pageSize: pageSize,
-				},
-			})
-			.then(({ data }) => {
-				setProductCommentsData(data);
-			});
-	}, [productId, pageIndex]);
+	const { data, isLoading, isError } = useProductCommentData(
+		productId,
+		pageIndex,
+		pageSize
+	);
 
-	if (!productCommentsData) return null;
+	if (isLoading) {
+		return <span>Loading...</span>;
+	}
+
+	if (isError) {
+		return <span>Error: {data.error.message}</span>;
+	}
+
+	const productCommentsData: ProductComments = data;
 
 	const productComments = productCommentsData!;
 
