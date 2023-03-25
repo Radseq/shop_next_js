@@ -27,7 +27,7 @@ const postNewsLettersEmail = async (
 	}
 
 	return res.status(500).send({
-		error: `Email already exists!`,
+		error: "Email already exists!",
 	})
 }
 

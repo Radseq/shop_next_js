@@ -29,7 +29,7 @@ const receiveHotSellProduct = async (
 
 	if (!dataResult) {
 		return res.status(520).send({
-			error: `No hotSell product found`,
+			error: "No hotSell product found",
 		})
 	}
 

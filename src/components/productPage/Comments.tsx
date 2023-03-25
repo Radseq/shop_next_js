@@ -49,7 +49,7 @@ export const CommentsPanel: FC<{ productId: number }> = ({ productId }) => {
 
 	useEffect(() => {
 		axios
-			.get(`http://localhost:3000/api/product/comment`, {
+			.get("http://localhost:3000/api/product/comment", {
 				params: {
 					productId: productId,
 					pageIndex: pageIndex,
