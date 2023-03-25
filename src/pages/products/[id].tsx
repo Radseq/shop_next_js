@@ -20,7 +20,7 @@ const ProductDescriptions: FC<{ descriptions: Description[] }> = (props) => {
 			{props.descriptions.map((desc) => {
 				return (
 					<div key={desc.id} className={styles.description}>
-						<img src={desc.imageSrc} alt="icon"></img>
+						<Image src={desc.imageSrc} alt="icon" />
 						<p>{desc.description}</p>
 					</div>
 				);

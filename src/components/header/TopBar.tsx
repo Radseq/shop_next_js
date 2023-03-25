@@ -53,9 +53,10 @@ export const TopBar = () => {
 			</a>
 
 			<div className={classNames(styles.icon, styles.cardInfo)}>
-				<a href="/cart">
+				<Link href="/cart">
 					<Icon kind="cart" />
-				</a>
+				</Link>
+
 				<span>{shoppingCart.length}</span>
 				<div className={styles.cartOverlay}>
 					{shoppingCart.length !== 0 ? (

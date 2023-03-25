@@ -6,13 +6,14 @@ import { StyledButton } from "../StyledButton";
 import { ThumbUp } from "../svg/ThumbUp";
 import { ThumbDown } from "../svg/ThumbDown";
 import axios from "axios";
+import Image from "next/image";
 
 const Comment: FC<{ commentProps: CommentProps }> = ({ commentProps }) => {
 	return (
 		<div className={styles.comment}>
 			<div className={styles.userPanel}>
 				<div className={styles.user}>
-					<img src={commentProps.avatarImgScr} alt="avatar" />
+					<Image src={commentProps.avatarImgScr} alt="icavataron" />
 					<span>{commentProps.username}</span>
 				</div>
 				<span>{commentProps.addDate}</span>
