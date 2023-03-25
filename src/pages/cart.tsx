@@ -10,7 +10,7 @@ import Head from "next/head";
 import Link from "next/link";
 import styles from "./cart.module.css";
 
-export const getStaticProps: GetStaticProps = async ({}) => {
+export const getStaticProps: GetStaticProps = async () => {
 	const navigation = await getNavigation();
 
 	return {

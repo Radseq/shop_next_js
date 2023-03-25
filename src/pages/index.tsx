@@ -70,7 +70,7 @@ export default function Home(props: {
 	);
 }
 
-export const getServerSideProps: GetStaticProps = async ({}) => {
+export const getServerSideProps: GetStaticProps = async () => {
 	const cacheKey = "homePage";
 	let cacheResult = await getCacheData(cacheKey);
 	if (cacheResult) {

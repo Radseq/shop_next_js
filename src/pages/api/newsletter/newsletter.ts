@@ -3,7 +3,7 @@ import { addNewsletterEmail } from "@/server/newsletter/newsletter";
 import type { NextApiRequest, NextApiResponse } from "next";
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
-	const { query, method } = req;
+	const { method } = req;
 
 	if (method !== "POST")
 		return res.status(405).end(`Method ${method} Not Allowed`);

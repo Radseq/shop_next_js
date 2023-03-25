@@ -42,7 +42,7 @@ export const Navigation: FC<{ navigations: RootNavigation[] }> = ({
 			menuItemLeftOffset: element.offsetLeft,
 			menuItemWidth: width,
 		};
-		setMenuItemHover((e) => (e = menuItemExt));
+		setMenuItemHover(menuItemExt);
 	};
 
 	return (

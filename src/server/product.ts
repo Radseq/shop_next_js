@@ -1,4 +1,4 @@
-export const getProduct = async (productId: number) => {
+export const getProduct = async () => {
 	return {
 		id: 1,
 		name: "ASUS TUF Gaming F15 i5-11400H/16GB/512/Win11 RTX3050Ti 144Hz",

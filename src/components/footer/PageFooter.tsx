@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useState } from "react";
+import React, { useState } from "react";
 import styles from "./PageFooter.module.css";
 import { StyledInput } from "../StyledInput";
 import Image from "next/image";

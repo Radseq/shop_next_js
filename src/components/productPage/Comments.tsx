@@ -6,7 +6,6 @@ import { StyledButton } from "../StyledButton";
 import { ThumbUp } from "../svg/ThumbUp";
 import { ThumbDown } from "../svg/ThumbDown";
 import axios from "axios";
-import { useQuery } from "react-query";
 
 const Comment: FC<{ commentProps: CommentProps }> = ({ commentProps }) => {
 	return (

@@ -3,7 +3,7 @@ import { getHotSellProduct } from "@/server/hotSellProduct/hotSellProduct";
 import type { NextApiRequest, NextApiResponse } from "next";
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
-	const { query, method } = req;
+	const { method } = req;
 
 	if (method !== "GET") {
 		return res.status(405).end(`Method ${method} Not Allowed`);

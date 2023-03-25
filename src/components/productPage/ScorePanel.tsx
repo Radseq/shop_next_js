@@ -14,8 +14,8 @@ const calculateProgressOfProgressbar = (
 ): Array<number> => {
 	let progressValues = new Array<number>();
 
-	Object.values(keyPair).forEach(([key, value]) => {
-		progressValues.push((value / votesCount) * 100);
+	Object.values(keyPair).forEach((keyValue) => {
+		progressValues.push((keyValue[1] / votesCount) * 100);
 	});
 	return progressValues;
 };
