@@ -38,7 +38,7 @@ export const getProductKeyValueVotes = (
 
 const getSpecificationRecords = (
 	specifications: Specification[],
-	mainType: boolean = false
+	mainType = false
 ) => {
 	const records: Record<string, string> = {}
 	for (let index = 0; index < specifications.length; index++) {

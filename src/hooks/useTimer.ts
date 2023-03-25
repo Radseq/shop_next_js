@@ -20,7 +20,7 @@ const calculateTimeLeft = (
 
 export const useTimer = (
 	target: number,
-	interval: number = 500 /* half a second */
+	interval = 500 /* half a second */
 ): Readonly<Timer> => {
 	const [timeLeft, setTimeLeft] = useState<number>(calculateTimeLeft(target))
 	useEffect(() => {
