@@ -15,7 +15,10 @@ const POST_DATA_VERIFIER = z.object({
 	}),
 });
 
-export default async (req: NextApiRequest, res: NextApiResponse) => {
+const receiveProductComments = async (
+	req: NextApiRequest,
+	res: NextApiResponse
+) => {
 	const { query, method } = req;
 
 	if (method !== "GET") {
@@ -51,3 +54,5 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 	}
 	return res.status(200).json(cacheResult);
 };
+
+export default receiveProductComments;

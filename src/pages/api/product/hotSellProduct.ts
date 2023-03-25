@@ -2,7 +2,10 @@ import { getCacheData, setCacheData } from "@/cache";
 import { getHotSellProduct } from "@/server/hotSellProduct/hotSellProduct";
 import type { NextApiRequest, NextApiResponse } from "next";
 
-export default async (req: NextApiRequest, res: NextApiResponse) => {
+const receiveHotSellProduct = async (
+	req: NextApiRequest,
+	res: NextApiResponse
+) => {
 	const { method } = req;
 
 	if (method !== "GET") {
@@ -32,3 +35,4 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 
 	return res.status(200).send(dataResult);
 };
+export default receiveHotSellProduct;

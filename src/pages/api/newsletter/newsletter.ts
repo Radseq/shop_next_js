@@ -2,7 +2,10 @@ import { isValid } from "@/lib/email";
 import { addNewsletterEmail } from "@/server/newsletter/newsletter";
 import type { NextApiRequest, NextApiResponse } from "next";
 
-export default async (req: NextApiRequest, res: NextApiResponse) => {
+const postNewsLettersEmail = async (
+	req: NextApiRequest,
+	res: NextApiResponse
+) => {
 	const { method } = req;
 
 	if (method !== "POST")
@@ -26,3 +29,5 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 		});
 	}
 };
+
+export default postNewsLettersEmail;
