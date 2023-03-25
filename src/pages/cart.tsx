@@ -39,9 +39,13 @@ export default function Cart(props: { navigation: RootNavigation[] }) {
 				<div className={styles.cartPageMain}>
 					<div className={styles.catrItems}>
 						<h2>Cart({shoppingCart.length})</h2>
-						{shoppingCart.map((item) => (
-							<ShopCartItem item={item} />
-						))}
+						<ul>
+							{shoppingCart.map((item) => (
+								<li key={item.id}>
+									<ShopCartItem item={item} />
+								</li>
+							))}
+						</ul>
 					</div>
 					<aside>
 						<PromotionCodePanel />
