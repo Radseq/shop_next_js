@@ -1,10 +1,10 @@
-import { useState } from "react";
-import { StyledButton } from "../StyledButton";
-import { StyledInput } from "../StyledInput";
-import styles from "./PromotionCodePanel.module.css";
+import { useState } from "react"
+import { StyledButton } from "../StyledButton"
+import { StyledInput } from "../StyledInput"
+import styles from "./PromotionCodePanel.module.css"
 
 export const PromotionCodePanel = () => {
-	const [promotionInput, setPromotionInput] = useState(false);
+	const [promotionInput, setPromotionInput] = useState(false)
 
 	return (
 		<div className={styles.promotionPanel}>
@@ -18,5 +18,5 @@ export const PromotionCodePanel = () => {
 				</div>
 			)}
 		</div>
-	);
-};
+	)
+}

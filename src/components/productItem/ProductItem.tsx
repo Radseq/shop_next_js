@@ -1,17 +1,17 @@
-import React, { FC } from "react";
-import styles from "./ProductItem.module.css";
-import Image from "next/image";
+import React, { FC } from "react"
+import styles from "./ProductItem.module.css"
+import Image from "next/image"
 
 const calcPercentagePrice = (oldPrice: number, newPrice: number) => {
-	return (newPrice * 100) / oldPrice;
-};
+	return (newPrice * 100) / oldPrice
+}
 
 type ProductHeaderProp = {
-	freeShipping: boolean;
-	bestseller: boolean;
-	price: number;
-	promotionPrice: number;
-};
+	freeShipping: boolean
+	bestseller: boolean
+	price: number
+	promotionPrice: number
+}
 
 const ProductHeader: FC<ProductHeaderProp> = ({
 	freeShipping,
@@ -37,17 +37,18 @@ const ProductHeader: FC<ProductHeaderProp> = ({
 				</span>
 			)}
 		</div>
-	);
-};
+	)
+}
 
 type ProductPriceProp = {
-	price: number;
-	promotionPrice: number;
-};
+	price: number
+	promotionPrice: number
+}
 
 const ProductPrice: FC<ProductPriceProp> = (productPrice) => {
-	if (!productPrice.promotionPrice)
-		return <div>{productPrice.price} pln</div>;
+	if (!productPrice.promotionPrice) {
+		return <div>{productPrice.price} pln</div>
+	}
 
 	return (
 		<div>
@@ -57,19 +58,19 @@ const ProductPrice: FC<ProductPriceProp> = (productPrice) => {
 			</div>
 			<div>{productPrice.promotionPrice} pln</div>
 		</div>
-	);
-};
+	)
+}
 
 type ProductItemProps = {
-	id: number;
-	name: string;
-	imageSrc: string;
-	price: number;
-	promotionPrice: number;
-	freeShipping: boolean;
-	bestseller: boolean;
-	children?: React.ReactNode;
-};
+	id: number
+	name: string
+	imageSrc: string
+	price: number
+	promotionPrice: number
+	freeShipping: boolean
+	bestseller: boolean
+	children?: React.ReactNode
+}
 
 export const ProductItem: FC<ProductItemProps> = (props) => {
 	return (
@@ -81,11 +82,11 @@ export const ProductItem: FC<ProductItemProps> = (props) => {
 				promotionPrice={props.promotionPrice}
 			/>
 			<Image
-					width="100"
-					height="100"
-					src={props.imageSrc}
-					alt={props.name}
-				/>
+				width="100"
+				height="100"
+				src={props.imageSrc}
+				alt={props.name}
+			/>
 			<div className={styles.content}>
 				<div className={styles.title}>{props.name}</div>
 				{props.children}
@@ -96,5 +97,5 @@ export const ProductItem: FC<ProductItemProps> = (props) => {
 				/>
 			</div>
 		</div>
-	);
-};
+	)
+}

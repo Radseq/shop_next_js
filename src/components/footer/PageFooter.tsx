@@ -1,55 +1,56 @@
-import React, { FC, useEffect, useState } from "react";
-import styles from "./PageFooter.module.css";
-import { StyledInput } from "../StyledInput";
-import Image from "next/image";
-import classNames from "classnames";
-import { isValid } from "@/lib/email";
+import React, { useState } from "react"
+import styles from "./PageFooter.module.css"
+import { StyledInput } from "../StyledInput"
+import Image from "next/image"
+import classNames from "classnames"
+import { isValid } from "@/lib/email"
+import Link from "next/link"
 
-type EmailResultCode = "fail" | "ok" | "notValid";
+type EmailResultCode = "fail" | "ok" | "notValid"
 
 const getMessageFromCode = (code: EmailResultCode) => {
 	switch (code) {
 		case "fail":
-			return "Fail, please try again later";
+			return "Fail, please try again later"
 		case "notValid":
-			return "Email is not valid!";
+			return "Email is not valid!"
 		case "ok":
-			return "Saved in";
+			return "Saved in"
 		default:
-			console.error(`Not found email code ${code}`);
-			return "";
+			console.error(`Not found email code ${code}`)
+			return ""
 	}
-};
+}
 
 const Newsletter = () => {
-	const [email, setEmail] = useState("");
-	const [emailResult, setEmailResult] = useState<EmailResultCode>();
+	const [email, setEmail] = useState("")
+	const [emailResult, setEmailResult] = useState<EmailResultCode>()
 
 	// todo give user information e.g too short, too long
 	const sendEmailToApi = async () => {
-		const result = isValid(email);
+		const result = isValid(email)
 
 		if (!result) {
-			setEmailResult("notValid");
-			return;
+			setEmailResult("notValid")
+			return
 		}
 
-		let res = await fetch(
-			`http://localhost:3000/api/newsletter/newsletter/`,
+		const res = await fetch(
+			"http://localhost:3000/api/newsletter/newsletter/",
 			{
 				method: "POST",
 				body: JSON.stringify({
 					email: email,
 				}),
 			}
-		);
+		)
 
 		if (res.status === 200) {
-			setEmailResult("ok");
+			setEmailResult("ok")
 		} else {
-			setEmailResult("fail");
+			setEmailResult("fail")
 		}
-	};
+	}
 
 	return (
 		<div className={styles.newsLetter}>
@@ -69,8 +70,8 @@ const Newsletter = () => {
 				/>
 				<button
 					onClick={(e) => {
-						e.preventDefault();
-						sendEmailToApi();
+						e.preventDefault()
+						sendEmailToApi()
 					}}
 				>
 					Sign up
@@ -86,12 +87,12 @@ const Newsletter = () => {
 				{emailResult && getMessageFromCode(emailResult)}
 			</div>
 		</div>
-	);
-};
+	)
+}
 
 export const PageFooter = () => {
-	const phoneNumber = "12 234 212 231";
-	const email = "some_email@gm.pl";
+	const phoneNumber = "12 234 212 231"
+	const email = "some_email@gm.pl"
 
 	return (
 		<div className={styles.footer}>
@@ -108,7 +109,7 @@ export const PageFooter = () => {
 							width="40"
 							height="40"
 						/>
-						<a href={"tel:" + phoneNumber}>{phoneNumber}</a>
+						<Link href={"tel:" + phoneNumber}>{phoneNumber}</Link>
 					</div>
 					<div className={styles.daysHours}>
 						<div>
@@ -128,7 +129,7 @@ export const PageFooter = () => {
 						width="40"
 						height="40"
 					/>
-					<a href={"mailto:" + email}> {email}</a>
+					<Link href={"mailto:" + email}> {email}</Link>
 				</div>
 				<div className={styles.icon}>
 					<Image
@@ -137,9 +138,9 @@ export const PageFooter = () => {
 						width="40"
 						height="40"
 					/>
-					<a href="/contact">Our shoop</a>
+					<Link href="/contact">Our shoop</Link>
 				</div>
 			</div>
 		</div>
-	);
-};
+	)
+}

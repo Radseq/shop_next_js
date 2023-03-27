@@ -1,14 +1,14 @@
-import React from "react";
-import styles from "./ProgressBar.module.css";
+import React from "react"
+import styles from "./ProgressBar.module.css"
 
 type ProgressBarProps = {
-	startValue: number;
-	endValue: number;
-	showValueInProgressBar?: boolean;
-	progressBarClassName?: string;
-	progressBarValueClassName?: string;
-	valueDigitCount?: number;
-};
+	startValue: number
+	endValue: number
+	showValueInProgressBar?: boolean
+	progressBarClassName?: string
+	progressBarValueClassName?: string
+	valueDigitCount?: number
+}
 
 export const ProgressBar: React.FC<ProgressBarProps> = ({
 	startValue = 0,
@@ -18,11 +18,11 @@ export const ProgressBar: React.FC<ProgressBarProps> = ({
 	showValueInProgressBar = false,
 	valueDigitCount = 0,
 }) => {
-	const barPercentage = (startValue * 100) / endValue;
+	const barPercentage = (startValue * 100) / endValue
 
 	const progressBarViewValue = showValueInProgressBar
 		? barPercentage.toFixed(valueDigitCount)
-		: undefined;
+		: undefined
 
 	return (
 		<div className={`${styles.progressBar} ${progressBarClassName}`}>
@@ -33,7 +33,7 @@ export const ProgressBar: React.FC<ProgressBarProps> = ({
 				{progressBarViewValue}
 			</div>
 		</div>
-	);
-};
+	)
+}
 
-export default React.memo(ProgressBar);
+export default React.memo(ProgressBar)

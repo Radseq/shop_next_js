@@ -1,35 +1,35 @@
-import { News } from "@/components/homePage/News";
-import { GetStaticProps } from "next";
-import Head from "next/head";
-import { RootNavigation } from "@/components/header/Types";
-import { ImageToSlide } from "@/components/homePage/Types";
-import { SeparateSection } from "@/components/homePage/SeparateSection";
-import { RecommendedProducts } from "@/components/homePage/recommendedProducts/RecommendedProducts";
-import { RecommendedProduct } from "@/components/homePage/recommendedProducts/Types";
-import { CurrentHotSellProduct } from "@/components/homePage/hotSellPanel/Types";
-import { Promotions } from "@/components/homePage/promotions/Promotions";
-import { Promotion } from "@/components/homePage/promotions/Types";
-import { HitsOfTheWeek } from "@/components/homePage/hitsOfTheWeekSlider/HitsOfTheWeek";
-import { HitOfWeekProduct } from "@/components/homePage/hitsOfTheWeekSlider/Types";
-import { BestSellers } from "@/components/homePage/bestsellers/BestSellers";
-import { BestsellerProduct } from "@/components/homePage/bestsellers/Types";
-import { Layout } from "@/components/Layout";
-import { getNavigation } from "@/server/navigation";
-import { getPromotion } from "@/server/promotion";
-import { getAllRecommendedProducts } from "@/server/recommendedProducts/recommendedProduct";
-import { getAllBestsellerProducts } from "@/server/bestseller/bestseller";
-import { getAdvertisement } from "@/server/advertising/advertisement";
-import { getCacheData, setCacheData } from "@/cache";
-import { getHitsOfWeekProducts } from "@/server/hitsOfTheWeek/hitsOfTheWeek";
+import { News } from "@/components/homePage/News"
+import { GetStaticProps } from "next"
+import Head from "next/head"
+import { RootNavigation } from "@/components/header/Types"
+import { ImageToSlide } from "@/components/homePage/Types"
+import { SeparateSection } from "@/components/homePage/SeparateSection"
+import { RecommendedProducts } from "@/components/homePage/recommendedProducts/RecommendedProducts"
+import { RecommendedProduct } from "@/components/homePage/recommendedProducts/Types"
+import { CurrentHotSellProduct } from "@/components/homePage/hotSellPanel/Types"
+import { Promotions } from "@/components/homePage/promotions/Promotions"
+import { Promotion } from "@/components/homePage/promotions/Types"
+import { HitsOfTheWeek } from "@/components/homePage/hitsOfTheWeekSlider/HitsOfTheWeek"
+import { HitOfWeekProduct } from "@/components/homePage/hitsOfTheWeekSlider/Types"
+import { BestSellers } from "@/components/homePage/bestsellers/BestSellers"
+import { BestsellerProduct } from "@/components/homePage/bestsellers/Types"
+import { Layout } from "@/components/Layout"
+import { getNavigation } from "@/server/navigation"
+import { getPromotion } from "@/server/promotion"
+import { getAllRecommendedProducts } from "@/server/recommendedProducts/recommendedProduct"
+import { getAllBestsellerProducts } from "@/server/bestseller/bestseller"
+import { getAdvertisement } from "@/server/advertising/advertisement"
+import { getCacheData, setCacheData } from "@/cache"
+import { getHitsOfWeekProducts } from "@/server/hitsOfTheWeek/hitsOfTheWeek"
 
 export default function Home(props: {
-	navigationData: RootNavigation[];
-	advertisementData: ImageToSlide[];
-	recommendedProductsData: RecommendedProduct[];
-	hotSellProductData: CurrentHotSellProduct;
-	promotions: Promotion[];
-	hitsOfTheWeekProducts: HitOfWeekProduct[];
-	bestsellers: BestsellerProduct[];
+	navigationData: RootNavigation[]
+	advertisementData: ImageToSlide[]
+	recommendedProductsData: RecommendedProduct[]
+	hotSellProductData: CurrentHotSellProduct
+	promotions: Promotion[]
+	hitsOfTheWeekProducts: HitOfWeekProduct[]
+	bestsellers: BestsellerProduct[]
 }) {
 	return (
 		<div>
@@ -67,14 +67,14 @@ export default function Home(props: {
 				<hr />
 			</Layout>
 		</div>
-	);
+	)
 }
 
-export const getServerSideProps: GetStaticProps = async ({}) => {
-	const cacheKey = "homePage";
-	let cacheResult = await getCacheData(cacheKey);
+export const getServerSideProps: GetStaticProps = async () => {
+	const cacheKey = "homePage"
+	let cacheResult = await getCacheData(cacheKey)
 	if (cacheResult) {
-		cacheResult = JSON.parse(cacheResult);
+		cacheResult = JSON.parse(cacheResult)
 	} else {
 		const [
 			navigationData,
@@ -90,7 +90,7 @@ export const getServerSideProps: GetStaticProps = async ({}) => {
 			getPromotion(),
 			getHitsOfWeekProducts(),
 			getAllBestsellerProducts(),
-		]);
+		])
 		cacheResult = {
 			navigationData,
 			advertisementData,
@@ -98,11 +98,11 @@ export const getServerSideProps: GetStaticProps = async ({}) => {
 			promotions,
 			hitsOfTheWeekProducts,
 			bestsellers,
-		};
-		await setCacheData(cacheKey, JSON.stringify(cacheResult));
+		}
+		await setCacheData(cacheKey, JSON.stringify(cacheResult))
 	}
 
 	return {
 		props: cacheResult,
-	};
-};
+	}
+}

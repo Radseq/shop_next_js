@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import React, { FC } from "react"
 
 export const SvgStar: FC<{ color?: string; className?: string }> = ({
 	color = "#757575",
@@ -16,13 +16,13 @@ export const SvgStar: FC<{ color?: string; className?: string }> = ({
 				d="M8 10.832l-3.708 2.581L5.6 9.089 2 6.359l4.517-.092L8 2l1.483 4.267L14 6.359l-3.6 2.73 1.308 4.324z"
 			></path>
 		</svg>
-	);
-};
+	)
+}
 
 export const SvgHalfColoredStar: FC<{
-	leftColor?: string;
-	rightColor?: string;
-	className?: string;
+	leftColor?: string
+	rightColor?: string
+	className?: string
 }> = ({ leftColor = "#efca00", rightColor = "#757575", className }) => {
 	return (
 		<svg
@@ -41,5 +41,5 @@ export const SvgHalfColoredStar: FC<{
 				d="M8 10.832l-3.708 2.581L5.6 9.089 2 6.359l4.517-.092L8 2l1.483 4.267L14 6.359l-3.6 2.73 1.308 4.324z"
 			/>
 		</svg>
-	);
-};
+	)
+}

@@ -1,9 +1,9 @@
-import { CONFIG } from "@/config";
-import { prisma } from "prisma/prisma";
+import { CONFIG } from "@/config"
+import { prisma } from "prisma/prisma"
 import {
 	retrieveAllCategories,
 	retrieveAllCategoriesByName,
-} from "../categories/category";
+} from "../categories/category"
 
 export const retrieveOneRecommendedProductsOfCategories = async (
 	categoriesIds: number[]
@@ -16,9 +16,9 @@ export const retrieveOneRecommendedProductsOfCategories = async (
 			scoreValue: "desc",
 		},
 		take: 1,
-	});
-	return result;
-};
+	})
+	return result
+}
 
 // Motivation: take 3 max scored products of each category.
 export const getAllRecommendedProducts = async (
@@ -26,10 +26,10 @@ export const getAllRecommendedProducts = async (
 ) => {
 	let categories = await retrieveAllCategoriesByName(
 		customerSearch.map((searchStringValue) => searchStringValue.value)
-	);
+	)
 
 	if (!categories?.length) {
-		categories = await retrieveAllCategories();
+		categories = await retrieveAllCategories()
 	}
 
 	const sqlQuerys = categories.map(({ id }: { id: number }) => {
@@ -45,14 +45,14 @@ export const getAllRecommendedProducts = async (
 				scoreValue: "desc",
 			},
 			take: CONFIG.MAX_PRODUCTS_PER_CATEGORY,
-		});
-	});
+		})
+	})
 
-	const queryResultPromises = await Promise.all(sqlQuerys);
+	const queryResultPromises = await Promise.all(sqlQuerys)
 
 	let recommendedProducts = queryResultPromises
 		.flat()
-		.slice(0, CONFIG.MAX_RECOMMENDED_PRODUCTS);
+		.slice(0, CONFIG.MAX_RECOMMENDED_PRODUCTS)
 
 	if (recommendedProducts.length < CONFIG.MAX_RECOMMENDED_PRODUCTS) {
 		// we don't have proper amount of products, we just take most scored products overall
@@ -67,9 +67,9 @@ export const getAllRecommendedProducts = async (
 				scoreValue: "desc",
 			},
 			take: recommendedProducts.length - CONFIG.MAX_RECOMMENDED_PRODUCTS,
-		});
-		recommendedProducts = recommendedProducts.concat(products);
+		})
+		recommendedProducts = recommendedProducts.concat(products)
 	}
 
-	return recommendedProducts;
-};
+	return recommendedProducts
+}

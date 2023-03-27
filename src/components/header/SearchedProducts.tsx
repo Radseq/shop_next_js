@@ -1,18 +1,18 @@
-import axios from "axios";
-import React, { FC } from "react";
-import { useQuery } from "react-query";
-import { StarScore } from "../StarScore";
-import Image from "next/image";
-import styles from "./SearchedProducts.module.css";
-import { SearchProduct, SearchResult } from "./Types";
-import Link from "next/link";
+import axios from "axios"
+import React, { FC } from "react"
+import { useQuery } from "react-query"
+import { StarScore } from "../StarScore"
+import Image from "next/image"
+import styles from "./SearchedProducts.module.css"
+import { SearchProduct, SearchResult } from "./Types"
+import Link from "next/link"
 
 const AdditionalProducts: FC<{
-	products?: SearchProduct[];
-	groupName: string;
+	products?: SearchProduct[]
+	groupName: string
 }> = ({ products, groupName }) => {
 	if (!products) {
-		return null;
+		return null
 	}
 
 	return (
@@ -45,23 +45,22 @@ const AdditionalProducts: FC<{
 								</div>
 							</Link>
 						</li>
-					);
+					)
 				})}
 			</ul>
 		</div>
-	);
-};
+	)
+}
 
 export const SearchedProducts: FC<{ search: string; callback: () => void }> = ({
 	search,
 	callback,
 }) => {
-
 	// todo hook to do function every x instead every key press
 	const fetchData = () =>
 		axios
 			.get(`http://localhost:3000/api/product/search/${search}/`)
-			.then(({ data }) => data);
+			.then(({ data }) => data)
 
 	const { isSuccess, data, isLoading, isError } = useQuery(
 		["getSearchResult"],
@@ -70,17 +69,17 @@ export const SearchedProducts: FC<{ search: string; callback: () => void }> = ({
 			enabled: search.length > 0,
 			staleTime: 0,
 		}
-	);
+	)
 
 	if (isLoading) {
-		return <span>Loading...</span>;
+		return <span>Loading...</span>
 	}
 
 	if (isError) {
-		return <span>Error: {data.error.message}</span>;
+		return <span>Error: {data.error.message}</span>
 	}
 
-	const searchResultQuery: SearchResult = data;
+	const searchResultQuery: SearchResult = data
 
 	if (isSuccess && searchResultQuery) {
 		return (
@@ -94,7 +93,7 @@ export const SearchedProducts: FC<{ search: string; callback: () => void }> = ({
 									<span>{product.price} pln</span>
 								</Link>
 							</li>
-						);
+						)
 					})}
 				</ul>
 				{searchResultQuery.lastSeenProducts ? (
@@ -109,7 +108,7 @@ export const SearchedProducts: FC<{ search: string; callback: () => void }> = ({
 					/>
 				)}
 			</div>
-		);
+		)
 	}
-	return null;
-};
+	return null
+}

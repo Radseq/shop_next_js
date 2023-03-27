@@ -1,27 +1,27 @@
-import { CartFooter } from "@/components/cartPage/CartFooter";
-import { PromotionCodePanel } from "@/components/cartPage/PromotionCodePanel";
-import { ShopCartItem } from "@/components/cartPage/ShopCartItem";
-import { RootNavigation } from "@/components/header/Types";
-import { Layout } from "@/components/Layout";
-import { useCartSelector } from "@/lib/storeCart";
-import { getNavigation } from "@/server/navigation";
-import { GetStaticProps } from "next";
-import Head from "next/head";
-import Link from "next/link";
-import styles from "./cart.module.css";
+import { CartFooter } from "@/components/cartPage/CartFooter"
+import { PromotionCodePanel } from "@/components/cartPage/PromotionCodePanel"
+import { ShopCartItem } from "@/components/cartPage/ShopCartItem"
+import { RootNavigation } from "@/components/header/Types"
+import { Layout } from "@/components/Layout"
+import { useCartSelector } from "@/lib/storeCart"
+import { getNavigation } from "@/server/navigation"
+import { GetStaticProps } from "next"
+import Head from "next/head"
+import Link from "next/link"
+import styles from "./cart.module.css"
 
-export const getStaticProps: GetStaticProps = async ({}) => {
-	const navigation = await getNavigation();
+export const getStaticProps: GetStaticProps = async () => {
+	const navigation = await getNavigation()
 
 	return {
 		props: {
 			navigation,
 		},
-	};
-};
+	}
+}
 
 export default function Cart(props: { navigation: RootNavigation[] }) {
-	const shoppingCart = useCartSelector((state) => state.shoppingCart);
+	const shoppingCart = useCartSelector((state) => state.shoppingCart)
 
 	return (
 		<div>
@@ -39,9 +39,13 @@ export default function Cart(props: { navigation: RootNavigation[] }) {
 				<div className={styles.cartPageMain}>
 					<div className={styles.catrItems}>
 						<h2>Cart({shoppingCart.length})</h2>
-						{shoppingCart.map((item) => (
-							<ShopCartItem item={item} />
-						))}
+						<ul>
+							{shoppingCart.map((item) => (
+								<li key={item.id}>
+									<ShopCartItem item={item} />
+								</li>
+							))}
+						</ul>
 					</div>
 					<aside>
 						<PromotionCodePanel />
@@ -52,5 +56,5 @@ export default function Cart(props: { navigation: RootNavigation[] }) {
 				</div>
 			</Layout>
 		</div>
-	);
+	)
 }

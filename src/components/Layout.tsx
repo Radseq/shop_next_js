@@ -1,14 +1,14 @@
-import { ReactNode } from "react";
-import { PageFooter } from "./footer/PageFooter";
-import { Navigation } from "./header/Navigation";
-import { TopBar } from "./header/TopBar";
-import { RootNavigation } from "./header/Types";
-import styles from "../styles/MainPageBody.module.css";
+import { ReactNode } from "react"
+import { PageFooter } from "./footer/PageFooter"
+import { Navigation } from "./header/Navigation"
+import { TopBar } from "./header/TopBar"
+import { RootNavigation } from "./header/Types"
+import styles from "../styles/MainPageBody.module.css"
 
 type Props = {
-	children?: ReactNode;
-	navigation: RootNavigation[];
-};
+	children?: ReactNode
+	navigation: RootNavigation[]
+}
 
 export const Layout = ({ children, ...props }: Props) => {
 	return (
@@ -22,5 +22,5 @@ export const Layout = ({ children, ...props }: Props) => {
 				<PageFooter />
 			</footer>
 		</div>
-	);
-};
+	)
+}

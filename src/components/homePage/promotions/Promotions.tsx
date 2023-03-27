@@ -1,18 +1,18 @@
-import { ProductImage } from "@/components/ProductImage";
-import React, { FC } from "react";
-import { useMutipleItemsSlider } from "../../../hooks/useMutipleItemsSlider";
-import styles from "./Promotions.module.css";
-import { Promotion } from "./Types";
-import Link from "next/link";
+import { ProductImage } from "@/components/ProductImage"
+import React, { FC } from "react"
+import { useMutipleItemsSlider } from "../../../hooks/useMutipleItemsSlider"
+import styles from "./Promotions.module.css"
+import { Promotion } from "./Types"
+import Link from "next/link"
 
 const PromotionSlider: FC<{
-	promotions: Promotion[];
-	promotionsPerSlider: number;
+	promotions: Promotion[]
+	promotionsPerSlider: number
 }> = ({ promotions, promotionsPerSlider }) => {
 	const promotionSlider = useMutipleItemsSlider<Promotion>(
 		promotions,
 		promotionsPerSlider
-	);
+	)
 
 	return (
 		<div className={styles.productBasicSlider}>
@@ -35,15 +35,15 @@ const PromotionSlider: FC<{
 								title={promotion.title}
 							/>
 						</Link>
-					);
+					)
 				})}
 			</div>
 			<div className={styles.next} onClick={promotionSlider.nextSlide}>
 				❯
 			</div>
 		</div>
-	);
-};
+	)
+}
 
 export const Promotions: FC<{ promotionsData: Promotion[] }> = ({
 	promotionsData: promotions,
@@ -52,5 +52,5 @@ export const Promotions: FC<{ promotionsData: Promotion[] }> = ({
 		<section className={styles.promotions}>
 			<PromotionSlider promotions={promotions} promotionsPerSlider={4} />
 		</section>
-	);
-};
+	)
+}

@@ -2,36 +2,38 @@ import {
 	decrementQuantity,
 	incrementQuantity,
 	removeItem,
-} from "@/lib/cartSlice";
-import { useCartDispatch } from "@/lib/storeCart";
-import { FC, useState } from "react";
-import { ShippingCartProduct } from "../cart/types";
-import { DeleteIconSvg } from "../svg/DeleteIcon";
-import styles from "./ShopCartItem.module.css";
-import Image from "next/image";
+} from "@/lib/cartSlice"
+import { useCartDispatch } from "@/lib/storeCart"
+import { FC, useState } from "react"
+import { ShippingCartProduct } from "../cart/types"
+import { DeleteIconSvg } from "../svg/DeleteIcon"
+import styles from "./ShopCartItem.module.css"
+import Image from "next/image"
 
 export const ShopCartItem: FC<{ item: ShippingCartProduct }> = ({ item }) => {
-	const dispatch = useCartDispatch();
+	const dispatch = useCartDispatch()
 
 	const handleDeleteProductFromCartClick = (productId: number) => {
-		dispatch(removeItem(productId));
-	};
+		dispatch(removeItem(productId))
+	}
 
-	const [quantity, setQuantity] = useState(item.quantity);
+	const [quantity, setQuantity] = useState(item.quantity)
 
 	const handleQuntityChange: React.ChangeEventHandler<HTMLInputElement> = (
 		e
 	) => {
-		const inputValue = Number(e.target.value);
-		if (!inputValue) return;
+		const inputValue = Number(e.target.value)
+		if (!inputValue) {
+			return
+		}
 
 		if (quantity > inputValue) {
-			dispatch(decrementQuantity(item.id));
+			dispatch(decrementQuantity(item.id))
 		} else {
-			dispatch(incrementQuantity(item.id));
+			dispatch(incrementQuantity(item.id))
 		}
-		setQuantity(inputValue);
-	};
+		setQuantity(inputValue)
+	}
 
 	return (
 		<div className={styles.cartItem}>
@@ -55,5 +57,5 @@ export const ShopCartItem: FC<{ item: ShippingCartProduct }> = ({ item }) => {
 				<DeleteIconSvg />
 			</button>
 		</div>
-	);
-};
+	)
+}

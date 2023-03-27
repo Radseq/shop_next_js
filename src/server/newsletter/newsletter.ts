@@ -1,29 +1,31 @@
-import { prisma } from "prisma/prisma";
+import { prisma } from "prisma/prisma"
 
 export const addNewsletterEmail = async (email: string) => {
-	if (await isEmailExists(email)) return false;
+	if (await isEmailExists(email)) {
+		return false
+	}
 
 	const add = await prisma.newsletter.create({
 		data: {
 			email: email,
 			addDate: new Date(),
 		},
-	});
+	})
 
-	return add.id ?? false;
-};
+	return add.id ?? false
+}
 
 const isEmailExists = async (email: string) => {
 	const alreadyExistsEmail = await prisma.newsletter.findUnique({
 		where: {
 			email: email,
 		},
-	});
-	return alreadyExistsEmail;
-};
+	})
+	return alreadyExistsEmail
+}
 
 export const getNewsletterEmails = async () => {
-	const emails = await prisma.newsletter.findMany({});
+	const emails = await prisma.newsletter.findMany({})
 
-	return emails.map((newsletter) => newsletter.email);
-};
+	return emails.map((newsletter) => newsletter.email)
+}

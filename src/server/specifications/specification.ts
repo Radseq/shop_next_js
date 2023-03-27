@@ -1,4 +1,4 @@
-import { prisma } from "prisma/prisma";
+import { prisma } from "prisma/prisma"
 
 export const getSpecificationsByProductId = async (productId: number) => {
 	const allSpecifications = await prisma.specification.findMany({
@@ -9,7 +9,7 @@ export const getSpecificationsByProductId = async (productId: number) => {
 				},
 			},
 		},
-	});
+	})
 
-	return allSpecifications;
-};
+	return allSpecifications
+}

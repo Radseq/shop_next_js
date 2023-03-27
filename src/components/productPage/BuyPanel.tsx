@@ -1,35 +1,36 @@
-import { FC, useState } from "react";
-import styles from "./BuyPanel.module.css";
-import { Product, ProductDate } from "./Types";
-import { StyledInput } from "../StyledInput";
-import { useCartDispatch } from "@/lib/storeCart";
-import { addToCart } from "@/lib/cartSlice";
-import { StyledButton } from "../StyledButton";
-import Image from "next/image";
+import { FC, useState } from "react"
+import styles from "./BuyPanel.module.css"
+import { Product } from "./Types"
+import { StyledInput } from "../StyledInput"
+import { useCartDispatch } from "@/lib/storeCart"
+import { addToCart } from "@/lib/cartSlice"
+import { StyledButton } from "../StyledButton"
+import Image from "next/image"
+import Link from "next/link"
 
 const AvailableProductItem: FC<{ quantity: number; productId: number }> = ({
 	quantity,
 	productId,
 }) => {
-	if (quantity)
+	if (quantity) {
 		return (
 			<div className={styles.item}>
 				<span className={styles.ok}>Avaiable</span>
 				<span>
-					<a href={"/available/" + productId}> Find out more</a>
+					<Link href={"/available/" + productId}> Find out more</Link>
 				</span>
 			</div>
-		);
-	else
-		return (
-			<div className={styles.item}>
-				<span className={styles.error}>Inaccessible</span>
-				<span>
-					<a href="/inaccessible/1"> Find out more</a>
-				</span>
-			</div>
-		);
-};
+		)
+	}
+	return (
+		<div className={styles.item}>
+			<span className={styles.error}>Inaccessible</span>
+			<span>
+				<Link href="/inaccessible/1"> Find out more</Link>
+			</span>
+		</div>
+	)
+}
 
 const DeliveryItem: FC<{ hasFreeDelivery: boolean }> = ({
 	hasFreeDelivery,
@@ -39,25 +40,24 @@ const DeliveryItem: FC<{ hasFreeDelivery: boolean }> = ({
 			<div className={styles.item}>
 				<span className={styles.ok}>Free Delivery</span>
 				<span>
-					<a href={"/deliveryfree"}> Find out more</a>
+					<Link href={"/deliveryfree"}> Find out more</Link>
 				</span>
 			</div>
-		);
-	} else {
-		return (
-			<div className={styles.item}>
-				<span>Free pickup in the shop</span>
-				<span>
-					<a href={"/delivery"}> Find out more</a>
-				</span>
-			</div>
-		);
+		)
 	}
-};
+	return (
+		<div className={styles.item}>
+			<span>Free pickup in the shop</span>
+			<span>
+				<Link href={"/delivery"}> Find out more</Link>
+			</span>
+		</div>
+	)
+}
 
 const LoanInstallmentItemDetailRow: FC<{
-	installmentPrice: number;
-	productId: number;
+	installmentPrice: number
+	productId: number
 }> = ({ installmentPrice, productId }) => {
 	return (
 		<div className={styles.detailRow}>
@@ -70,14 +70,14 @@ const LoanInstallmentItemDetailRow: FC<{
 			<div className={styles.item}>
 				<span>Installment only {installmentPrice} PLN</span>
 				<span>
-					<a href={"/installment/" + productId}>
+					<Link href={"/installment/" + productId}>
 						Calculate loan rate
-					</a>
+					</Link>
 				</span>
 			</div>
 		</div>
-	);
-};
+	)
+}
 
 const Price: FC<{ discountPrice: number; price: number }> = ({
 	discountPrice,
@@ -92,7 +92,7 @@ const Price: FC<{ discountPrice: number; price: number }> = ({
 					<h2>{discountPrice} pln</h2>
 				</div>
 			</div>
-		);
+		)
 	}
 	return (
 		<div>
@@ -100,14 +100,14 @@ const Price: FC<{ discountPrice: number; price: number }> = ({
 				<h2>{price} pln</h2>
 			</div>
 		</div>
-	);
-};
+	)
+}
 
 export const BuyPanel: FC<{ purchasedProduct: Product }> = ({
 	purchasedProduct,
 }) => {
-	const [quantity, setQuantity] = useState(1);
-	const dispatch = useCartDispatch();
+	const [quantity, setQuantity] = useState(1)
+	const dispatch = useCartDispatch()
 
 	const onAddToCartBtnClick = (product: Product) => {
 		dispatch(
@@ -119,13 +119,13 @@ export const BuyPanel: FC<{ purchasedProduct: Product }> = ({
 				discountPrice: product.discountPrice,
 				quantity: quantity,
 			})
-		);
-	};
+		)
+	}
 
 	const onQuntityChange: React.ChangeEventHandler<HTMLInputElement> = (e) => {
-		const inputValue = Number(e.target.value);
-		setQuantity(inputValue > 0 ? inputValue : 1);
-	};
+		const inputValue = Number(e.target.value)
+		setQuantity(inputValue > 0 ? inputValue : 1)
+	}
 
 	return (
 		<div className={styles.buyPanel}>
@@ -172,9 +172,9 @@ export const BuyPanel: FC<{ purchasedProduct: Product }> = ({
 					<div className={styles.item}>
 						<span>Buy now, receive day after tomorrow</span>
 						<span>
-							<a href={"/receiveday/" + purchasedProduct.id}>
+							<Link href={"/receiveday/" + purchasedProduct.id}>
 								Find out more
-							</a>
+							</Link>
 						</span>
 					</div>
 				</div>
@@ -200,5 +200,5 @@ export const BuyPanel: FC<{ purchasedProduct: Product }> = ({
 				)}
 			</div>
 		</div>
-	);
-};
+	)
+}

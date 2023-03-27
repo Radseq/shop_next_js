@@ -1,21 +1,21 @@
-import React, { FC } from "react";
-import classNames from "classnames";
-import styles from "./CartFooter.module.css";
-import { ShippingCartProduct } from "../cart/types";
+import React, { FC } from "react"
+import classNames from "classnames"
+import styles from "./CartFooter.module.css"
+import { ShippingCartProduct } from "../cart/types"
 
 export const CartFooter: FC<{
-	cartItems: ShippingCartProduct[];
-	children: React.ReactNode;
+	cartItems: ShippingCartProduct[]
+	children: React.ReactNode
 }> = (props) => {
 	const sumItemsPrice = props.cartItems.reduce(
 		(prev, curr) => prev + curr.price * curr.quantity,
 		0
-	);
+	)
 
 	const sumItemsPriceDiscount = props.cartItems.reduce(
 		(prev, curr) => prev + curr.discountPrice * curr.quantity,
 		0
-	);
+	)
 
 	return (
 		<div className={styles.footer}>
@@ -29,5 +29,5 @@ export const CartFooter: FC<{
 			</div>
 			{props.children}
 		</div>
-	);
-};
+	)
+}

@@ -1,22 +1,22 @@
-import React, { FC, useMemo, useState } from "react";
-import styles from "./MenuItem.module.css";
+import React, { FC, useMemo, useState } from "react"
+import styles from "./MenuItem.module.css"
 import {
 	MenuCategory,
 	NavProduct,
 	RootNavigationExt,
 	SubCategory,
-} from "./Types";
-import Image from "next/image";
-import Link from "next/link";
+} from "./Types"
+import Image from "next/image"
+import Link from "next/link"
 
 const isProduct = (value: NavProduct | SubCategory[]): value is NavProduct =>
-	!Array.isArray(value);
+	!Array.isArray(value)
 
 const SubCategoryProduct: FC<{ value: NavProduct | SubCategory[] }> = (
 	props
 ) => {
 	if (!isProduct(props.value)) {
-		const subCategories = props.value; // ts knows props.value is SubCategory[]
+		const subCategories = props.value // ts knows props.value is SubCategory[]
 		return (
 			<ul>
 				{subCategories.map((subCategory) => (
@@ -27,9 +27,9 @@ const SubCategoryProduct: FC<{ value: NavProduct | SubCategory[] }> = (
 					</li>
 				))}
 			</ul>
-		);
+		)
 	}
-	const product = props.value; // ts knows props.value is NavProduct
+	const product = props.value // ts knows props.value is NavProduct
 	return (
 		<div className={styles.recommendedProduct} title={product.name}>
 			<span>Recommended Product</span>
@@ -52,37 +52,37 @@ const SubCategoryProduct: FC<{ value: NavProduct | SubCategory[] }> = (
 				<h2>{product.price}</h2>
 			</div>
 		</div>
-	);
-};
+	)
+}
 
 export const MenuItem: React.FC<{
-	value: RootNavigationExt;
-	onLeaveCategory: CallableFunction;
+	value: RootNavigationExt
+	onLeaveCategory: CallableFunction
 }> = (props) => {
 	const [menuCategory, setMenuCategory] = useState<MenuCategory | undefined>(
 		undefined
-	);
+	)
 	const rightProduct = useMemo(
 		() => menuCategory?.product || menuCategory?.subCategories,
 		[menuCategory]
-	);
-	const rootNav = props.value;
+	)
+	const rootNav = props.value
 
-	const leftOffset = props.value.menuItemLeftOffset;
-	const minWithToSwapRenderPosition = 520 + leftOffset;
+	const leftOffset = props.value.menuItemLeftOffset
+	const minWithToSwapRenderPosition = 520 + leftOffset
 
-	let categoryLeftPosition: number;
-	let categoryRightPosition: number | undefined;
+	let categoryLeftPosition: number
+	let categoryRightPosition: number | undefined
 
 	//whole pane is greater than  windows width, so we render from right to left
 	if (minWithToSwapRenderPosition > window.innerWidth) {
-		let leftPosition = leftOffset + rootNav.menuItemWidth - 520;
-		categoryLeftPosition = leftPosition < 0 ? 0 : leftPosition;
+		const leftPosition = leftOffset + rootNav.menuItemWidth - 520
+		categoryLeftPosition = leftPosition < 0 ? 0 : leftPosition
 		categoryRightPosition =
-			window.innerWidth - leftOffset - rootNav.menuItemWidth;
+			window.innerWidth - leftOffset - rootNav.menuItemWidth
 	} else {
-		categoryLeftPosition = leftOffset;
-		categoryRightPosition = undefined;
+		categoryLeftPosition = leftOffset
+		categoryRightPosition = undefined
 	}
 
 	return (
@@ -114,5 +114,5 @@ export const MenuItem: React.FC<{
 				</section>
 			)}
 		</div>
-	);
-};
+	)
+}

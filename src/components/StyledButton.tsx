@@ -1,13 +1,13 @@
-import styled from "styled-components";
+import styled from "styled-components"
 
-type ButtonKind = "primary" | "secondary";
+type ButtonKind = "primary" | "secondary"
 
 type ButtonStyleProps = {
-	color: string;
-	borderColor: string;
-	hoverBackgroundColor: string;
-	hoverBorderColor: string;
-};
+	color: string
+	borderColor: string
+	hoverBackgroundColor: string
+	hoverBorderColor: string
+}
 
 const STYLES_PER_KIND: Record<ButtonKind, ButtonStyleProps> = {
 	primary: {
@@ -22,7 +22,7 @@ const STYLES_PER_KIND: Record<ButtonKind, ButtonStyleProps> = {
 		hoverBackgroundColor: "rgb(68, 68, 68)",
 		hoverBorderColor: "rgb(68, 68, 68)",
 	},
-};
+}
 
 export const StyledButton = styled.button<{ kind: ButtonKind }>`
 	font-size: 1em;
@@ -42,4 +42,4 @@ export const StyledButton = styled.button<{ kind: ButtonKind }>`
 			STYLES_PER_KIND[props.kind].hoverBorderColor};
 		color: white;
 	}
-`;
+`
